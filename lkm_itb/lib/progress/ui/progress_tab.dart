@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
+import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/progress/ui/progress_screen.dart';
 
@@ -34,15 +35,16 @@ class _ProgressTabState extends State<ProgressTab>
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
             // give the tab bar a height [can change hheight to preferred height]
-            SizedBox(height: 40),
+            SizedBox(height: SizeConfig.screenHeight*0.05),
             Container(
-              width: MediaQuery.of(context).size.width,
+              width: SizeConfig.screenWidth,
               child: Text('Capaian',
                   textAlign: TextAlign.start,
                   style: GoogleFonts.roboto(
@@ -50,9 +52,7 @@ class _ProgressTabState extends State<ProgressTab>
                       fontSize: 20,
                       fontWeight: FontWeight.bold)),
             ),
-            SizedBox(
-              height: 20,
-            ),
+            SizedBox(height: SizeConfig.screenHeight*0.025),
 
             Container(
               height: 45,

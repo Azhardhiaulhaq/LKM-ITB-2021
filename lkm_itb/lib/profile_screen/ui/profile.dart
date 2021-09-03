@@ -7,6 +7,7 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
+import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/repositories/user_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/pusat_bantuan/ui/pusat_bantuan.dart';
@@ -97,6 +98,7 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return FutureBuilder<DocumentSnapshot>(
       future: homeStream(),
       builder: (_, snapshot) {
@@ -120,14 +122,14 @@ class _ProfileState extends State<Profile> {
             body: SingleChildScrollView(
           child: ConstrainedBox(
             constraints: BoxConstraints(
-              minWidth: MediaQuery.of(context).size.width,
-              minHeight: MediaQuery.of(context).size.height,
+              minWidth: SizeConfig.screenWidth,
+              minHeight: SizeConfig.screenHeight,
             ),
             child: IntrinsicHeight(
               child: Stack(
                 children: [
                   Positioned(
-                    top: MediaQuery.of(context).size.height * 0.08,
+                    top: SizeConfig.screenHeight * 0.08,
                     child: Image.asset(
                       "assets/images/profile_background.png",
                       width: MediaQuery.of(context).size.width,
@@ -135,7 +137,7 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   Positioned(
-                    top: MediaQuery.of(context).size.height * 0.16,
+                    top: SizeConfig.screenHeight * 0.16,
                     right: 70,
                     child: Image.asset(
                       "assets/images/ganesha_man.png",
@@ -144,7 +146,7 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   Positioned(
-                    top: MediaQuery.of(context).size.height * 0.17,
+                    top: SizeConfig.screenHeight * 0.17,
                     right: 0,
                     child: Image.asset(
                       "assets/images/ganesha_woman.png",
@@ -153,17 +155,17 @@ class _ProfileState extends State<Profile> {
                     ),
                   ),
                   Positioned(
-                    top: MediaQuery.of(context).size.height * 0.257,
+                    top:SizeConfig.screenHeight* 0.257,
                     right: 82,
                     child: SvgPicture.asset('assets/svg/small_ellipse.svg'),
                   ),
                   Positioned(
-                    top: MediaQuery.of(context).size.height * 0.267,
+                    top:SizeConfig.screenHeight* 0.267,
                     right: 20,
                     child: SvgPicture.asset('assets/svg/small_ellipse.svg'),
                   ),
                   Positioned(
-                    top: MediaQuery.of(context).size.height * 0.1,
+                    top:SizeConfig.screenHeight * 0.1,
                     left: 143,
                     right: 143,
                     child: Center(
@@ -186,7 +188,7 @@ class _ProfileState extends State<Profile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: MediaQuery.of(context).size.height*0.17,
+                          height: SizeConfig.screenHeight*0.17,
                         ),
                         Text(
                             dataProfile['name'] ??
@@ -196,7 +198,7 @@ class _ProfileState extends State<Profile> {
                                 fontWeight: FontWeight.w700,
                                 color: ConstColor.whiteBackground)),
                         SizedBox(
-                          height: 5,
+                          height: SizeConfig.screenHeight *0.004,
                         ),
                         Text(user.email!,
                             style: GoogleFonts.roboto(
@@ -204,7 +206,7 @@ class _ProfileState extends State<Profile> {
                                 fontWeight: FontWeight.w400,
                                 color: ConstColor.whiteBackground)),
                         SizedBox(
-                          height: 5,
+                          height:SizeConfig.screenHeight *0.004,
                         ),
                         Text(
                             dataProfile['organization']??
@@ -214,7 +216,7 @@ class _ProfileState extends State<Profile> {
                                 fontWeight: FontWeight.w400,
                                 color: ConstColor.darkGreen)),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height*0.05,
+                          height: SizeConfig.screenHeight*0.05,
                         ),
                         Text('PENGATURAN',
                             style: GoogleFonts.roboto(
@@ -222,17 +224,17 @@ class _ProfileState extends State<Profile> {
                                 fontWeight: FontWeight.w400,
                                 color: ConstColor.greyText)),
                         SizedBox(
-                          height: 5,
+                          height: SizeConfig.screenHeight *0.004,
                         ),
                         _profileEntry('Informasi pribadi',
                             'assets/svg/logo_person_black.svg', 'infoPribadi'),
                         SizedBox(
-                          height: 5,
+                          height: SizeConfig.screenHeight *0.004,
                         ),
                         _profileEntry('Password',
                             'assets/svg/logo_lock_black.svg', 'password'),
                         SizedBox(
-                          height: MediaQuery.of(context).size.height*0.05,
+                          height: SizeConfig.screenHeight*0.05,
                         ),
                         Text('TENTANG',
                             style: GoogleFonts.roboto(
@@ -240,22 +242,22 @@ class _ProfileState extends State<Profile> {
                                 fontWeight: FontWeight.w400,
                                 color: ConstColor.greyText)),
                         SizedBox(
-                          height: 5,
+                          height: SizeConfig.screenHeight *0.004,
                         ),
                         _profileEntry('Tentang kami', 'assets/svg/info.svg',
                             'tentangKami'),
                         SizedBox(
-                          height: 5,
+                          height: SizeConfig.screenHeight *0.004,
                         ),
                         _profileEntry('Pusat Bantuan',
                             'assets/svg/question.svg', 'pusatBantuan'),
                         SizedBox(
-                          height: 5,
+                          height: SizeConfig.screenHeight *0.004,
                         ),
                         _profileEntry(
                             'Keluar', 'assets/svg/sign_out.svg', 'signOut'),
                           SizedBox(
-                          height: MediaQuery.of(context).size.height*0.2,
+                          height: SizeConfig.screenHeight*0.2,
                         ),
                       ],
                     ),

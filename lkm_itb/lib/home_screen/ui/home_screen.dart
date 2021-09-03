@@ -5,6 +5,7 @@ import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
+import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/models/module.dart';
 import 'package:lkm_itb/data/models/seminar.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
@@ -78,12 +79,12 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             child: Container(
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.fromLTRB(16, 5, 16, 15),
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Container(
-                        width: MediaQuery.of(context).size.width * 0.8,
+                        width: SizeConfig.screenWidth * 0.8,
                         child: Text(
                           title,
                           style: GoogleFonts.roboto(
@@ -98,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _timeline() {
     return Container(
-        margin: EdgeInsets.fromLTRB(16, 15, 16, 20),
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
         child: Center(
           child: SvgPicture.asset(
             'assets/svg/timeline_kegiatan.svg',
@@ -117,8 +118,8 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           splashColor: Colors.transparent,
           child: Container(
-              width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.fromLTRB(16, 0, 16, 15),
+              width: SizeConfig.screenWidth,
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
               child: Card(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
@@ -229,6 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return StreamBuilder<DocumentSnapshot>(
       stream: homeStream(),
       builder: (_, snapshot) {
@@ -243,7 +245,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Text('No Data'),
           );
         }
-        if(snapshot.hasData){
+        if (snapshot.hasData) {
           sharedPrefs.setRole(snapshot.data!.get('role'));
           sharedPrefs.setGroup(snapshot.data!.get('group'));
           sharedPrefs.setName(snapshot.data!.get('name'));
@@ -269,8 +271,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 _contentTitle('Kumpulan Modul'),
                 _kumpulanModule(snapshot.data!.get('role')),
                 SizedBox(
-                  height: 150,
-                )
+                  height: SizeConfig.screenHeight * 0.12,
+                ),
               ],
             ))
           ]),

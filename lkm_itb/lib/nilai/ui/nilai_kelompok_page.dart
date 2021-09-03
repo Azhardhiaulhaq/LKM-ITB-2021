@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
+import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/models/nilai_mentee.dart';
 import 'package:lkm_itb/nilai/bloc/nilai_bloc.dart';
 import 'package:lkm_itb/nilai/ui/nilai_kelompok_card.dart';
@@ -38,7 +39,7 @@ class _NilaiKelompokPageState extends State<NilaiKelompokPage> {
         Navigator.pop(context);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: Row(
           children: <Widget>[
             Container(
@@ -61,6 +62,7 @@ class _NilaiKelompokPageState extends State<NilaiKelompokPage> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return BlocListener<NilaiBloc, NilaiState>(listener:
         (context, state) {
       if (state is NilaiLoadFailed) {
@@ -102,14 +104,17 @@ class _NilaiKelompokPageState extends State<NilaiKelompokPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               SizedBox(
-                height: 20,
+                height: SizeConfig.screenHeight * 0.025,
               ),
               _backButton(),
               SizedBox(
-                height: 10,
+                height: SizeConfig.screenHeight * 0.01,
               ),
               for (var list in listNilaiMentee)
-                new NilaiKelompokCard(penilaian: list)
+                new NilaiKelompokCard(penilaian: list),
+              SizedBox(
+                height: SizeConfig.screenHeight * 0.12,
+              ),
             ],
           )),
           isLoading

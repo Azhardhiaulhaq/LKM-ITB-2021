@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
+import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/models/nilai.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/nilai/bloc/nilai_bloc.dart';
@@ -32,7 +33,7 @@ class _NilaiPageState extends State<NilaiPage> {
 
   _NilaiPageState(this.group, this.name, this.role);
 
-  Widget _ModulePoint(String modul, int nilai) {
+  Widget _modulePoint(String modul, int nilai) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -58,7 +59,7 @@ class _NilaiPageState extends State<NilaiPage> {
           borderRadius: BorderRadius.circular(20.0),
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-            width: MediaQuery.of(context).size.width,
+            width: SizeConfig.screenWidth,
             color: ConstColor.lightGrey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -78,13 +79,13 @@ class _NilaiPageState extends State<NilaiPage> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10.0),
           child: Container(
-            width: MediaQuery.of(context).size.width,
+            width: SizeConfig.screenWidth,
             color: ConstColor.lightGreen,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                    width: MediaQuery.of(context).size.width,
+                    width: SizeConfig.screenWidth,
                     padding: EdgeInsets.all(15),
                     color: ConstColor.darkGreen,
                     child: Column(
@@ -116,7 +117,7 @@ class _NilaiPageState extends State<NilaiPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               for (Nilai data in listNilaiModule)
-                                _ModulePoint(
+                                _modulePoint(
                                     'Modul ' + data.ID, data.totalNilai)
                             ],
                           ),
@@ -124,14 +125,16 @@ class _NilaiPageState extends State<NilaiPage> {
                             height: 15,
                           ),
                           InkWell(
-                              child:
-                                  Text(sharedPrefs.role == 'mentor' ? 'Cek Nilai Kelompok ' + group.toString() : 'Cek Nilai Saya',
-                                      style: GoogleFonts.roboto(
-                                        fontSize: 12,
-                                        color: ConstColor.darkGreen,
-                                        fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline,
-                                      )),
+                              child: Text(
+                                  sharedPrefs.role == 'mentor'
+                                      ? 'Cek Nilai Kelompok ' + group.toString()
+                                      : 'Cek Nilai Saya',
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 12,
+                                    color: ConstColor.darkGreen,
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.underline,
+                                  )),
                               onTap: () {
                                 if (sharedPrefs.role == 'mentor') {
                                   Navigator.pushNamed(
@@ -192,7 +195,7 @@ class _NilaiPageState extends State<NilaiPage> {
 
   @override
   Widget build(BuildContext context) {
-    
+    SizeConfig().init(context);
     return BlocListener<NilaiBloc, NilaiState>(listener: (context, state) {
       if (state is NilaiLoadFailed) {
         setState(() {
@@ -222,10 +225,10 @@ class _NilaiPageState extends State<NilaiPage> {
           isLoading = false;
           listNilaiModule = state.listNilaiModule;
           listNilaiKelompok = state.listNilaiKelompok;
-          if(listNilaiKelompok.length >= int.parse(group)){
+          if (listNilaiKelompok.length >= int.parse(group)) {
             nilaiGroup = listNilaiKelompok[int.parse(group) - 1].totalNilai;
-          }         
-          listNilaiKelompok = listNilaiKelompok.sublist(0,20);
+          }
+          listNilaiKelompok = listNilaiKelompok.sublist(0, 20);
           listNilaiKelompok
               .sort((a, b) => b.totalNilai.compareTo(a.totalNilai));
         });
@@ -239,7 +242,7 @@ class _NilaiPageState extends State<NilaiPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               SizedBox(
-                height: 30,
+                height: SizeConfig.screenHeight*0.03,
               ),
               Text('Hai, ' + name.toUpperCase(),
                   style: GoogleFonts.roboto(
@@ -249,12 +252,12 @@ class _NilaiPageState extends State<NilaiPage> {
               _groupPointCard(nilaiGroup),
               _klasementTitle(),
               SizedBox(
-                height: 20,
+                height: SizeConfig.screenHeight*0.03,
               ),
               for (var i = 0; i < listNilaiKelompok.length; ++i)
                 _klasemen(listNilaiKelompok[i], i + 1),
               SizedBox(
-                height: 80,
+                height: SizeConfig.screenHeight*0.12,
               ),
             ],
           )),

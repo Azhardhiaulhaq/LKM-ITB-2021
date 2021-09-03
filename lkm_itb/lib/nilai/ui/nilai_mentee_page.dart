@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
+import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/models/nilai.dart';
 import 'package:lkm_itb/nilai/bloc/nilai_bloc.dart';
-
 
 class NilaiMenteePage extends StatefulWidget {
   NilaiMenteePage({
@@ -38,7 +38,7 @@ class _NilaiMenteePageState extends State<NilaiMenteePage> {
         Navigator.pop(context);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: Row(
           children: <Widget>[
             Container(
@@ -65,7 +65,7 @@ class _NilaiMenteePageState extends State<NilaiMenteePage> {
         style: GoogleFonts.lato(fontSize: 16, color: ConstColor.greyText));
   }
 
-  Widget _ModulePoint(String modul, int nilai) {
+  Widget _modulePoint(String modul, int nilai) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -101,7 +101,7 @@ class _NilaiMenteePageState extends State<NilaiMenteePage> {
               children: [
                 Container(
                     width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.all(15),
+                    padding: EdgeInsets.all(20),
                     color: ConstColor.darkGreen,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -133,7 +133,7 @@ class _NilaiMenteePageState extends State<NilaiMenteePage> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               for (Nilai data in listModule)
-                                _ModulePoint(
+                                _modulePoint(
                                     'Modul ' + data.ID, data.totalNilai)
                             ],
                           ),
@@ -146,6 +146,7 @@ class _NilaiMenteePageState extends State<NilaiMenteePage> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return BlocListener<NilaiBloc, NilaiState>(listener: (context, state) {
       if (state is NilaiLoadFailed) {
         setState(() {
@@ -189,11 +190,11 @@ class _NilaiMenteePageState extends State<NilaiMenteePage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(
-                    height: 20,
+                    height: SizeConfig.screenHeight * 0.025,
                   ),
                   _backButton(),
                   SizedBox(
-                    height: 60,
+                    height: SizeConfig.screenHeight * 0.1,
                   ),
                   _menteeName(menteeName),
                   _groupPointCard(listNilaiModule),
