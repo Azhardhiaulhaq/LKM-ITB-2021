@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:lkm_itb/Authentication/bloc/auth_bloc.dart';
 import 'package:lkm_itb/data/models/module.dart';
 import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/user_repositories.dart';

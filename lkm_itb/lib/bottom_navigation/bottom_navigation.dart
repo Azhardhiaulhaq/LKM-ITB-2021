@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/detail_lkm/ui/detail_lkm.dart';
@@ -276,7 +275,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
                       builder: (context) =>
                           NilaiKelompokScreen(group: arg['group']));
                 } else if (settings.name == NilaiScreen.routeName) {
-                  var arg = settings.arguments as Map;
                   return MaterialPageRoute(
                       builder: (context) => NilaiScreen(
                             group: sharedPrefs.group,

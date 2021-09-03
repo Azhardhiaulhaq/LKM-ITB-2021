@@ -10,7 +10,6 @@ import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/data/repositories/user_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/pusat_bantuan/ui/pusat_bantuan.dart';
-import 'package:lkm_itb/splash_screen/ui/splash_screen.dart';
 import 'package:lkm_itb/tentang_kami/ui/tentang_kami.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 

@@ -29,11 +29,13 @@ class PasswordValid extends LoginState{
   PasswordValid();
 }
 
+// ignore: must_be_immutable
 class EmailInvalid extends LoginState{
   String message;
   EmailInvalid({required this.message});
 }
 
+// ignore: must_be_immutable
 class PasswordInvalid extends LoginState{
   String message;
   PasswordInvalid({required this.message});

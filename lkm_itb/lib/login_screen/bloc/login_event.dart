@@ -13,11 +13,13 @@ class SignInButtonPressed extends LoginEvent {
   SignInButtonPressed({required this.email, required this.password});
 }
 
+// ignore: must_be_immutable
 class CheckEmail extends LoginEvent{
   String email;
   CheckEmail({required this.email});
 }
 
+// ignore: must_be_immutable
 class CheckPassword extends LoginEvent{
   String password;
   CheckPassword({required this.password});

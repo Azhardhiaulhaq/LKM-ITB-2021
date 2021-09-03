@@ -4,8 +4,6 @@ import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/data/models/module.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/penilaian_modul/ui/penilaian_modul_screen.dart';
-import 'package:lkm_itb/presence/presence_builder.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 // ignore: must_be_immutable
 class ProgressCard extends StatelessWidget {

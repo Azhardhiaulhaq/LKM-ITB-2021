@@ -7,6 +7,7 @@ import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/data/repositories/user_repositories.dart';
 import 'package:lkm_itb/modules/1/module_1_page_7.dart';
 
+// ignore: must_be_immutable
 class Modul1Page6 extends StatefulWidget {
   Modul1Page6(
       {Key? key, required this.title, required this.role, this.menteeID})

@@ -5,7 +5,6 @@ import 'package:lkm_itb/Authentication/bloc/auth_bloc.dart';
 import 'package:lkm_itb/bottom_navigation/bottom_navigation.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
-import 'package:lkm_itb/home_screen/ui/home_screen.dart';
 import 'package:lkm_itb/login_screen/ui/login_screen.dart';
 import 'package:lkm_itb/splash_screen/ui/splash_screen.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';

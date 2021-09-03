@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lkm_itb/data/models/presence.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class UserRepository {
   static FirebaseAuth firebaseAuth = FirebaseAuth.instance;
@@ -103,7 +102,6 @@ class UserRepository {
 
   static Future<User?> signIn(String email, String password) async {
     try {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
       var auth = await firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
 
@@ -132,7 +130,6 @@ class UserRepository {
   // check Sign In
   static Future<bool> isSignedIn() async {
     // ignore: await_only_futures
-    SharedPreferences prefs = await SharedPreferences.getInstance();
     var currentUser = await firebaseAuth.currentUser;
     if (currentUser != null) {
       await users.doc(currentUser.uid).snapshots().listen((result) {
