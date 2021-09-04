@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lkm_itb/constants/components/module_button.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 
 class Modul1Page8 extends StatefulWidget {
-  Modul1Page8({Key? key, required this.title, required this.role}) : super(key: key);
+  Modul1Page8({Key? key, required this.title, required this.role})
+      : super(key: key);
 
   final String title;
   final String role;
@@ -17,65 +19,8 @@ class _Modul1Page8State extends State<Modul1Page8> {
 
   _Modul1Page8State(this.role);
 
-  _Button(String next_route) {
-    return Container(
-        color:
-            role == 'mentee' ? ConstColor.whiteBackground : Colors.transparent,
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(
-                height: 40,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.arrow_back,
-                        color: ConstColor.blackText,
-                        size: 30,
-                      )
-                    ],
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      elevation: 3,
-                      primary: ConstColor.greyText,
-                      shape: StadiumBorder()),
-                )),
-            SizedBox(
-                height: 40,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, next_route);
-                  },
-                  child: Row(
-                    children: [
-                      Text(
-                        'Next',
-                        style: GoogleFonts.roboto(
-                            fontSize: 15, color: ConstColor.whiteBackground),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Icon(
-                        Icons.arrow_forward_outlined,
-                        color: ConstColor.blackText,
-                        size: 30,
-                      )
-                    ],
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      elevation: 3,
-                      primary: ConstColor.lightGreen,
-                      shape: StadiumBorder()),
-                ))
-          ],
-        ));
+  void pushFunction(String next_route) {
+    Navigator.pushNamed(context, next_route);
   }
 
   _contentMentor() {
@@ -85,22 +30,25 @@ class _Modul1Page8State extends State<Modul1Page8> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-      width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      child: Card(
-          color: ConstColor.lightGreen,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          elevation: 3,
-          child: Container(margin: EdgeInsets.all(20),child: Text(
-              'Selamat item pertama telah ditemukan! kamu telah membantu menemukan Kacamata Loki yang telah hilang. Dengan kacamata ini Loki dapat melihat dengan jelas dari berbagai sudut yang dia lihat. \n\nSelanjutnya silahkan menyusuri kembali ruang itu bersama Kimy untuk membantu Loki!',
-              style: GoogleFonts.roboto(
-                  color: ConstColor.whiteBackground,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),),
-          )),
+              width: MediaQuery.of(context).size.width,
+              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              child: Card(
+                color: ConstColor.lightGreen,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                elevation: 3,
+                child: Container(
+                  margin: EdgeInsets.all(20),
+                  child: Text(
+                    'Selamat item pertama telah ditemukan! kamu telah membantu menemukan Kacamata Loki yang telah hilang. Dengan kacamata ini Loki dapat melihat dengan jelas dari berbagai sudut yang dia lihat. \n\nSelanjutnya silahkan menyusuri kembali ruang itu bersama Kimy untuk membantu Loki!',
+                    style: GoogleFonts.roboto(
+                        color: ConstColor.whiteBackground,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              )),
           SizedBox(
             height: 20,
           ),
@@ -170,7 +118,7 @@ class _Modul1Page8State extends State<Modul1Page8> {
         ),
         _contentMentor(),
         SizedBox(
-          height: MediaQuery.of(context).size.height*0.3,
+          height: MediaQuery.of(context).size.height * 0.3,
         ),
       ],
     ));
@@ -179,13 +127,15 @@ class _Modul1Page8State extends State<Modul1Page8> {
   _forMentee() {
     return SingleChildScrollView(
         child: Container(
-      alignment: Alignment.center,    
+      alignment: Alignment.center,
       height: MediaQuery.of(context).size.height,
       color: ConstColor.lightGreen,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          SizedBox(height: 80,),
+          SizedBox(
+            height: 80,
+          ),
           Image.asset(
             'assets/images/icon_kacamata.png',
             width: 150,
@@ -202,8 +152,8 @@ class _Modul1Page8State extends State<Modul1Page8> {
           ),
           _contentMentee(),
           SizedBox(
-          height: MediaQuery.of(context).size.height*0.3,
-        )
+            height: MediaQuery.of(context).size.height * 0.3,
+          )
         ],
       ),
     ));
@@ -213,10 +163,21 @@ class _Modul1Page8State extends State<Modul1Page8> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-      child: Stack(fit: StackFit.expand, alignment : Alignment.topCenter,children: <Widget>[
-        role == 'mentor' ? _forMentor() : _forMentee(),
-        Positioned(bottom: 55, child: _Button('/module/1/page/9'))
-      ]),
+      child: Stack(
+          fit: StackFit.expand,
+          alignment: Alignment.topCenter,
+          children: <Widget>[
+            role == 'mentor' ? _forMentor() : _forMentee(),
+            Positioned(
+                bottom: 60,
+                child: Container(
+                    padding: EdgeInsets.all(10),
+                    color: role == 'mentor'
+                        ? Colors.transparent
+                        : ConstColor.whiteBackground,
+                    child: CustomModuleButton(
+                        pushFunction: () => pushFunction('/module/1/page/9'))))
+          ]),
     ));
   }
 }

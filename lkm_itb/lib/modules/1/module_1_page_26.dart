@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lkm_itb/constants/components/module_button.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
@@ -19,74 +20,16 @@ class _Modul1Page26State extends State<Modul1Page26> {
   final String role;
 
   _Modul1Page26State(this.role);
-
-  _Button(String next_route) {
-    return Container(
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(
-                height: 40,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.arrow_back,
-                        color: ConstColor.blackText,
-                        size: 30,
-                      )
-                    ],
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      elevation: 3,
-                      primary: ConstColor.greyText,
-                      shape: StadiumBorder()),
-                )),
-            SizedBox(
-                height: 40,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    if (role == 'mentee') {
-                      print(sharedPrefs.userid);
-                      await ModuleRepository.setAnswerStatus(
-                              '1', sharedPrefs.userid)
-                          .then((value) {
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, '/home', (_) => false);
-                      });
-                    }
-
-                    // Navigator.pushNamed(context, next_route);
-                  },
-                  child: Row(
-                    children: [
-                      Text(
-                        'End',
-                        style: GoogleFonts.roboto(
-                            fontSize: 15, color: ConstColor.whiteBackground),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Icon(
-                        Icons.arrow_forward_outlined,
-                        color: ConstColor.blackText,
-                        size: 30,
-                      )
-                    ],
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      elevation: 3,
-                      primary: ConstColor.lightGreen,
-                      shape: StadiumBorder()),
-                ))
-          ],
-        ));
+  void pushFunction(String next_route) async {
+    if (role == 'mentee') {
+      print(sharedPrefs.userid);
+      await ModuleRepository.setAnswerStatus('1', sharedPrefs.userid)
+          .then((value) {
+        Navigator.pushNamedAndRemoveUntil(context, '/home', (_) => false);
+      });
+    } else {
+      Navigator.pushNamedAndRemoveUntil(context, '/home', (_) => false);
+    }
   }
 
   _contentMentee() {
@@ -144,7 +87,10 @@ class _Modul1Page26State extends State<Modul1Page26> {
         body: SafeArea(
       child: Stack(fit: StackFit.expand, children: <Widget>[
         _forMentee(),
-        Positioned(bottom: 70, child: _Button('/home'))
+        Positioned(
+            bottom: 70,
+            child:
+                CustomModuleButton(pushFunction: () => pushFunction('/home')))
       ]),
     ));
   }

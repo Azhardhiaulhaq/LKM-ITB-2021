@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lkm_itb/constants/components/module_button.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 
 class Modul1Page2 extends StatefulWidget {
@@ -19,63 +20,9 @@ class _Modul1Page2State extends State<Modul1Page2> {
       'Bantulah Loki dalam mewujudkan impiannya menjadi kenyataan, butuh beberapa item untuk membantu Loki dalam mencapai tujuan akhirnya. Ketercapaian loki bergantung pada kalian. \n\nSilahkan menyusuri jalanan itu bersama Kimy.';
 
   _Modul1Page2State(this.role);
-  _Button(String next_route) {
-    return Container(
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(
-                height: 40,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.arrow_back,
-                        color: ConstColor.blackText,
-                        size: 30,
-                      )
-                    ],
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      elevation: 3,
-                      primary: ConstColor.greyText,
-                      shape: StadiumBorder()),
-                )),
-            SizedBox(
-                height: 40,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, next_route);
-                  },
-                  child: Row(
-                    children: [
-                      Text(
-                        'Next',
-                        style: GoogleFonts.roboto(
-                            fontSize: 15, color: ConstColor.whiteBackground),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Icon(
-                        Icons.arrow_forward_outlined,
-                        color: ConstColor.blackText,
-                        size: 30,
-                      )
-                    ],
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      elevation: 3,
-                      primary: ConstColor.lightGreen,
-                      shape: StadiumBorder()),
-                ))
-          ],
-        ));
+
+    void pushFunction(String next_route) {
+    Navigator.pushNamed(context, next_route);
   }
 
   _Card() {
@@ -129,7 +76,7 @@ class _Modul1Page2State extends State<Modul1Page2> {
                     _Card(),
                   ],
                 ))),
-        Positioned(bottom: 70, child: _Button('/module/1/page/3'))
+        Positioned(bottom: 70, child: CustomModuleButton(pushFunction: () => pushFunction('/module/1/page/3')))
       ]),
     ));
   }

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lkm_itb/constants/components/module_button.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
@@ -104,90 +105,33 @@ class _Modul1Page14State extends State<Modul1Page14> {
     );
   }
 
-  _Button(String next_route) {
-    return Container(
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(
-                height: 40,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.arrow_back,
-                        color: ConstColor.blackText,
-                        size: 30,
-                      )
-                    ],
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      elevation: 3,
-                      primary: ConstColor.greyText,
-                      shape: StadiumBorder()),
-                )),
-            SizedBox(
-                height: 40,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    if (role == 'mentee') {
-                      setState(() {
-                        isLoading = true;
-                      });
-                      if (menteeID != null) {
-                        List<int> listGrades = [];
-                        listGrades.add(int.parse(firstAnswerController.text));
-                        listGrades.add(int.parse(secondAnswerController.text));
-                        await ModuleRepository.addModuleGrades(
-                                "1", "14", listGrades, menteeID!,sharedPrefs.group)
-                            .then((value) => Navigator.pushNamed(
-                                context, Modul1Page16.routeName,
-                                arguments: {'menteeID': menteeID}));
-                      } else {
-                        List<String> listAnswers = [];
-                        listAnswers.add(firstController.text);
-                        listAnswers.add(secondController.text);
-                        await ModuleRepository.addModuleAnswer(
-                                "1", "14", listAnswers)
-                            .then((value) =>
-                                Navigator.pushNamed(context, next_route));
-                      }
-                      setState(() {
-                        isLoading = false;
-                      });
-                    } else {
-                      Navigator.pushNamed(context, next_route);
-                    }
-                  },
-                  child: Row(
-                    children: [
-                      Text(
-                        'Next',
-                        style: GoogleFonts.roboto(
-                            fontSize: 15, color: ConstColor.whiteBackground),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Icon(
-                        Icons.arrow_forward_outlined,
-                        color: ConstColor.blackText,
-                        size: 30,
-                      )
-                    ],
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      elevation: 3,
-                      primary: ConstColor.lightGreen,
-                      shape: StadiumBorder()),
-                ))
-          ],
-        ));
+  void pushFunction(String next_route) async {
+    if (role == 'mentee') {
+      setState(() {
+        isLoading = true;
+      });
+      if (menteeID != null) {
+        List<int> listGrades = [];
+        listGrades.add(int.parse(firstAnswerController.text));
+        listGrades.add(int.parse(secondAnswerController.text));
+        await ModuleRepository.addModuleGrades(
+                "1", "14", listGrades, menteeID!, sharedPrefs.group)
+            .then((value) => Navigator.pushNamed(
+                context, Modul1Page16.routeName,
+                arguments: {'menteeID': menteeID}));
+      } else {
+        List<String> listAnswers = [];
+        listAnswers.add(firstController.text);
+        listAnswers.add(secondController.text);
+        await ModuleRepository.addModuleAnswer("1", "14", listAnswers)
+            .then((value) => Navigator.pushNamed(context, next_route));
+      }
+      setState(() {
+        isLoading = false;
+      });
+    } else {
+      Navigator.pushNamed(context, next_route);
+    }
   }
 
   _contentMentor() {
@@ -480,7 +424,10 @@ class _Modul1Page14State extends State<Modul1Page14> {
         body: SafeArea(
       child: Stack(fit: StackFit.expand, children: <Widget>[
         role == 'mentor' ? _forMentor() : _forMentee(),
-        Positioned(bottom: 55, child: _Button('/module/1/page/15')),
+        Positioned(
+            bottom: 70,
+            child: CustomModuleButton(
+                pushFunction: () => pushFunction('/module/1/page/15'))),
         isLoading
             ? Center(
                 child: Container(

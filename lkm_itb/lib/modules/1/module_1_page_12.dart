@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lkm_itb/constants/components/module_button.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 
 class Modul1Page12 extends StatefulWidget {
@@ -14,69 +15,11 @@ class Modul1Page12 extends StatefulWidget {
 
 class _Modul1Page12State extends State<Modul1Page12> {
   final String role;
-  TextEditingController firstController = TextEditingController(text: "");
 
   _Modul1Page12State(this.role);
 
-  _Button(String next_route) {
-    return Container(
-        color:
-            role == 'mentee' ? ConstColor.whiteBackground : Colors.transparent,
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(
-                height: 40,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.arrow_back,
-                        color: ConstColor.blackText,
-                        size: 30,
-                      )
-                    ],
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      elevation: 3,
-                      primary: ConstColor.greyText,
-                      shape: StadiumBorder()),
-                )),
-            SizedBox(
-                height: 40,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, next_route);
-                  },
-                  child: Row(
-                    children: [
-                      Text(
-                        'Next',
-                        style: GoogleFonts.roboto(
-                            fontSize: 15, color: ConstColor.whiteBackground),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Icon(
-                        Icons.arrow_forward_outlined,
-                        color: ConstColor.blackText,
-                        size: 30,
-                      )
-                    ],
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      elevation: 3,
-                      primary: ConstColor.lightGreen,
-                      shape: StadiumBorder()),
-                ))
-          ],
-        ));
+  void pushFunction(String next_route) {
+    Navigator.pushNamed(context, next_route);
   }
 
   _contentMentor() {
@@ -215,7 +158,15 @@ class _Modul1Page12State extends State<Modul1Page12> {
           alignment: Alignment.center,
           children: <Widget>[
             role == 'mentor' ? _forMentor() : _forMentee(),
-            Positioned(bottom: 55, child: _Button('/module/1/page/13'))
+            Positioned(
+                bottom: 60,
+                child: Container(
+                    padding: EdgeInsets.all(10),
+                    color: role == 'mentor'
+                        ? Colors.transparent
+                        : ConstColor.whiteBackground,
+                    child: CustomModuleButton(
+                        pushFunction: () => pushFunction('/module/1/page/13'))))
           ]),
     ));
   }

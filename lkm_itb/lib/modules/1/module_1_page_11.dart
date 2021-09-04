@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lkm_itb/constants/components/module_button.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 
 class Modul1Page11 extends StatefulWidget {
-  Modul1Page11({Key? key, required this.title, required this.role}) : super(key: key);
+  Modul1Page11({Key? key, required this.title, required this.role})
+      : super(key: key);
 
   final String title;
   final String role;
@@ -17,63 +19,8 @@ class _Modul1Page11State extends State<Modul1Page11> {
 
   _Modul1Page11State(this.role);
 
-  _Button(String next_route) {
-    return Container(
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SizedBox(
-                height: 40,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.arrow_back,
-                        color: ConstColor.blackText,
-                        size: 30,
-                      )
-                    ],
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      elevation: 3,
-                      primary: ConstColor.greyText,
-                      shape: StadiumBorder()),
-                )),
-            SizedBox(
-                height: 40,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, next_route);
-                  },
-                  child: Row(
-                    children: [
-                      Text(
-                        'Next',
-                        style: GoogleFonts.roboto(
-                            fontSize: 15, color: ConstColor.whiteBackground),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Icon(
-                        Icons.arrow_forward_outlined,
-                        color: ConstColor.blackText,
-                        size: 30,
-                      )
-                    ],
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      elevation: 3,
-                      primary: ConstColor.lightGreen,
-                      shape: StadiumBorder()),
-                ))
-          ],
-        ));
+  void pushFunction(String next_route) {
+    Navigator.pushNamed(context, next_route);
   }
 
   _contentMentor() {
@@ -87,14 +34,18 @@ class _Modul1Page11State extends State<Modul1Page11> {
             style:
                 GoogleFonts.roboto(fontSize: 16, color: ConstColor.blackText),
           ),
-          SizedBox(height: 40,),
+          SizedBox(
+            height: 40,
+          ),
           Text(
             'Dari video tersebut, dapat diketahui bahwa perbedaan pendapat bisa saling membuat konflik. Tono mengajarkan bahwa setiap pendapat bisa sama sama benar dan mengerucut ke sebuah kesimpulan yang harusnya dapat dipahami oleh setiap orang. Perilaku Tono adalah cerminan dari orang yang berpikir dialogis. Dialog yang terjadi dalam kehidupan sehari-hari kadang hanya menunjukkan keunggulan masing masing pendapat saja, tanpa mencari makna sebenarnya dari semua pendapat yang diutarakan. Sebagai calon pemimpin, haruslah kita mau berdialog dan tidak menutup hati serta pikiran kita bersama.',
             textAlign: TextAlign.justify,
             style:
                 GoogleFonts.roboto(fontSize: 16, color: ConstColor.blackText),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           Text(
             'Pemikir kritis harus mampu terlibat dalam dialog eksplorasi yang bermanfaat, mengusulkan ide, menggali akarnya, mempertimbangkan wawasan dan bukti materi pelajaran, menguji ide dan bergerak di antara berbagai sudut pandang.',
             textAlign: TextAlign.justify,
@@ -127,9 +78,13 @@ class _Modul1Page11State extends State<Modul1Page11> {
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        SizedBox(height: 80,),
+        SizedBox(
+          height: 80,
+        ),
         _contentMentor(),
-        SizedBox(height: MediaQuery.of(context).size.height*0.3,)
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.3,
+        )
       ],
     ));
   }
@@ -140,7 +95,9 @@ class _Modul1Page11State extends State<Modul1Page11> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         _contentMentee(),
-        SizedBox(height: MediaQuery.of(context).size.height*0.3,)
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.3,
+        )
       ],
     ));
   }
@@ -149,17 +106,25 @@ class _Modul1Page11State extends State<Modul1Page11> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-      child: Stack(fit: StackFit.expand, alignment : Alignment.center,children: <Widget>[
-        Positioned(top:40,child:        Text('Bagian 2',
-            style: GoogleFonts.roboto(
-              fontSize: 24,
-              color: ConstColor.lightGreen,
-              fontWeight: FontWeight.w700,
-            )),),
-        role == 'mentor' ? _forMentor() : Center(child:_forMentee()),
-        Positioned(bottom: 70, child: _Button('/module/1/page/12'))
-      ]),
+      child: Stack(
+          fit: StackFit.expand,
+          alignment: Alignment.center,
+          children: <Widget>[
+            Positioned(
+              top: 40,
+              child: Text('Bagian 2',
+                  style: GoogleFonts.roboto(
+                    fontSize: 24,
+                    color: ConstColor.lightGreen,
+                    fontWeight: FontWeight.w700,
+                  )),
+            ),
+            role == 'mentor' ? _forMentor() : Center(child: _forMentee()),
+            Positioned(
+                bottom: 70,
+                child: CustomModuleButton(
+                    pushFunction: () => pushFunction('/module/1/page/12')))
+          ]),
     ));
-    
   }
 }
