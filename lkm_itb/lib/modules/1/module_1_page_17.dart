@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lkm_itb/constants/components/module_answer_field.dart';
 import 'package:lkm_itb/constants/components/module_button.dart';
+import 'package:lkm_itb/constants/components/module_grade_field.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/data/repositories/user_repositories.dart';
 import 'package:lkm_itb/modules/1/module_1_page_20.dart';
-
 
 // ignore: must_be_immutable
 class Modul1Page17 extends StatefulWidget {
@@ -33,72 +34,31 @@ class _Modul1Page17State extends State<Modul1Page17> {
   _Modul1Page17State(this.role, this.menteeID);
 
   void pushFunction(String next_route) async {
-                        if (role == 'mentee') {
-                      setState(() {
-                        isLoading = true;
-                      });
-                      if (menteeID != null) {
-                        List<int> listGrades = [];
-                        listGrades.add(int.parse(firstAnswerController.text));
-                        await ModuleRepository.addModuleGrades(
-                                "1", "17", listGrades, menteeID!,sharedPrefs.group)
-                            .then((value) {
-                          Navigator.pushNamed(context, Modul1Page20.routeName,
-                              arguments: {'menteeID': menteeID});
-                        });
-                      } else {
-                        List<String> listAnswers = [];
-                        listAnswers.add(firstController.text);
-                        await ModuleRepository.addModuleAnswer(
-                                "1", "17", listAnswers)
-                            .then((value) =>
-                                Navigator.pushNamed(context, next_route));
-                      }
-                      setState(() {
-                        isLoading = false;
-                      });
-                    } else {
-                      Navigator.pushNamed(context, next_route);
-                    }
-  }
-  
-
-  _penilaian(TextEditingController numController) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SizedBox(
-          height: 10,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-                width: 60.0,
-                height: 30,
-                alignment: Alignment.center,
-                child: TextField(
-                    controller: numController,
-                    keyboardType: TextInputType.number,
-                    decoration: new InputDecoration(
-                      fillColor: ConstColor.darkGreen,
-                      filled: true,
-                      focusedBorder: new OutlineInputBorder(
-                          borderSide: BorderSide(color: ConstColor.darkGreen),
-                          borderRadius: BorderRadius.circular(5)),
-                      enabledBorder: new OutlineInputBorder(
-                          borderSide: BorderSide(color: ConstColor.darkGreen),
-                          borderRadius: BorderRadius.circular(5)),
-                    ),
-                    style: TextStyle(
-                        fontSize: 16.0, color: ConstColor.whiteBackground))),
-          ],
-        ),
-        SizedBox(
-          height: 10,
-        ),
-      ],
-    );
+    if (role == 'mentee') {
+      setState(() {
+        isLoading = true;
+      });
+      if (menteeID != null) {
+        List<int> listGrades = [];
+        listGrades.add(int.parse(firstAnswerController.text));
+        await ModuleRepository.addModuleGrades(
+                "1", "17", listGrades, menteeID!, sharedPrefs.group)
+            .then((value) {
+          Navigator.pushNamed(context, Modul1Page20.routeName,
+              arguments: {'menteeID': menteeID});
+        });
+      } else {
+        List<String> listAnswers = [];
+        listAnswers.add(firstController.text);
+        await ModuleRepository.addModuleAnswer("1", "17", listAnswers)
+            .then((value) => Navigator.pushNamed(context, next_route));
+      }
+      setState(() {
+        isLoading = false;
+      });
+    } else {
+      Navigator.pushNamed(context, next_route);
+    }
   }
 
   _contentMentor() {
@@ -136,29 +96,13 @@ class _Modul1Page17State extends State<Modul1Page17> {
             fit: BoxFit.fill,
           ),
           SizedBox(height: 30),
-          Text(
-            'Dari ilustrasi tersebut apakah yang seharusnya dibenarkan?',
-            textAlign: TextAlign.justify,
-            style:
-                GoogleFonts.roboto(fontSize: 14, color: ConstColor.blackText),
-          ),
-          SizedBox(height: 20),
-          TextField(
-              controller: firstController,
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                    borderSide: BorderSide(color: ConstColor.lightGreen),
-                    borderRadius: BorderRadius.circular(20)),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: ConstColor.lightGreen),
-                    borderRadius: BorderRadius.circular(20)),
-                fillColor: ConstColor.whiteBackground,
-                filled: true,
-                hintText: 'Isikan jawabanmu disini...',
-              )),
-          menteeID != null ? _penilaian(firstAnswerController) : Container()
+          ModuleAnswerField(
+              title:
+                  'Dari ilustrasi tersebut apakah yang seharusnya dibenarkan?',
+              textController: firstController),
+          menteeID != null
+              ? ModuleGradeField(textController: firstAnswerController)
+              : Container()
         ],
       ),
     );
@@ -252,7 +196,10 @@ class _Modul1Page17State extends State<Modul1Page17> {
         body: SafeArea(
       child: Stack(fit: StackFit.expand, children: <Widget>[
         role == 'mentor' ? _forMentor() : _forMentee(),
-        Positioned(bottom: 70, child: CustomModuleButton(pushFunction: () => pushFunction('/module/1/page/18'))),
+        Positioned(
+            bottom: 70,
+            child: CustomModuleButton(
+                pushFunction: () => pushFunction('/module/1/page/18'))),
         isLoading
             ? Center(
                 child: Container(

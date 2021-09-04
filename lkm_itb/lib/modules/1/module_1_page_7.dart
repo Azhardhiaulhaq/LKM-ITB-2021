@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lkm_itb/constants/components/module_answer_field.dart';
 import 'package:lkm_itb/constants/components/module_button.dart';
+import 'package:lkm_itb/constants/components/module_grade_field.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
@@ -81,69 +83,15 @@ class _Modul1Page7State extends State<Modul1Page7> {
       margin: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
       child: Column(
         children: [
-          Text(
-            'Jawablah pertanyaan berikut!\n\nNah, menurut kalian, di kondisi pandemi seperti ini, manakah yang lebih penting? Kesehatan atau Ekonomi?',
-            textAlign: TextAlign.justify,
-            style:
-                GoogleFonts.roboto(fontSize: 14, color: ConstColor.blackText),
-          ),
-          SizedBox(height: 20),
-          TextField(
-              controller: firstController,
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                    borderSide: BorderSide(color: ConstColor.lightGreen),
-                    borderRadius: BorderRadius.circular(20)),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: ConstColor.lightGreen),
-                    borderRadius: BorderRadius.circular(20)),
-                fillColor: ConstColor.whiteBackground,
-                filled: true,
-                hintText: 'Isikan jawabanmu disini...',
-              )),
-          menteeID != null ? _penilaian(firstAnswerController) : Container()
+          ModuleAnswerField(
+              title:
+                  'Jawablah pertanyaan berikut!\n\nNah, menurut kalian, di kondisi pandemi seperti ini, manakah yang lebih penting? Kesehatan atau Ekonomi?',
+              textController: firstController),
+          menteeID != null
+              ? ModuleGradeField(textController: firstAnswerController)
+              : Container()
         ],
       ),
-    );
-  }
-
-  _penilaian(TextEditingController numController) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SizedBox(
-          height: 10,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-                width: 60.0,
-                height: 30,
-                alignment: Alignment.center,
-                child: TextField(
-                    controller: numController,
-                    keyboardType: TextInputType.number,
-                    decoration: new InputDecoration(
-                      fillColor: ConstColor.darkGreen,
-                      filled: true,
-                      focusedBorder: new OutlineInputBorder(
-                          borderSide: BorderSide(color: ConstColor.darkGreen),
-                          borderRadius: BorderRadius.circular(5)),
-                      enabledBorder: new OutlineInputBorder(
-                          borderSide: BorderSide(color: ConstColor.darkGreen),
-                          borderRadius: BorderRadius.circular(5)),
-                    ),
-                    style: TextStyle(
-                        fontSize: 16.0, color: ConstColor.whiteBackground))),
-          ],
-        ),
-        SizedBox(
-          height: 10,
-        ),
-      ],
     );
   }
 

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/components/module_button.dart';
+import 'package:lkm_itb/constants/components/module_grade_field.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
@@ -73,44 +74,6 @@ class _Modul1Page24State extends State<Modul1Page24> {
     } else {
       Navigator.pushNamed(context, next_route);
     }
-  }
-
-  _penilaian(TextEditingController numController) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SizedBox(
-          height: 10,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-                width: 60.0,
-                height: 30,
-                alignment: Alignment.center,
-                child: TextField(
-                    controller: numController,
-                    keyboardType: TextInputType.number,
-                    decoration: new InputDecoration(
-                      fillColor: ConstColor.darkGreen,
-                      filled: true,
-                      focusedBorder: new OutlineInputBorder(
-                          borderSide: BorderSide(color: ConstColor.darkGreen),
-                          borderRadius: BorderRadius.circular(5)),
-                      enabledBorder: new OutlineInputBorder(
-                          borderSide: BorderSide(color: ConstColor.darkGreen),
-                          borderRadius: BorderRadius.circular(5)),
-                    ),
-                    style: TextStyle(
-                        fontSize: 16.0, color: ConstColor.whiteBackground))),
-          ],
-        ),
-        SizedBox(
-          height: 10,
-        ),
-      ],
-    );
   }
 
   _contentMentor() {
@@ -438,7 +401,9 @@ class _Modul1Page24State extends State<Modul1Page24> {
                   ),
                 ),
               )),
-          menteeID != null ? _penilaian(firstAnswerController) : Container()
+          menteeID != null
+              ? ModuleGradeField(textController: firstAnswerController)
+              : Container()
         ],
       ),
     );
