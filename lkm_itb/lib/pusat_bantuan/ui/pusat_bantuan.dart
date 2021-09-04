@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lkm_itb/constants/components/back_button.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -92,12 +93,11 @@ class _PusatBantuanState extends State<PusatBantuan> {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
         body: Container(
-      color: ConstColor.whiteBackground,
       height: height,
       child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
-          Positioned(top: 40, left: 0, child: _backButton()),
+          Positioned(top: 40, left: 0, child: CustomBackButton(title:'Pusat Bantuan')),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

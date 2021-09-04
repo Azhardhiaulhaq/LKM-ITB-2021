@@ -2,6 +2,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lkm_itb/constants/components/back_button.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/data/models/module.dart';
 import 'package:lkm_itb/data/models/penilaian_modul.dart';
@@ -32,33 +33,6 @@ class _PenilaianModulePageState extends State<PenilaianModulePage> {
     super.initState();
   }
 
-  Widget _backButton() {
-    return Material(
-        child: InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(Icons.arrow_back, color: ConstColor.lightGreen),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Text('Capaian Berjalan',
-                style: GoogleFonts.roboto(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                    color: ConstColor.blackText))
-          ],
-        ),
-      ),
-    ));
-  }
 
   Widget emptyMessage() {
     return Column(
@@ -165,7 +139,7 @@ class _PenilaianModulePageState extends State<PenilaianModulePage> {
               SizedBox(
                 height: 20,
               ),
-              _backButton(),
+              CustomBackButton(title : 'Capaian'),
               _modulInfo(),
               SizedBox(
                 height: 10,

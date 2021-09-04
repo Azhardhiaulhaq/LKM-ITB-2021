@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
+import 'package:lkm_itb/data/repositories/module_repositories.dart';
+import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 
 class Modul1Page26 extends StatefulWidget {
   Modul1Page26({Key? key, required this.title, required this.role})
@@ -48,8 +50,17 @@ class _Modul1Page26State extends State<Modul1Page26> {
             SizedBox(
                 height: 40,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamedAndRemoveUntil(context, '/home', (_) => false);
+                  onPressed: () async {
+                    if (role == 'mentee') {
+                      print(sharedPrefs.userid);
+                      await ModuleRepository.setAnswerStatus(
+                              '1', sharedPrefs.userid)
+                          .then((value) {
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, '/home', (_) => false);
+                      });
+                    }
+
                     // Navigator.pushNamed(context, next_route);
                   },
                   child: Row(
@@ -79,7 +90,8 @@ class _Modul1Page26State extends State<Modul1Page26> {
   }
 
   _contentMentee() {
-    return Center(child:Container(
+    return Center(
+        child: Container(
       margin: EdgeInsets.symmetric(horizontal: 40),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -92,7 +104,9 @@ class _Modul1Page26State extends State<Modul1Page26> {
                 color: ConstColor.whiteBackground,
                 fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 30,),
+          SizedBox(
+            height: 30,
+          ),
           Text(
             'Sudah membantu Loki dalam persiapan ujiannya. Berkat kamu dan Kimy, Loki bisa lulus ujian TPB, yuhuu.',
             textAlign: TextAlign.center,
@@ -101,7 +115,9 @@ class _Modul1Page26State extends State<Modul1Page26> {
                 color: ConstColor.whiteBackground,
                 fontWeight: FontWeight.normal),
           ),
-           SizedBox(height: 30,),
+          SizedBox(
+            height: 30,
+          ),
         ],
       ),
     ));

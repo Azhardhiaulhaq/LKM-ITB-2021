@@ -2,6 +2,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lkm_itb/constants/components/back_button.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/data/models/presence.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
@@ -32,32 +33,6 @@ class _PresenceScreenState extends State<PresenceScreen> {
   List<Presence> listPresence = [];
 
   _PresenceScreenState(this.eventID, this.type);
-  Widget _backButton() {
-    return InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(Icons.arrow_back, color: ConstColor.lightGreen),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Text('Presensi Kelompok',
-                style: GoogleFonts.roboto(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                    color: ConstColor.blackText))
-          ],
-        ),
-      ),
-    );
-  }
 
   _countKehadiran() {
     var countPresence =
@@ -212,7 +187,7 @@ class _PresenceScreenState extends State<PresenceScreen> {
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              type == 'seminar' ? _backButton() : Container(),
+              type == 'seminar' ? CustomBackButton(title: 'Presensi Kelompok') : Container(),
               type == 'module'
                   ? Text(
                       'Sebelum memulai mentoring, jangan lupa untuk mengisi presensi ini ya!',

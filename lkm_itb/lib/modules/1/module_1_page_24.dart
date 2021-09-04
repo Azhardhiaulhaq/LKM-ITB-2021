@@ -87,8 +87,8 @@ class _Modul1Page24State extends State<Modul1Page24> {
                       if (menteeID != null) {
                         List<int> listGrades = [];
                         listGrades.add(int.parse(firstAnswerController.text));
-                        await ModuleRepository.addModuleGrades(
-                                "1", "24", listGrades, menteeID!,sharedPrefs.group)
+                        await ModuleRepository.addModuleGrades("1", "24",
+                                listGrades, menteeID!, sharedPrefs.group)
                             .then((value) => Navigator.pushNamed(
                                     context, PenilaianLast.routeName,
                                     arguments: {
@@ -97,6 +97,7 @@ class _Modul1Page24State extends State<Modul1Page24> {
                                       'moduleID': '1'
                                     }));
                       } else {
+                        print(listAnswer);
                         await ModuleRepository.addModuleAnswer(
                                 "1", "24", listAnswer)
                             .then((value) =>
@@ -569,13 +570,11 @@ class _Modul1Page24State extends State<Modul1Page24> {
     }
     String? id = menteeID != null ? menteeID : sharedPrefs.userid;
     await UserRepository.getUserAnswers('1', id!, '24').then((e) {
-      var listString = List.from(e.get('answers'));
+      List<String?> listString = List.from(e.get('answers'));
       setState(() {
-        listAnswer[0] = listString[0] != null ? listString[0] : '';
-        listAnswer[1] = listString[1] != null ? listString[1] : '';
-        listAnswer[2] = listString[2] != null ? listString[2] : '';
-        listAnswer[3] = listString[3] != null ? listString[3] : '';
-        listAnswer[4] = listString[4] != null ? listString[4] : '';
+        for (var i = 0; i < listString.length; i++) {
+          listAnswer[i] = listString[i] ?? '';
+        }
       });
     });
   }

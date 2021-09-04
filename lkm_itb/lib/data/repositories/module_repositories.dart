@@ -9,6 +9,7 @@ class ModuleRepository {
   static CollectionReference answers = firestore.collection('answers');
   static CollectionReference modules = firestore.collection('modules');
   static CollectionReference grades = firestore.collection('grades');
+    static CollectionReference users = firestore.collection('users');
 
   static Future<DocumentSnapshot<Object?>> getModuleQuestions(String moduleID) {
     try {
@@ -173,6 +174,7 @@ class ModuleRepository {
   static Future<void> addModuleAnswer(
       String moduleID, String questionID, List<String> listAnswers) async {
     try {
+      print(listAnswers);
       String userID = sharedPrefs.userid;
       String name = sharedPrefs.name;
       String group = sharedPrefs.group;
@@ -191,7 +193,7 @@ class ModuleRepository {
             .doc(userID)
             .collection('questions')
             .doc(questionID)
-            .set({'answers': FieldValue.arrayUnion(listAnswers)});
+            .set({'answers' : listAnswers});
       } else {
         await answers
             .doc(moduleID)
@@ -199,7 +201,7 @@ class ModuleRepository {
             .doc(userID)
             .collection('questions')
             .doc(questionID)
-            .set({'answers': FieldValue.arrayUnion(listAnswers)});
+            .set({'answers' : listAnswers});
       }
     } catch (e) {
       print(e.toString());

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lkm_itb/constants/components/back_button.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 
 class TentangKami extends StatefulWidget {
@@ -13,32 +14,6 @@ class TentangKami extends StatefulWidget {
 }
 
 class _TentangKamiState extends State<TentangKami> {
-  Widget _backButton() {
-    return InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(Icons.arrow_back, color: ConstColor.lightGreen),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Text('Tentang Kami',
-                style: GoogleFonts.roboto(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                    color: ConstColor.blackText))
-          ],
-        ),
-      ),
-    );
-  }
 
   @override
   void initState() {
@@ -50,7 +25,7 @@ class _TentangKamiState extends State<TentangKami> {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
         body: Container(
-      color: ConstColor.whiteBackground,
+
       height: height,
       child: Stack(
         alignment: Alignment.center,
@@ -161,7 +136,7 @@ class _TentangKamiState extends State<TentangKami> {
                   fontWeight: FontWeight.w400),
             ),
           ),
-                    Positioned(top: 40, left: 0, child: _backButton()),
+                    Positioned(top: 40, left: 0, child: CustomBackButton( title: 'Tentang Kami',)),
         ],
       ),
     ));
