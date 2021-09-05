@@ -5,6 +5,7 @@ class ConstColor {
   static const Color whiteBackground = Color(0xffffffff);
   static const Color blackText = Color(0xff313333);
   static const Color greyText = Color(0xffc4c4c4);
+  static const Color boldGreyText = Color(0xff8F9090);
   static const Color appBarBackground = Color(0xff8AB446);
   static const Color lightGreen = Color(0xff8AB446);
   static const Color darkGreen = Color(0xff2D6B22);

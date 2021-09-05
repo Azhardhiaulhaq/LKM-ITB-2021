@@ -14,7 +14,6 @@ class TentangKami extends StatefulWidget {
 }
 
 class _TentangKamiState extends State<TentangKami> {
-
   @override
   void initState() {
     super.initState();
@@ -25,12 +24,10 @@ class _TentangKamiState extends State<TentangKami> {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
         body: Container(
-
       height: height,
       child: Stack(
         alignment: Alignment.center,
         children: [
-
           Positioned(
             top: 100,
             child: Column(
@@ -136,7 +133,12 @@ class _TentangKamiState extends State<TentangKami> {
                   fontWeight: FontWeight.w400),
             ),
           ),
-                    Positioned(top: 40, left: 0, child: CustomBackButton( title: 'Tentang Kami',)),
+          Positioned(
+              top: 40,
+              left: 0,
+              child: CustomBackButton(
+                title: 'Tentang Kami',
+              )),
         ],
       ),
     ));

@@ -32,6 +32,35 @@ import 'package:lkm_itb/modules/1/module_1_page_23.dart';
 import 'package:lkm_itb/modules/1/module_1_page_24.dart';
 import 'package:lkm_itb/modules/1/module_1_page_25.dart';
 import 'package:lkm_itb/modules/1/module_1_page_26.dart';
+import 'package:lkm_itb/modules/2/module_2_page_1.dart';
+import 'package:lkm_itb/modules/2/module_2_page_10.dart';
+import 'package:lkm_itb/modules/2/module_2_page_11.dart';
+import 'package:lkm_itb/modules/2/module_2_page_12.dart';
+import 'package:lkm_itb/modules/2/module_2_page_13.dart';
+import 'package:lkm_itb/modules/2/module_2_page_14.dart';
+import 'package:lkm_itb/modules/2/module_2_page_15.dart';
+import 'package:lkm_itb/modules/2/module_2_page_16.dart';
+import 'package:lkm_itb/modules/2/module_2_page_17.dart';
+import 'package:lkm_itb/modules/2/module_2_page_18.dart';
+import 'package:lkm_itb/modules/2/module_2_page_19.dart';
+import 'package:lkm_itb/modules/2/module_2_page_2.dart';
+import 'package:lkm_itb/modules/2/module_2_page_20.dart';
+import 'package:lkm_itb/modules/2/module_2_page_21.dart';
+import 'package:lkm_itb/modules/2/module_2_page_22.dart';
+import 'package:lkm_itb/modules/2/module_2_page_23.dart';
+import 'package:lkm_itb/modules/2/module_2_page_24.dart';
+import 'package:lkm_itb/modules/2/module_2_page_25.dart';
+import 'package:lkm_itb/modules/2/module_2_page_26.dart';
+import 'package:lkm_itb/modules/2/module_2_page_27.dart';
+import 'package:lkm_itb/modules/2/module_2_page_28.dart';
+import 'package:lkm_itb/modules/2/module_2_page_29.dart';
+import 'package:lkm_itb/modules/2/module_2_page_3.dart';
+import 'package:lkm_itb/modules/2/module_2_page_4.dart';
+import 'package:lkm_itb/modules/2/module_2_page_5.dart';
+import 'package:lkm_itb/modules/2/module_2_page_6.dart';
+import 'package:lkm_itb/modules/2/module_2_page_7.dart';
+import 'package:lkm_itb/modules/2/module_2_page_8.dart';
+import 'package:lkm_itb/modules/2/module_2_page_9.dart';
 import 'package:lkm_itb/modules/penilaian/penilaian_first.dart';
 import 'package:lkm_itb/modules/penilaian/penilaian_last.dart';
 import 'package:lkm_itb/nilai/ui/nilai_kelompok_screen.dart';
@@ -76,8 +105,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
   List<Widget> _buildScreens() {
     return [
       new HomeScreen(title: 'Home Screen', user: user),
-      ProgressTab(user: user),
-      NilaiScreen(
+      new ProgressTab(user: user),
+      new NilaiScreen(
         group: sharedPrefs.group,
         name: sharedPrefs.name,
         role: sharedPrefs.role,
@@ -154,6 +183,64 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 Modul1Page25(title: 'Module 1 Page 25', role: sharedPrefs.role),
             '/module/1/page/26': (context) =>
                 Modul1Page26(title: 'Module 1 Page 26', role: sharedPrefs.role),
+            Modul2Page1.routeName: (context) =>
+                Modul2Page1(role: sharedPrefs.role),
+            Modul2Page2.routeName: (context) =>
+                Modul2Page2(role: sharedPrefs.role),
+            Modul2Page3.routeName: (context) =>
+                Modul2Page3(role: sharedPrefs.role),
+            Modul2Page4.routeName: (context) =>
+                Modul2Page4(role: sharedPrefs.role),
+            Modul2Page5.routeName: (context) =>
+                Modul2Page5(role: sharedPrefs.role),
+            Modul2Page6.routeName: (context) =>
+                Modul2Page6(role: sharedPrefs.role),
+            Modul2Page7.routeName: (context) =>
+                Modul2Page7(role: sharedPrefs.role),
+            Modul2Page8.routeName: (context) =>
+                Modul2Page8(role: sharedPrefs.role),
+            Modul2Page9.routeName: (context) =>
+                Modul2Page9(role: sharedPrefs.role),
+            Modul2Page10.routeName: (context) =>
+                Modul2Page10(role: sharedPrefs.role),
+            Modul2Page11.routeName: (context) =>
+                Modul2Page11(role: sharedPrefs.role),
+            Modul2Page12.routeName: (context) =>
+                Modul2Page12(role: sharedPrefs.role),
+            Modul2Page13.routeName: (context) =>
+                Modul2Page13(role: sharedPrefs.role),
+            Modul2Page14.routeName: (context) =>
+                Modul2Page14(role: sharedPrefs.role),
+            Modul2Page15.routeName: (context) =>
+                Modul2Page15(role: sharedPrefs.role),
+            Modul2Page16.routeName: (context) =>
+                Modul2Page16(role: sharedPrefs.role),
+            Modul2Page17.routeName: (context) =>
+                Modul2Page17(role: sharedPrefs.role),
+            Modul2Page18.routeName: (context) =>
+                Modul2Page18(role: sharedPrefs.role),
+            Modul2Page19.routeName: (context) =>
+                Modul2Page19(role: sharedPrefs.role),
+            Modul2Page20.routeName: (context) =>
+                Modul2Page20(role: sharedPrefs.role),
+            Modul2Page21.routeName: (context) =>
+                Modul2Page21(role: sharedPrefs.role),
+            Modul2Page22.routeName: (context) =>
+                Modul2Page22(role: sharedPrefs.role),
+            Modul2Page23.routeName: (context) =>
+                Modul2Page23(role: sharedPrefs.role),
+            Modul2Page24.routeName: (context) =>
+                Modul2Page24(role: sharedPrefs.role),
+            Modul2Page25.routeName: (context) =>
+                Modul2Page25(role: sharedPrefs.role),
+            Modul2Page26.routeName: (context) =>
+                Modul2Page26(role: sharedPrefs.role),
+            Modul2Page27.routeName: (context) =>
+                Modul2Page27(role: sharedPrefs.role),
+            Modul2Page28.routeName: (context) =>
+                Modul2Page28(role: sharedPrefs.role),
+                Modul2Page29.routeName: (context) =>
+                Modul2Page29(role: sharedPrefs.role),
           },
         ),
       ),
@@ -313,7 +400,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   @override
   Widget build(BuildContext context) {
-
     return PersistentTabView(
       context,
       controller: _controller,

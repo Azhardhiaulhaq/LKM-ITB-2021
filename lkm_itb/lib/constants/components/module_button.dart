@@ -4,12 +4,20 @@ import 'package:lkm_itb/constants/const_colors.dart';
 
 class CustomModuleButton extends StatelessWidget {
   final Function pushFunction;
+  final bool? isEnd;
 
-  const CustomModuleButton({Key? key, required this.pushFunction}) : super(key: key);
+  const CustomModuleButton({Key? key, required this.pushFunction, this.isEnd})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-        return Container(
+    String nextTitle = '';
+    if (isEnd == null) {
+      nextTitle = 'Next';
+    } else {
+      nextTitle = 'End';
+    }
+    return Container(
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         child: Row(
@@ -38,13 +46,13 @@ class CustomModuleButton extends StatelessWidget {
             SizedBox(
                 height: 40,
                 child: ElevatedButton(
-                  onPressed: (){
+                  onPressed: () {
                     pushFunction();
                   },
                   child: Row(
                     children: [
                       Text(
-                        'Next',
+                        nextTitle,
                         style: GoogleFonts.roboto(
                             fontSize: 15, color: ConstColor.whiteBackground),
                       ),

@@ -187,7 +187,9 @@ class _PresenceScreenState extends State<PresenceScreen> {
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              type == 'seminar' ? CustomBackButton(title: 'Presensi Kelompok') : Container(),
+              type == 'seminar'
+                  ? CustomBackButton(title: 'Presensi Kelompok')
+                  : Container(),
               type == 'module'
                   ? Text(
                       'Sebelum memulai mentoring, jangan lupa untuk mengisi presensi ini ya!',
@@ -201,12 +203,19 @@ class _PresenceScreenState extends State<PresenceScreen> {
               SizedBox(
                 height: 40,
               ),
-              Text(title,
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.roboto(
-                      fontSize: 20,
-                      color: ConstColor.lightGreen,
-                      fontWeight: FontWeight.w700)),
+              type == 'seminar'
+                  ? Text(title,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.roboto(
+                          fontSize: 20,
+                          color: ConstColor.lightGreen,
+                          fontWeight: FontWeight.w700))
+                  : Text('Modul ' + eventID + ' - ' + title,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.roboto(
+                          fontSize: 20,
+                          color: ConstColor.blackText,
+                          fontWeight: FontWeight.w700)),
               SizedBox(
                 height: 40,
               ),
@@ -227,7 +236,9 @@ class _PresenceScreenState extends State<PresenceScreen> {
                 height: 20,
               ),
               _saveButton(context),
-              SizedBox(height: 80,)
+              SizedBox(
+                height: 80,
+              )
             ],
           )),
           isLoading
