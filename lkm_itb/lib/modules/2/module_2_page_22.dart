@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/components/loading_progress.dart';
@@ -8,6 +9,8 @@ import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
+import 'package:lkm_itb/data/repositories/user_repositories.dart';
+import 'package:lkm_itb/modules/2/module_2_page_26.dart';
 
 class Modul2Page22 extends StatefulWidget {
   Modul2Page22({Key? key, required this.role, this.menteeID}) : super(key: key);
@@ -56,7 +59,10 @@ class _Modul2Page22State extends State<Modul2Page22> {
             .then((value) async {
           await ModuleRepository.addModuleGrades(module.toString(),
                   page.toString(), listGrades, menteeID!, sharedPrefs.group)
-              .then((value) {});
+              .then((value) {
+                Navigator.pushNamed(context, Modul2Page26.routeName,
+                arguments: {'menteeID': menteeID});
+              });
         });
       } else {
         await ModuleRepository.addModuleAnswer(
@@ -181,10 +187,37 @@ class _Modul2Page22State extends State<Modul2Page22> {
       ),
     );
   }
+    _initAnswer() async {
+    if (menteeID != null) {
+      DocumentSnapshot userGrade = await UserRepository.getUserGrade(
+          module.toString(), menteeID!, page.toString());
+      if (userGrade.exists) {
+        var listString = List.from(userGrade.get('grades'));
+        setState(() {
+          firstAnswerController.text =
+              listString[0] != null ? listString[0].toString() : '';
+        });
+      }
+    }
+
+    String? id = menteeID != null ? menteeID : sharedPrefs.userid;
+    await UserRepository.getUserAnswers(module.toString(), id!, page.toString())
+        .then((e) {
+      if (e.exists) {
+        List<String?> listString = List.from(e.get('answers'));
+        setState(() {
+          for (var i = 0; i < listString.length; i++) {
+            answers[i] = listString[i] ?? '';
+          }
+        });
+      }
+    });
+  }
 
   @override
   void initState() {
     super.initState();
+    _initAnswer();
     List<String> firstQuestions = [
       'Perjanjian',
       'Komitmen',
@@ -211,6 +244,8 @@ class _Modul2Page22State extends State<Modul2Page22> {
     mapQuestions[2] = thirdQuestions;
     print(mapQuestions);
   }
+
+  
 
   @override
   Widget build(BuildContext context) {

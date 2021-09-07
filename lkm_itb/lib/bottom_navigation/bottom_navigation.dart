@@ -240,7 +240,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 Modul2Page27(role: sharedPrefs.role),
             Modul2Page28.routeName: (context) =>
                 Modul2Page28(role: sharedPrefs.role),
-                Modul2Page29.routeName: (context) =>
+            Modul2Page29.routeName: (context) =>
                 Modul2Page29(role: sharedPrefs.role),
           },
         ),
@@ -271,6 +271,13 @@ class _BottomNavigationState extends State<BottomNavigation> {
                           userID: arg['userID'],
                           moduleID: arg['moduleID']));
                 } else if (settings.name == Modul1Page4.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => Modul1Page4(
+                          menteeID: arg['menteeID'],
+                          title: 'Penilaian Modul 1 Page 4',
+                          role: 'mentee'));
+                } else if (settings.name == '/module/1/penilaian/first') {
                   var arg = settings.arguments as Map;
                   return MaterialPageRoute(
                       builder: (context) => Modul1Page4(
@@ -340,6 +347,56 @@ class _BottomNavigationState extends State<BottomNavigation> {
                           menteeID: arg['menteeID'],
                           title: 'Penilaian Modul 1 Page 24',
                           role: 'mentee'));
+                } else if (settings.name == Modul2Page5.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => Modul2Page5(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == '/module/2/penilaian/first') {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => Modul2Page5(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul2Page7.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => Modul2Page7(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul2Page9.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => Modul2Page9(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul2Page12.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => Modul2Page12(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul2Page14.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => Modul2Page14(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul2Page18.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => Modul2Page18(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul2Page20.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => Modul2Page20(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul2Page22.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => Modul2Page22(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul2Page26.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => Modul2Page26(
+                          menteeID: arg['menteeID'], role: 'mentee'));
                 } else if (settings.name == '/progress') {
                   return MaterialPageRoute(
                     builder: (context) => ProgressTab(user: user),
@@ -387,8 +444,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
         routeAndNavigatorSettings: RouteAndNavigatorSettings(
           initialRoute: '/profile',
           routes: {
-            '/profile/edit' : (context) => ProfileFormBuilder(user: user),
-            '/profile' : (context) => new Profile(title: 'Profile', user: user),
+            '/profile/edit': (context) => ProfileFormBuilder(user: user),
+            '/profile': (context) => new Profile(title: 'Profile', user: user),
             '/profile/info': (context) => DetailLKM(title: 'Detail LKM'),
             '/profile/password': (context) => DetailLKM(title: 'Detail LKM'),
             '/profile/about': (context) => TentangKami(title: 'Tentang Kami'),

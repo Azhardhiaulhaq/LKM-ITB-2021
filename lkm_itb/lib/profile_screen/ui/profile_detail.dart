@@ -84,7 +84,7 @@ class _ProfileDetailState extends State<ProfileDetail> {
         String role = dataProfile['role'] ?? 'Belum Ada Status';
         String group = dataProfile['group'] ?? 'Belum Ada Kelompok';
         String faculty = dataProfile['faculty'] ?? 'Belum Ada Fakultas';
-        String major = AppData.mapMajor[faculty]![dataProfile['major']] ??
+        String major = AppData.mapMajor[faculty]?[dataProfile['major']] ??
             'Belum Ada Program Jurusan';
 
         return Scaffold(

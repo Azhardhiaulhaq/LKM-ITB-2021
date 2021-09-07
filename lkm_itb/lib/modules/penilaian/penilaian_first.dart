@@ -83,7 +83,7 @@ class _PenilaianFirstState extends State<PenilaianFirst> {
                 height: 40,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context,Modul1Page4.routeName,arguments: {'menteeID' : menteeID});
+                    Navigator.pushNamed(context,'/module/'+ moduleID +'/penilaian/first',arguments: {'menteeID' : menteeID});
                   },
                   child: Center(child: Text('Mulai Penilaian')),
                   style: ElevatedButton.styleFrom(

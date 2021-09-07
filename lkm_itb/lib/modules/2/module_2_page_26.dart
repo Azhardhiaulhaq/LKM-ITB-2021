@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/components/loading_progress.dart';
@@ -8,6 +9,8 @@ import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
+import 'package:lkm_itb/data/repositories/user_repositories.dart';
+import 'package:lkm_itb/modules/penilaian/penilaian_last.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Modul2Page26 extends StatefulWidget {
@@ -48,7 +51,14 @@ class _Modul2Page26State extends State<Modul2Page26> {
             .then((value) async {
           await ModuleRepository.addModuleGrades(module.toString(),
                   page.toString(), listGrades, menteeID!, sharedPrefs.group)
-              .then((value) {});
+              .then((value) {
+                Navigator.pushNamed(
+                    context, PenilaianLast.routeName, arguments: {
+                  'menteeID': menteeID,
+                  'userID': sharedPrefs.userid,
+                  'moduleID': module.toString()
+                });
+              });
         });
       } else {
         List<String> listAnswers = [];
@@ -112,6 +122,37 @@ class _Modul2Page26State extends State<Modul2Page26> {
         ],
       ),
     );
+  }
+
+  _initAnswer() async {
+    if (menteeID != null) {
+      DocumentSnapshot userGrade = await UserRepository.getUserGrade(
+          module.toString(), menteeID!, page.toString());
+      if (userGrade.exists) {
+        var listString = List.from(userGrade.get('grades'));
+        setState(() {
+          firstAnswerController.text =
+              listString[0] != null ? listString[0].toString() : '0';
+        });
+      }
+    }
+    String? id = menteeID != null ? menteeID : sharedPrefs.userid;
+    DocumentSnapshot userAnswer = await UserRepository.getUserAnswers(
+        module.toString(), id!, page.toString());
+    if (userAnswer.exists) {
+      var listString = List.from(userAnswer.get('answers'));
+      setState(() {
+        firstController.text = listString[0] != null ? listString[0] : '';
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Add the observer.
+    _initAnswer();
   }
 
   @override

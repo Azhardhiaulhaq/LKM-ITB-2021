@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/components/module_button.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/constants/size_config.dart';
+import 'package:lkm_itb/data/repositories/module_repositories.dart';
+import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 
 class Modul2Page29 extends StatefulWidget {
   Modul2Page29({Key? key, required this.role}) : super(key: key);
@@ -19,8 +21,16 @@ class _Modul2Page29State extends State<Modul2Page29> {
 
   _Modul2Page29State(this.role);
 
-  void pushFunction(String next_route) {
-    Navigator.pushNamed(context, next_route);
+  void pushFunction(String next_route) async {
+    if (role == 'mentee') {
+      print(sharedPrefs.userid);
+      await ModuleRepository.setAnswerStatus('2', sharedPrefs.userid)
+          .then((value) {
+        Navigator.pushNamedAndRemoveUntil(context, '/home', (_) => false);
+      });
+    } else {
+      Navigator.pushNamedAndRemoveUntil(context, '/home', (_) => false);
+    }
   }
 
   @override

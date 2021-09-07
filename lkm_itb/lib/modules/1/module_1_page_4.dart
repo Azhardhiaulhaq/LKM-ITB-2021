@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lkm_itb/constants/components/loading_progress.dart';
 import 'package:lkm_itb/constants/components/module_answer_field.dart';
 import 'package:lkm_itb/constants/components/module_button.dart';
 import 'package:lkm_itb/constants/components/module_grade_field.dart';
@@ -310,16 +311,7 @@ class _Modul1Page4State extends State<Modul1Page4> {
                     bottom: 70,
                     child: CustomModuleButton(
                         pushFunction: () => pushFunction('/module/1/page/5'))),
-                isLoading
-                    ? Center(
-                        child: Container(
-                            height: 100,
-                            width: 100,
-                            child: CircularProgressIndicator(
-                              color: ConstColor.darkGreen,
-                            )),
-                      )
-                    : Container(),
+                LoadingProgress(isLoading: isLoading),
               ]),
         ));
   }

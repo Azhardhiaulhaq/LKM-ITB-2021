@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/components/loading_progress.dart';
@@ -7,6 +8,8 @@ import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
+import 'package:lkm_itb/data/repositories/user_repositories.dart';
+import 'package:lkm_itb/modules/2/module_2_page_18.dart';
 
 class Modul2Page14 extends StatefulWidget {
   Modul2Page14({Key? key, required this.role, this.menteeID}) : super(key: key);
@@ -48,7 +51,10 @@ class _Modul2Page14State extends State<Modul2Page14> {
         listGrades.add(int.parse(firstAnswerController.text));
         await ModuleRepository.addModuleGrades(module.toString(),
                 page.toString(), listGrades, menteeID!, sharedPrefs.group)
-            .then((value) {});
+            .then((value) {
+              Navigator.pushNamed(context, Modul2Page18.routeName,
+                arguments: {'menteeID': menteeID});
+            });
       } else {
         await ModuleRepository.addModuleAnswer(
                 module.toString(), page.toString(), listAnswer)
@@ -461,6 +467,41 @@ class _Modul2Page14State extends State<Modul2Page14> {
         ],
       ),
     );
+  }
+
+  _initAnswer() async {
+    if (menteeID != null) {
+      DocumentSnapshot userGrade = await UserRepository.getUserGrade(
+          module.toString(), menteeID!, page.toString());
+      if (userGrade.exists) {
+        var listString = List.from(userGrade.get('grades'));
+        setState(() {
+          firstAnswerController.text =
+              listString[0] != null ? listString[0].toString() : '';
+        });
+      }
+    }
+
+    String? id = menteeID != null ? menteeID : sharedPrefs.userid;
+    await UserRepository.getUserAnswers(module.toString(), id!, page.toString())
+        .then((e) {
+      if (e.exists) {
+        List<String?> listString = List.from(e.get('answers'));
+        setState(() {
+          for (var i = 0; i < listString.length; i++) {
+            listAnswer[i] = listString[i] ?? '';
+          }
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Add the observer.
+    _initAnswer();
   }
 
   @override
