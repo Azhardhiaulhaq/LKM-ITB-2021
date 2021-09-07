@@ -67,6 +67,7 @@ import 'package:lkm_itb/nilai/ui/nilai_kelompok_screen.dart';
 import 'package:lkm_itb/nilai/ui/nilai_mentee_screen.dart';
 import 'package:lkm_itb/nilai/ui/nilai_screen.dart';
 import 'package:lkm_itb/profile_screen/ui/profile.dart';
+import 'package:lkm_itb/profile_screen/ui/profile_form_builder.dart';
 import 'package:lkm_itb/progress/ui/progress_tab.dart';
 import 'package:lkm_itb/pusat_bantuan/ui/pusat_bantuan.dart';
 import 'package:lkm_itb/tentang_kami/ui/tentang_kami.dart';
@@ -386,6 +387,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
         routeAndNavigatorSettings: RouteAndNavigatorSettings(
           initialRoute: '/profile',
           routes: {
+            '/profile/edit' : (context) => ProfileFormBuilder(user: user),
+            '/profile' : (context) => new Profile(title: 'Profile', user: user),
             '/profile/info': (context) => DetailLKM(title: 'Detail LKM'),
             '/profile/password': (context) => DetailLKM(title: 'Detail LKM'),
             '/profile/about': (context) => TentangKami(title: 'Tentang Kami'),

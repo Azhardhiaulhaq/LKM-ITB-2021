@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/components/back_button.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
+import 'package:lkm_itb/constants/data.dart';
 import 'package:lkm_itb/constants/size_config.dart';
 
 class ProfileDetail extends StatefulWidget {
@@ -80,10 +81,12 @@ class _ProfileDetailState extends State<ProfileDetail> {
           );
         }
         Map dataProfile = snapshot.data!.data() as Map;
-        String role = dataProfile['role']??'Belum Ada Status';
-        String group = dataProfile['group']??'Belum Ada Kelompok';
-        String major = dataProfile['major']??'Belum Ada Program jurusan';
-        String faculty = dataProfile['faculty']??'Belum Ada Fakultas';
+        String role = dataProfile['role'] ?? 'Belum Ada Status';
+        String group = dataProfile['group'] ?? 'Belum Ada Kelompok';
+        String faculty = dataProfile['faculty'] ?? 'Belum Ada Fakultas';
+        String major = AppData.mapMajor[faculty]![dataProfile['major']] ??
+            'Belum Ada Program Jurusan';
+
         return Scaffold(
             body: SingleChildScrollView(
           child: ConstrainedBox(
@@ -115,18 +118,28 @@ class _ProfileDetailState extends State<ProfileDetail> {
                                     null
                                 ? dataProfile['photo']
                                 : 'https://firebasestorage.googleapis.com/v0/b/lkmitb2021-eacb6.appspot.com/o/profile%2Fpngfind.com-default-image-png-6764065.png?alt=media&token=b5ed67d2-cf3b-41b0-804a-e51f4fbd008f'),
-                            minRadius: 45,
+                            maxRadius: 45,
                           )),
                         ),
                         SizedBox(
                           height: SizeConfig.screenHeight * 0.08,
                         ),
-                        _field('Nama Lengkap', dataProfile['name']??'Belum Ada Nama', true),
-                        _field('NIM', dataProfile['nim']??'Belum Ada NIM', false),
-                        _field('Program Studi/Fakultas', major+'/'+faculty, false),
-                        _field('Lembaga', dataProfile['organization']??'Belum Ada Lembaga', false),
-                        _field('Status/Kelompok',role+'/'+group,false),
-                        _field('Email', user.email??'Belum Ada Lembaga', false),
+                        _field('Nama Lengkap',
+                            dataProfile['name'] ?? 'Belum Ada Nama', true),
+                        _field('NIM', dataProfile['nim'] ?? 'Belum Ada NIM',
+                            false),
+                        _field('Program Studi/Fakultas', major + '/' + faculty,
+                            false),
+                        _field(
+                            'Lembaga',
+                            AppData.mapOrganization[
+                                        dataProfile['organizationType']]
+                                    ?[dataProfile['organization']] ??
+                                'Belum Ada Lembaga',
+                            false),
+                        _field('Status/Kelompok', role + '/' + group, false),
+                        _field(
+                            'Email', user.email ?? 'Belum Ada Lembaga', false),
                       ],
                     ),
                   ),

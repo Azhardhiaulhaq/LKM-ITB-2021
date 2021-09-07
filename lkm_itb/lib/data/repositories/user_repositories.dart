@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:lkm_itb/data/models/presence.dart';
+import 'package:lkm_itb/data/models/profile_data.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
+import 'package:path/path.dart';
 
 class UserRepository {
   static FirebaseAuth firebaseAuth = FirebaseAuth.instance;
@@ -13,6 +18,31 @@ class UserRepository {
   static CollectionReference answers = firestore.collection('answers');
 
   // Sign In with email and password
+
+  static Future<String?> uploadImage(File imageFile) async {
+    try {
+      String fileName = basename(imageFile.path);
+      var firebaseStorageRef =
+          FirebaseStorage.instance.ref().child('profile').child('$fileName');
+      UploadTask uploadTask = firebaseStorageRef.putFile(imageFile);
+      var taskSnapshot = await uploadTask.whenComplete(() {});
+      var urlDownload = await taskSnapshot.ref.getDownloadURL();
+      return urlDownload;
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  static Future<void> updateImageProfile(String link, String userID) async {
+    try {
+      await users.doc(userID).update({
+        'photo': link,
+      });
+    } catch (e) {
+      throw e;
+    }
+  }
+
   static Future<List<QueryDocumentSnapshot<Object?>>> getUserGrades(
       String moduleID, String userID) async {
     try {
@@ -30,20 +60,36 @@ class UserRepository {
     }
   }
 
+  static Future<void> updateProfile(ProfileData profile) async {
+    try {
+      await users.doc(profile.userID).update({
+        'name': profile.name,
+        'email': profile.email,
+        'gender': profile.gender,
+        'nim': profile.nim,
+        'faculty': profile.faculty,
+        'major': profile.major,
+        'organizationType': profile.organizationType,
+        'organization': profile.organization,
+        'photo': profile.photo,
+        'role': profile.role,
+        'group': profile.group
+      });
+    } catch (e) {
+      throw e;
+    }
+  }
 
-  static Future<int> getUserTotalGrade(
-      String moduleID, String userID) async {
+  static Future<int> getUserTotalGrade(String moduleID, String userID) async {
     try {
       int grade = 0;
-      DocumentSnapshot userGrades = await grades
-          .doc(moduleID)
-          .collection('users')
-          .doc(userID).get();
-      if(userGrades.exists){
-        Map<String, dynamic> map = userGrades.data() as Map<String,dynamic>;
-        grade = map['score']??0;
+      DocumentSnapshot userGrades =
+          await grades.doc(moduleID).collection('users').doc(userID).get();
+      if (userGrades.exists) {
+        Map<String, dynamic> map = userGrades.data() as Map<String, dynamic>;
+        grade = map['score'] ?? 0;
       }
-      
+
       return grade;
     } catch (e) {
       print(e.toString());
@@ -74,7 +120,7 @@ class UserRepository {
     }
   }
 
-    static Future<DocumentSnapshot<Object?>> getUserGrade(
+  static Future<DocumentSnapshot<Object?>> getUserGrade(
       String moduleID, String userID, String docID) {
     try {
       return grades
@@ -183,7 +229,8 @@ class UserRepository {
     }
   }
 
-  static Future<List<QueryDocumentSnapshot<Object?>>> getUserinGroup(String group) async {
+  static Future<List<QueryDocumentSnapshot<Object?>>> getUserinGroup(
+      String group) async {
     try {
       QuerySnapshot<Object?> listUser = await users
           .where('group', isEqualTo: group)

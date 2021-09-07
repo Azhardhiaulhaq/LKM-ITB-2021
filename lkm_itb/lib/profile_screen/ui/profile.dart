@@ -11,6 +11,8 @@ import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/repositories/user_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/profile_screen/ui/profile_detail.dart';
+import 'package:lkm_itb/profile_screen/ui/profile_edit_form.dart';
+import 'package:lkm_itb/profile_screen/ui/profile_form_builder.dart';
 import 'package:lkm_itb/pusat_bantuan/ui/pusat_bantuan.dart';
 import 'package:lkm_itb/tentang_kami/ui/tentang_kami.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -42,7 +44,7 @@ class _ProfileState extends State<Profile> {
                   print('info Pribadi');
                   pushNewScreen(
                     context,
-                    screen: ProfileDetail(title: 'Profile Detail', user : user),
+                    screen: ProfileDetail(title: 'Profile Detail', user: user),
                     withNavBar: false, // OPTIONAL VALUE. True by default.
                     pageTransitionAnimation: PageTransitionAnimation.cupertino,
                   );
@@ -51,7 +53,17 @@ class _ProfileState extends State<Profile> {
                   print('password');
                   break;
                 case 'editProfile':
-                  print('password');
+                  print('EditProfile');
+                  // pushNewScreen(
+                  //   context,
+                  //   screen: ProfileFormBuilder(user: user),
+                  //   withNavBar: false, // OPTIONAL VALUE. True by default.
+                  //   pageTransitionAnimation: PageTransitionAnimation.cupertino,
+                  // );
+                  pushNewScreenWithRouteSettings(context,
+                      screen: ProfileFormBuilder(user: user),
+                      settings: RouteSettings(name: '/profile/edit'),
+                      withNavBar: false);
                   break;
                 case 'tentangKami':
                   pushNewScreen(
@@ -102,15 +114,15 @@ class _ProfileState extends State<Profile> {
                 ))));
   }
 
-  Future<DocumentSnapshot> homeStream() {
-    return users.doc(user.uid).get();
+  Stream<DocumentSnapshot> homeStream() {
+    return users.doc(user.uid).snapshots();
   }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return FutureBuilder<DocumentSnapshot>(
-      future: homeStream(),
+    return StreamBuilder<DocumentSnapshot>(
+      stream: homeStream(),
       builder: (_, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
@@ -156,7 +168,7 @@ class _ProfileState extends State<Profile> {
                       backgroundImage: NetworkImage(dataProfile['photo'] != null
                           ? dataProfile['photo']
                           : 'https://firebasestorage.googleapis.com/v0/b/lkmitb2021-eacb6.appspot.com/o/profile%2Fpngfind.com-default-image-png-6764065.png?alt=media&token=b5ed67d2-cf3b-41b0-804a-e51f4fbd008f'),
-                      minRadius: 45,
+                      maxRadius: 45,
                     )),
                   ),
                   SingleChildScrollView(
