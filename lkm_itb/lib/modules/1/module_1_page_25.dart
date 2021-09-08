@@ -122,7 +122,7 @@ class _Modul1Page25State extends State<Modul1Page25> {
         body: SafeArea(
       child: Stack(fit: StackFit.expand, children: <Widget>[
         role == 'mentor' ? Center(child:_forMentor()) : Center(child:_forMentee()),
-        Positioned(bottom: 70, child: CustomModuleButton(pushFunction: () => pushFunction('/module/1/page/26')))
+        Positioned(bottom: 70, child: new CustomModuleButton(pushFunction: () => pushFunction('/module/1/page/26')))
       ]),
     ));
   }

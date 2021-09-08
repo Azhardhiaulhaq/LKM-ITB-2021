@@ -219,20 +219,20 @@ class _Modul1Page14State extends State<Modul1Page14> {
                   SizedBox(
                     height: 20,
                   ),
-                  ModuleAnswerField(
+                  new ModuleAnswerField(
                       title: 'Penyebab masalah terjadi:',
                       textController: firstController),
                   menteeID != null
-                      ? ModuleGradeField(textController: firstAnswerController)
+                      ? new ModuleGradeField(textController: firstAnswerController)
                       : Container(),
                   SizedBox(
                     height: 20,
                   ),
-                  ModuleAnswerField(
+                  new ModuleAnswerField(
                       title: 'Solusi terhadap masalah:',
                       textController: secondController),
                   menteeID != null
-                      ? ModuleGradeField(textController: secondAnswerController)
+                      ?new  ModuleGradeField(textController: secondAnswerController)
                       : Container(),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.1,
@@ -340,7 +340,7 @@ class _Modul1Page14State extends State<Modul1Page14> {
         role == 'mentor' ? _forMentor() : _forMentee(),
         Positioned(
             bottom: 70,
-            child: CustomModuleButton(
+            child: new CustomModuleButton(
                 pushFunction: () => pushFunction('/module/1/page/15'))),
         isLoading
             ? Center(

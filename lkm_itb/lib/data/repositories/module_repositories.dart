@@ -9,7 +9,8 @@ class ModuleRepository {
   static CollectionReference answers = firestore.collection('answers');
   static CollectionReference modules = firestore.collection('modules');
   static CollectionReference grades = firestore.collection('grades');
-    static CollectionReference users = firestore.collection('users');
+  static CollectionReference groupGrades = firestore.collection('group_grades');
+  static CollectionReference users = firestore.collection('users');
 
   static Future<DocumentSnapshot<Object?>> getModuleQuestions(String moduleID) {
     try {
@@ -154,6 +155,9 @@ class ModuleRepository {
           .collection('groups')
           .doc(groupID)
           .update({'score': FieldValue.increment(diff)});
+      await groupGrades
+          .doc(groupID)
+          .update({'total': FieldValue.increment(diff)});
     } catch (e) {
       print(e.toString());
     }
@@ -193,7 +197,7 @@ class ModuleRepository {
             .doc(userID)
             .collection('questions')
             .doc(questionID)
-            .set({'answers' : listAnswers});
+            .set({'answers': listAnswers});
       } else {
         await answers
             .doc(moduleID)
@@ -201,25 +205,21 @@ class ModuleRepository {
             .doc(userID)
             .collection('questions')
             .doc(questionID)
-            .set({'answers' : listAnswers});
+            .set({'answers': listAnswers});
       }
     } catch (e) {
       print(e.toString());
     }
   }
 
-  static Future<int> getModuleGrade(
-      String moduleID, String groupID) async {
+  static Future<int> getModuleGrade(String moduleID, String groupID) async {
     try {
-      DocumentSnapshot moduleGrades = await grades
-          .doc(moduleID)
-          .collection('groups')
-          .doc(groupID)
-          .get();
+      DocumentSnapshot moduleGrades =
+          await grades.doc(moduleID).collection('groups').doc(groupID).get();
 
       if (moduleGrades.exists) {
         var data = moduleGrades.data() as Map<String, dynamic>;
-        return data['score']??0;
+        return data['score'] ?? 0;
       } else {
         return 0;
       }

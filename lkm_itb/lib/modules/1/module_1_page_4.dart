@@ -195,18 +195,18 @@ class _Modul1Page4State extends State<Modul1Page4> {
             ],
           ),
           SizedBox(height: 30),
-          ModuleAnswerField(
+          new ModuleAnswerField(
               title: 'Coba ceritakan apa yang terjadi pada gambar 1?',
               textController: firstController),
           menteeID != null
-              ? ModuleGradeField(textController: firstAnswerController)
+              ? new ModuleGradeField(textController: firstAnswerController)
               : Container(),
           SizedBox(height: 20),
-          ModuleAnswerField(
+          new ModuleAnswerField(
               title: 'Coba ceritakan apa yang terjadi pada gambar 2',
               textController: secondController),
           menteeID != null
-              ? ModuleGradeField(textController: secondAnswerController)
+              ?new  ModuleGradeField(textController: secondAnswerController)
               : Container(),
         ],
       ),
@@ -309,7 +309,7 @@ class _Modul1Page4State extends State<Modul1Page4> {
                 role == 'mentor' ? _forMentor() : _forMentee(),
                 Positioned(
                     bottom: 70,
-                    child: CustomModuleButton(
+                    child: new CustomModuleButton(
                         pushFunction: () => pushFunction('/module/1/page/5'))),
                 LoadingProgress(isLoading: isLoading),
               ]),

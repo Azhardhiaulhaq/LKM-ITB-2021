@@ -83,12 +83,12 @@ class _Modul2Page18State extends State<Modul2Page18> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ModuleAnswerField(
+          new ModuleAnswerField(
               title:
                   'Yuk curahkan semua pandanganmu di bagian isian dibawah ini ya!\n\nJadi menurut kalian apa sih hubungan antara pentingnya sikap berempati tadi dengan sosok yang katanya calon pemimpin?',
               textController: firstController),
           menteeID != null
-              ? ModuleGradeField(textController: firstAnswerController)
+              ? new ModuleGradeField(textController: firstAnswerController)
               : Container(),
         ],
       ),
@@ -179,9 +179,9 @@ class _Modul2Page18State extends State<Modul2Page18> {
                 ])))),
         Positioned(
             bottom: 70,
-            child: CustomModuleButton(
+            child: new CustomModuleButton(
                 pushFunction: () => pushFunction('/module/2/page/19'))),
-        LoadingProgress(isLoading: isLoading),
+        new LoadingProgress(isLoading: isLoading),
       ],
     ));
   }

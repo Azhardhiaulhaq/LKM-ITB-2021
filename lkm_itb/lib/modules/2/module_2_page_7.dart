@@ -83,12 +83,12 @@ class _Modul2Page7State extends State<Modul2Page7> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ModuleAnswerField(
+          new ModuleAnswerField(
               title:
                   'Apa saja yang sudah kamu dapatkan sejauh ini? Yuk tuliskan semaksimal yang kamu dapat dalam bagian ini!',
               textController: firstController),
           menteeID != null
-              ? ModuleGradeField(textController: firstAnswerController)
+              ? new ModuleGradeField(textController: firstAnswerController)
               : Container(),
         ],
       ),
@@ -176,10 +176,10 @@ class _Modul2Page7State extends State<Modul2Page7> {
                       width: SizeConfig.screenWidth,
                       child: role == 'mentor' ? _forMentor() : _forMentee()),
                 ])))),
-        LoadingProgress(isLoading: isLoading),
+        new LoadingProgress(isLoading: isLoading),
         Positioned(
             bottom: 70,
-            child: CustomModuleButton(
+            child: new CustomModuleButton(
                 pushFunction: () => pushFunction('/module/2/page/8'))),
       ],
     ));

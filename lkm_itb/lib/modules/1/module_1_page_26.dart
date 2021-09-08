@@ -90,7 +90,7 @@ class _Modul1Page26State extends State<Modul1Page26> {
         Positioned(
             bottom: 70,
             child:
-                CustomModuleButton(pushFunction: () => pushFunction('/home'), isEnd: true,))
+                new CustomModuleButton(pushFunction: () => pushFunction('/home'), isEnd: true,))
       ]),
     ));
   }

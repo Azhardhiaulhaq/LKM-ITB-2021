@@ -157,7 +157,7 @@ class _Modul2Page29State extends State<Modul2Page29> {
             child: Container(
                 padding: EdgeInsets.all(10),
                 color:  ConstColor.whiteBackground,
-                child: CustomModuleButton(
+                child: new CustomModuleButton(
                   pushFunction: () => pushFunction('/home'),
                   isEnd: true,
                 )))

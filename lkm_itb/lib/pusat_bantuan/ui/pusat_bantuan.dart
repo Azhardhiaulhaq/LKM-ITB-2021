@@ -97,7 +97,7 @@ class _PusatBantuanState extends State<PusatBantuan> {
       child: Stack(
         alignment: Alignment.center,
         children: <Widget>[
-          Positioned(top: 40, left: 0, child: CustomBackButton(title:'Pusat Bantuan')),
+          Positioned(top: 40, left: 0, child: new CustomBackButton(title:'Pusat Bantuan')),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

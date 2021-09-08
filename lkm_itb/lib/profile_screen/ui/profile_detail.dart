@@ -156,7 +156,7 @@ class _ProfileDetailState extends State<ProfileDetail> {
                   Positioned(
                       top: 40,
                       left: 0,
-                      child: CustomBackButton(
+                      child: new CustomBackButton(
                         title: 'Informasi Pribadi',
                       )),
                 ],

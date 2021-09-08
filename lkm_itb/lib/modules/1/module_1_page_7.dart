@@ -83,12 +83,12 @@ class _Modul1Page7State extends State<Modul1Page7> {
       margin: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
       child: Column(
         children: [
-          ModuleAnswerField(
+          new ModuleAnswerField(
               title:
                   'Jawablah pertanyaan berikut!\n\nNah, menurut kalian, di kondisi pandemi seperti ini, manakah yang lebih penting? Kesehatan atau Ekonomi?',
               textController: firstController),
           menteeID != null
-              ? ModuleGradeField(textController: firstAnswerController)
+              ?new  ModuleGradeField(textController: firstAnswerController)
               : Container()
         ],
       ),
@@ -170,7 +170,7 @@ class _Modul1Page7State extends State<Modul1Page7> {
             role == 'mentor' ? Center(child: _forMentor()) : _forMentee(),
             Positioned(
                 bottom: 70,
-                child: CustomModuleButton(
+                child: new CustomModuleButton(
                     pushFunction: () => pushFunction('/module/1/page/8'))),
             isLoading
                 ? Center(

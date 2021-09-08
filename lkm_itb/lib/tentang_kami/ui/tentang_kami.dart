@@ -136,7 +136,7 @@ class _TentangKamiState extends State<TentangKami> {
           Positioned(
               top: 40,
               left: 0,
-              child: CustomBackButton(
+              child: new CustomBackButton(
                 title: 'Tentang Kami',
               )),
         ],

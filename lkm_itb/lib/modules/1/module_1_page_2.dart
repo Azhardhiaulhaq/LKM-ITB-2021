@@ -76,7 +76,7 @@ class _Modul1Page2State extends State<Modul1Page2> {
                     _Card(),
                   ],
                 ))),
-        Positioned(bottom: 70, child: CustomModuleButton(pushFunction: () => pushFunction('/module/1/page/3')))
+        Positioned(bottom: 70, child: new CustomModuleButton(pushFunction: () => pushFunction('/module/1/page/3')))
       ]),
     ));
   }

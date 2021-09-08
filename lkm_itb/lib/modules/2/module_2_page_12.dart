@@ -114,12 +114,12 @@ class _Modul2Page12State extends State<Modul2Page12> {
           SizedBox(
             height: 20,
           ),
-          ModuleAnswerField(
+          new ModuleAnswerField(
               title:
                   'Apakah kamu tahu diagaram apakah ini? Jelaskan apa yang kamu dapat dari diagram ini!',
               textController: firstController),
           menteeID != null
-              ? ModuleGradeField(textController: firstAnswerController)
+              ?new  ModuleGradeField(textController: firstAnswerController)
               : Container(),
           SizedBox(
             height: SizeConfig.screenHeight * 0.2,
@@ -242,9 +242,9 @@ class _Modul2Page12State extends State<Modul2Page12> {
                 ])))),
         Positioned(
             bottom: 70,
-            child: CustomModuleButton(
+            child: new CustomModuleButton(
                 pushFunction: () => pushFunction('/module/2/page/13'))),
-        LoadingProgress(isLoading: isLoading),
+        new LoadingProgress(isLoading: isLoading),
       ],
     ));
   }

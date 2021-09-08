@@ -100,12 +100,12 @@ class _Modul1Page22State extends State<Modul1Page22> {
             fit: BoxFit.fill,
           ),
           SizedBox(height: 40),
-          ModuleAnswerField(
+          new ModuleAnswerField(
               title:
                   'Dari gambar diatas, solusi apa yang bisa kamu berikan untuk memecahkan masalah tersebut!',
               textController: firstController),
           menteeID != null
-              ? ModuleGradeField(textController: firstAnswerController)
+              ? new ModuleGradeField(textController: firstAnswerController)
               : Container()
         ],
       ),
@@ -202,7 +202,7 @@ class _Modul1Page22State extends State<Modul1Page22> {
         role == 'mentor' ? _forMentor() : _forMentee(),
         Positioned(
             bottom: 70,
-            child: CustomModuleButton(
+            child: new CustomModuleButton(
                 pushFunction: () => pushFunction('/module/1/page/23'))),
         isLoading
             ? Center(

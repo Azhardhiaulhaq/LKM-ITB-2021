@@ -139,7 +139,7 @@ class _PenilaianModulePageState extends State<PenilaianModulePage> {
               SizedBox(
                 height: 20,
               ),
-              CustomBackButton(title : 'Capaian'),
+              new CustomBackButton(title : 'Capaian'),
               _modulInfo(),
               SizedBox(
                 height: 10,

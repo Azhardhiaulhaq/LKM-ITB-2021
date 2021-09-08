@@ -102,11 +102,11 @@ class _Modul1Page16State extends State<Modul1Page16> {
                 GoogleFonts.roboto(fontSize: 14, color: ConstColor.blackText),
           ),
           SizedBox(height: 20),
-          ModuleAnswerField(
+          new ModuleAnswerField(
               title: 'Coba kemukakan pendapatmu!',
               textController: firstController),
           menteeID != null
-              ? ModuleGradeField(textController: firstAnswerController)
+              ? new ModuleGradeField(textController: firstAnswerController)
               : Container(),
         ],
       ),
@@ -205,7 +205,7 @@ class _Modul1Page16State extends State<Modul1Page16> {
         role == 'mentor' ? _forMentor() : _forMentee(),
         Positioned(
             bottom: 70,
-            child: CustomModuleButton(
+            child: new CustomModuleButton(
                 pushFunction: () => pushFunction('/module/1/page/17'))),
         isLoading
             ? Center(

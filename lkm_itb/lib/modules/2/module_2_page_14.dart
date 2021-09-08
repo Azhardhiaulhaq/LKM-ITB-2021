@@ -339,7 +339,7 @@ class _Modul2Page14State extends State<Modul2Page14> {
                 ),
               )),
           menteeID != null
-              ? ModuleGradeField(textController: firstAnswerController)
+              ? new ModuleGradeField(textController: firstAnswerController)
               : Container()
         ],
       ),
@@ -540,9 +540,9 @@ class _Modul2Page14State extends State<Modul2Page14> {
                 ])))),
         Positioned(
             bottom: 70,
-            child: CustomModuleButton(
+            child: new CustomModuleButton(
                 pushFunction: () => pushFunction('/module/2/page/15'))),
-        LoadingProgress(isLoading: isLoading),
+        new LoadingProgress(isLoading: isLoading),
       ],
     ));
   }

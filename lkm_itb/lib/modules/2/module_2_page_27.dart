@@ -166,7 +166,7 @@ class _Modul2Page27State extends State<Modul2Page27> {
                 color: role == 'mentor'
                     ? Colors.transparent
                     : ConstColor.whiteBackground,
-                child: CustomModuleButton(
+                child: new CustomModuleButton(
                     pushFunction: () => pushFunction('/module/2/page/28'))))
       ],
     ));

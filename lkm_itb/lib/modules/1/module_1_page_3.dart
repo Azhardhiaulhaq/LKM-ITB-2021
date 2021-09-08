@@ -143,7 +143,7 @@ class _Modul1Page3State extends State<Modul1Page3> {
                   )),
             ),
             role == 'mentor' ? _forMentor() : Center(child: _forMentee()),
-            Positioned(bottom: 70, child: CustomModuleButton(pushFunction: () => pushFunction(('/module/1/page/4')),))
+            Positioned(bottom: 70, child: new CustomModuleButton(pushFunction: () => pushFunction(('/module/1/page/4')),))
           ]),
     ));
   }

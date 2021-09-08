@@ -15,6 +15,7 @@ class UserRepository {
   static CollectionReference precenses = firestore.collection('precenses');
   static CollectionReference statistics = firestore.collection('statistics');
   static CollectionReference grades = firestore.collection('grades');
+  static CollectionReference groupGrades = firestore.collection('group_grades');
   static CollectionReference answers = firestore.collection('answers');
 
   // Sign In with email and password
@@ -130,6 +131,14 @@ class UserRepository {
           .collection('questions')
           .doc(docID)
           .get();
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  static Future<DocumentSnapshot<Object?>> getGroupGrade(String groupID) {
+    try {
+      return groupGrades.doc(groupID).get();
     } catch (e) {
       throw e;
     }

@@ -123,12 +123,12 @@ class _Modul1Page6State extends State<Modul1Page6> {
             ],
           ),
           SizedBox(height: 30),
-          ModuleAnswerField(
+          new ModuleAnswerField(
               title:
                   'Coba lihat gambar tersebut! BERBEDA bukan? Nah, setelah melihat gembar ini, menurut kalian, apa sih pemikiran holistik itu?',
               textController: firstController),
           menteeID != null
-              ? ModuleGradeField(textController: firstAnswerController)
+              ? new ModuleGradeField(textController: firstAnswerController)
               : Container()
         ],
       ),
@@ -228,7 +228,7 @@ class _Modul1Page6State extends State<Modul1Page6> {
             role == 'mentor' ? _forMentor() : _forMentee(),
             Positioned(
                 bottom: 70,
-                child: CustomModuleButton(
+                child: new CustomModuleButton(
                     pushFunction: () => pushFunction('/module/1/page/7'))),
             isLoading
                 ? Center(

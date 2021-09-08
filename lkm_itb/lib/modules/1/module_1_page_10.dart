@@ -85,12 +85,12 @@ class _Modul1Page10State extends State<Modul1Page10> {
       margin: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
       child: Column(
         children: [
-          ModuleAnswerField(
+          new ModuleAnswerField(
               title:
                   'Yuk keluarkan pendapatmu!\n\nKalau disuruh memilih dari ketiga karakter tersebut, siapa yang kamu pilih? Alasannya mengapa?',
               textController: firstController),
           menteeID != null
-              ? ModuleGradeField(textController: firstAnswerController)
+              ?new  ModuleGradeField(textController: firstAnswerController)
               : Container()
         ],
       ),
@@ -189,7 +189,7 @@ class _Modul1Page10State extends State<Modul1Page10> {
         role == 'mentor' ? _forMentor() : _forMentee(),
         Positioned(
             bottom: 70,
-            child: CustomModuleButton(
+            child: new CustomModuleButton(
                 pushFunction: () => pushFunction('/module/1/page/11'))),
         isLoading
             ? Center(

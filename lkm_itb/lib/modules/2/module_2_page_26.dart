@@ -94,9 +94,9 @@ class _Modul2Page26State extends State<Modul2Page26> {
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 10),
-          ModuleAnswerField(title: '', textController: firstController),
+          new ModuleAnswerField(title: '', textController: firstController),
           menteeID != null
-              ? ModuleGradeField(textController: firstAnswerController)
+              ? new ModuleGradeField(textController: firstAnswerController)
               : Container(),
         ],
       ),
@@ -187,9 +187,9 @@ class _Modul2Page26State extends State<Modul2Page26> {
                 ])))),
         Positioned(
             bottom: 70,
-            child: CustomModuleButton(
+            child: new CustomModuleButton(
                 pushFunction: () => pushFunction('/module/2/page/27'))),
-        LoadingProgress(isLoading: isLoading),
+        new LoadingProgress(isLoading: isLoading),
       ],
     ));
   }

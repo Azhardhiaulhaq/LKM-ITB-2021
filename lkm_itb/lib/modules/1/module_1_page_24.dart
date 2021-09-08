@@ -402,7 +402,7 @@ class _Modul1Page24State extends State<Modul1Page24> {
                 ),
               )),
           menteeID != null
-              ? ModuleGradeField(textController: firstAnswerController)
+              ?new  ModuleGradeField(textController: firstAnswerController)
               : Container()
         ],
       ),
@@ -502,7 +502,7 @@ class _Modul1Page24State extends State<Modul1Page24> {
         role == 'mentor' ? _forMentor() : _forMentee(),
         Positioned(
             bottom: 70,
-            child: CustomModuleButton(
+            child: new CustomModuleButton(
                 pushFunction: () => pushFunction('/module/1/page/25'))),
         isLoading
             ? Center(

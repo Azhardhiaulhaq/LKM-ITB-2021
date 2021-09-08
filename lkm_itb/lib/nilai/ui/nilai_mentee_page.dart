@@ -193,7 +193,7 @@ class _NilaiMenteePageState extends State<NilaiMenteePage> {
                   SizedBox(
                     height: SizeConfig.screenHeight * 0.025,
                   ),
-                  CustomBackButton(title: 'Cek Nilai Mentee',),
+                  new CustomBackButton(title: 'Cek Nilai Mentee',),
                   SizedBox(
                     height: SizeConfig.screenHeight * 0.1,
                   ),

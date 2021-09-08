@@ -120,9 +120,9 @@ class _Modul2Page20State extends State<Modul2Page20> {
           SizedBox(
             height: 10,
           ),
-          ModuleAnswerField(title: '', textController: firstController),
+          new ModuleAnswerField(title: '', textController: firstController),
           menteeID != null
-              ? ModuleGradeField(textController: firstAnswerController)
+              ? new ModuleGradeField(textController: firstAnswerController)
               : Container(),
           SizedBox(
             height: SizeConfig.screenHeight * 0.2,
@@ -245,9 +245,9 @@ class _Modul2Page20State extends State<Modul2Page20> {
                 ])))),
         Positioned(
             bottom: 70,
-            child: CustomModuleButton(
+            child: new CustomModuleButton(
                 pushFunction: () => pushFunction('/module/2/page/21'))),
-        LoadingProgress(isLoading: isLoading),
+        new LoadingProgress(isLoading: isLoading),
       ],
     ));
   }

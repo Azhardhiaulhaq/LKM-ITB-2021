@@ -148,7 +148,7 @@ class _Modul2Page28State extends State<Modul2Page28> {
                 ])))),
         Positioned(
             bottom: 70,
-            child: CustomModuleButton(
+            child: new CustomModuleButton(
                 pushFunction: () => pushFunction('/module/2/page/29')))
       ],
     ));

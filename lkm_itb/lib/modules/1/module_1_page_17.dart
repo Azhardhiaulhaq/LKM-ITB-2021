@@ -96,12 +96,12 @@ class _Modul1Page17State extends State<Modul1Page17> {
             fit: BoxFit.fill,
           ),
           SizedBox(height: 30),
-          ModuleAnswerField(
+          new ModuleAnswerField(
               title:
                   'Dari ilustrasi tersebut apakah yang seharusnya dibenarkan?',
               textController: firstController),
           menteeID != null
-              ? ModuleGradeField(textController: firstAnswerController)
+              ? new ModuleGradeField(textController: firstAnswerController)
               : Container()
         ],
       ),
@@ -198,7 +198,7 @@ class _Modul1Page17State extends State<Modul1Page17> {
         role == 'mentor' ? _forMentor() : _forMentee(),
         Positioned(
             bottom: 70,
-            child: CustomModuleButton(
+            child: new CustomModuleButton(
                 pushFunction: () => pushFunction('/module/1/page/18'))),
         isLoading
             ? Center(

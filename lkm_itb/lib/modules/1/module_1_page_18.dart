@@ -115,7 +115,7 @@ class _Modul1Page18State extends State<Modul1Page18> {
                 : Center(child: _forMentee()),
             Positioned(
                 bottom: 70,
-                child: CustomModuleButton(
+                child: new CustomModuleButton(
                     pushFunction: () => pushFunction('/module/1/page/19')))
           ]),
     ));

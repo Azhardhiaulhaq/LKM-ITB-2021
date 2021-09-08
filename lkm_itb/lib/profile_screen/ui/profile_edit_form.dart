@@ -442,7 +442,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
               Positioned(
                   top: 40,
                   left: 0,
-                  child: CustomBackButton(
+                  child: new CustomBackButton(
                     title: 'Edit Profil',
                   )),
               LoadingProgress(isLoading: isLoading)

@@ -188,7 +188,7 @@ class _PresenceScreenState extends State<PresenceScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               type == 'seminar'
-                  ? CustomBackButton(title: 'Presensi Kelompok')
+                  ? new CustomBackButton(title: 'Presensi Kelompok')
                   : Container(),
               type == 'module'
                   ? Text(

@@ -107,7 +107,7 @@ class _NilaiKelompokPageState extends State<NilaiKelompokPage> {
               SizedBox(
                 height: SizeConfig.screenHeight * 0.025,
               ),
-              CustomBackButton(title : 'Cek Nilai Kelompok'),
+              new CustomBackButton(title : 'Cek Nilai Kelompok'),
               SizedBox(
                 height: SizeConfig.screenHeight * 0.01,
               ),

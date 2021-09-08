@@ -25,22 +25,26 @@ class NilaiBloc extends Bloc<NilaiEvent, NilaiState> {
         Map<String, Nilai> mapNilaiModule = {};
         List<Nilai> listNilaiModule = [];
         List<Nilai> listNilaiKelompok = [];
-        var listGroups = List.generate(22, (index) => (index + 1).toString());
         for (int i = 1; i <= 6; ++i) {
           mapNilaiModule[i.toString()] = Nilai(ID: i.toString(), totalNilai: 0);
         }
         List<QueryDocumentSnapshot> listGradeModules =
             await NilaiRepository.getGradeModules();
-        for (var group in listGroups){
-          int nilaiGroup = 0;
-          for (var module in listGradeModules){
-            int nilai = await ModuleRepository.getModuleGrade(module.id, group);
-            nilaiGroup+= nilai;
-            if(group == event.group){
-              mapNilaiModule[module.id]!.incrementNilai(nilai);
-            }
-          }
-          listNilaiKelompok.add(Nilai(ID: group.toString(),totalNilai: nilaiGroup));
+        int nilaiGroup = 0;
+        for (var module in listGradeModules) {
+          int nilai =
+              await ModuleRepository.getModuleGrade(module.id, event.group);
+          nilaiGroup += nilai;
+          mapNilaiModule[module.id]!.incrementNilai(nilai);
+        }
+
+        List<QueryDocumentSnapshot> listGroupGrade =
+            await NilaiRepository.getGroupGrade();
+        for (var grade in listGroupGrade) {
+          var tempGrade = grade.data() as Map;
+          int total = tempGrade['total'];
+          listNilaiKelompok
+              .add(Nilai(ID: tempGrade['group'], totalNilai: total));
         }
 
         mapNilaiModule.forEach((key, value) {
