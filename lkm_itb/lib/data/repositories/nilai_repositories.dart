@@ -36,7 +36,7 @@ class NilaiRepository {
 
   static Future<List<QueryDocumentSnapshot<Object?>>> getGroupGrade() async {
     try {
-      QuerySnapshot<Object?> listGrades = await groupGrades.get();
+      QuerySnapshot<Object?> listGrades = await groupGrades.orderBy('id',descending: false).get();
 
 
       List<QueryDocumentSnapshot> docs = listGrades.docs;

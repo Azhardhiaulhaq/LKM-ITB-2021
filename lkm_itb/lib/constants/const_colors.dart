@@ -15,5 +15,8 @@ class ConstColor {
   static const Color greenButton = Color(0xff00FF00);
   static const Color redButton = Color(0xffFF0000);
   static const Color lightGrey = Color(0xffE4E4E4);
+  static const Color goldColor = Color(0xffFFD700);
+  static const Color silverColor = Color(0xffC0C0C0);
+  static const Color bronzeColor = Color(0xffCD7F32);
 
 }

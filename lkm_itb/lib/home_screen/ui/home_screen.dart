@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/models/module.dart';
+import 'package:lkm_itb/data/models/nilai.dart';
 import 'package:lkm_itb/data/models/seminar.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/home_screen/ui/module_card.dart';
@@ -29,6 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
       FirebaseFirestore.instance.collection('modules');
   CollectionReference seminars =
       FirebaseFirestore.instance.collection('seminars');
+  CollectionReference groupGrades =
+      FirebaseFirestore.instance.collection('group_grades');
   CollectionReference banners =
       FirebaseFirestore.instance.collection('banners');
   CollectionReference users = FirebaseFirestore.instance.collection('users');
@@ -141,6 +144,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return modules.limit(2).snapshots();
   }
 
+  Stream<QuerySnapshot> klasemenStream() {
+    return groupGrades.orderBy('total', descending: true).limit(3).snapshots();
+  }
+
   Stream<QuerySnapshot> seminarStream() {
     return seminars.snapshots();
   }
@@ -228,6 +235,105 @@ class _HomeScreenState extends State<HomeScreen> {
     return users.doc(user.uid).snapshots();
   }
 
+  Widget _modulePoint(String modul, int pos) {
+    Color color = ConstColor.goldColor;
+    switch (pos) {
+      case 1:
+        color = ConstColor.goldColor;
+        break;
+      case 2:
+        color = ConstColor.silverColor;
+        break;
+      case 3:
+        color = ConstColor.bronzeColor;
+        break;
+    }
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          padding: EdgeInsets.all(5),
+          decoration: BoxDecoration(
+              color: color,
+              shape: BoxShape.circle,
+              border: Border.all(width: 1, color: color)),
+          child: Text(
+            pos.toString(),
+            style: GoogleFonts.roboto(
+                fontSize: 14, color: ConstColor.whiteBackground),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        Text(modul,
+            style: GoogleFonts.roboto(
+                fontSize: 12, color: ConstColor.whiteBackground)),
+      ],
+    );
+  }
+
+  Widget _klasemenCard() {
+    return StreamBuilder<QuerySnapshot>(
+        stream: klasemenStream(),
+        builder: (_, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(
+                child: CircularProgressIndicator(
+              color: ConstColor.darkGreen,
+            ));
+          }
+          if (!snapshot.hasData) {
+            return Center(
+              child: Text('No Data'),
+            );
+          }
+          return Container(
+              margin: EdgeInsets.fromLTRB(16, 30, 16, 0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  color: ConstColor.darkGreen,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.all(10),
+                        child: Text('Klasemen Sementara',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.roboto(
+                                color: ConstColor.whiteBackground,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 16)),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 40),
+                        child: Divider(
+                          color: ConstColor.lightGreen,
+                          thickness: 1,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          for (var i = 0; i < snapshot.data!.docs.length; ++i)
+                            _modulePoint('Kelompok ' + snapshot.data!.docs[i].id, i + 1)
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      )
+                    ],
+                  ),
+                ),
+              ));
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -271,10 +377,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 _contentTitle('Kumpulan Modul'),
                 _kumpulanModule(snapshot.data!.get('role')),
                 SizedBox(
-                  height: SizeConfig.screenHeight * 0.12,
+                  height: SizeConfig.screenHeight * 0.23,
                 ),
               ],
-            ))
+            )),
+            Positioned(
+              bottom: 70,
+              left: 0,
+              right: 0,
+              child: _klasemenCard(),
+            )
           ]),
         ));
       },
