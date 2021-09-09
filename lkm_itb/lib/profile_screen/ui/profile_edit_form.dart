@@ -15,10 +15,8 @@ import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/constants/data.dart';
 import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/models/profile_data.dart';
-import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/profile_screen/bloc/profile_bloc.dart';
-import 'package:lkm_itb/profile_screen/ui/profile.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+
 
 class ProfileEditForm extends StatefulWidget {
   ProfileEditForm({Key? key, required this.title, required this.user})
@@ -395,7 +393,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
                               right: 10,
                               child: MaterialButton(
                                 onPressed: () async {
-                                  final XFile? image = await picker
+                                  await picker
                                       .pickImage(source: ImageSource.gallery)
                                       .then((value) {
                                     _profileBloc.add(uploadImage(

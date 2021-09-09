@@ -28,32 +28,6 @@ class _PusatBantuanState extends State<PusatBantuan> {
     }
   }
 
-  Widget _backButton() {
-    return InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(Icons.arrow_back, color: ConstColor.lightGreen),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Text('Pusat Bantuan',
-                style: GoogleFonts.roboto(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                    color: ConstColor.blackText))
-          ],
-        ),
-      ),
-    );
-  }
 
   @override
   void initState() {
@@ -73,7 +47,7 @@ class _PusatBantuanState extends State<PusatBantuan> {
             splashColor: Colors.blueGrey,
             onTap: () async {
               share(phone,
-                  'Halo kak ${contactName}.\nSaya mengalami beberapa kendala dalam penggunaan applikasi LKM ITB. Mohon Bantuannya.');
+                  'Halo kak $contactName.\nSaya mengalami beberapa kendala dalam penggunaan applikasi LKM ITB. Mohon Bantuannya.');
             },
             child: Container(
                 alignment: Alignment.center,

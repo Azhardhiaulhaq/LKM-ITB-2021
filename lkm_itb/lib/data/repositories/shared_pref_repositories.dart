@@ -25,6 +25,7 @@ class SharedPrefs {
     _sharedPrefs!.setString('role',role);
   }
 
+  // ignore: non_constant_identifier_names
   void setID(String ID){
     _sharedPrefs!.setString('userid',ID);
   }

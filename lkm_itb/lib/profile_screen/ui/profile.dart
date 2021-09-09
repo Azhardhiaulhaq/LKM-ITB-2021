@@ -11,7 +11,6 @@ import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/repositories/user_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/profile_screen/ui/profile_detail.dart';
-import 'package:lkm_itb/profile_screen/ui/profile_edit_form.dart';
 import 'package:lkm_itb/profile_screen/ui/profile_form_builder.dart';
 import 'package:lkm_itb/pusat_bantuan/ui/pusat_bantuan.dart';
 import 'package:lkm_itb/tentang_kami/ui/tentang_kami.dart';
