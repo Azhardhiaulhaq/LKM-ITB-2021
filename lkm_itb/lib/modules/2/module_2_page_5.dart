@@ -33,8 +33,8 @@ class _Modul2Page5State extends State<Modul2Page5> {
   final int page;
   String? menteeID;
   bool isLoading = false;
-  TextEditingController firstController = TextEditingController(text: "");
-  TextEditingController firstAnswerController = TextEditingController(text: "");
+  List<TextEditingController> answerController = [];
+  List<TextEditingController> gradeController = [];
 
   _Modul2Page5State(this.role, this.module, this.page, this.menteeID);
 
@@ -45,7 +45,9 @@ class _Modul2Page5State extends State<Modul2Page5> {
       });
       if (menteeID != null) {
         List<int> listGrades = [];
-        listGrades.add(int.parse(firstAnswerController.text));
+        gradeController.forEach((element) {
+          listGrades.add(int.parse(element.text));
+        });
         await ModuleRepository.initiateModuleGrades(
                 module.toString(), menteeID!)
             .then((value) async {
@@ -58,7 +60,9 @@ class _Modul2Page5State extends State<Modul2Page5> {
         });
       } else {
         List<String> listAnswers = [];
-        listAnswers.add(firstController.text);
+        answerController.forEach((element) {
+          listAnswers.add(element.text);
+        });
         await ModuleRepository.addModuleAnswer(
                 module.toString(), page.toString(), listAnswers)
             .then((value) => Navigator.pushNamed(context, next_route));
@@ -78,8 +82,9 @@ class _Modul2Page5State extends State<Modul2Page5> {
       if (userGrade.exists) {
         var listString = List.from(userGrade.get('grades'));
         setState(() {
-          firstAnswerController.text =
-              listString[0] != null ? listString[0].toString() : '0';
+          for (var i = 0; i < listString.length; i++) {
+            gradeController[i].text = listString[i].toString();
+          }
         });
       }
     }
@@ -89,7 +94,9 @@ class _Modul2Page5State extends State<Modul2Page5> {
     if (userAnswer.exists) {
       var listString = List.from(userAnswer.get('answers'));
       setState(() {
-        firstController.text = listString[0] != null ? listString[0] : '';
+        for (var i = 0; i < listString.length; i++) {
+          answerController[i].text = listString[i] != null ? listString[i] : '';
+        }
       });
     }
   }
@@ -97,16 +104,10 @@ class _Modul2Page5State extends State<Modul2Page5> {
   @override
   void initState() {
     super.initState();
-
+    gradeController.add(TextEditingController(text: '0'));
+    answerController.add(TextEditingController(text: ""));
     // Add the observer.
     _initAnswer();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    firstAnswerController.dispose();
-    firstController.dispose();
   }
 
   _forMentee() {
@@ -149,9 +150,9 @@ class _Modul2Page5State extends State<Modul2Page5> {
           new ModuleAnswerField(
               title:
                   'Coba ungkapkan SATU KATA yang menggambarkan ilustrasi tersebut!',
-              textController: firstController),
+              textController: answerController[0]),
           menteeID != null
-              ? new ModuleGradeField(textController: firstAnswerController)
+              ? new ModuleGradeField(textController: gradeController[0])
               : Container(),
         ],
       ),
@@ -239,5 +240,16 @@ class _Modul2Page5State extends State<Modul2Page5> {
         new LoadingProgress(isLoading: isLoading)
       ],
     ));
+  }
+
+  @override
+  void dispose() {
+    answerController.forEach((element) {
+      element.dispose();
+    });
+    gradeController.forEach((element) {
+      element.dispose();
+    });
+    super.dispose();
   }
 }

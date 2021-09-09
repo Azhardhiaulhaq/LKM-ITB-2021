@@ -29,7 +29,7 @@ class Modul2Page22 extends StatefulWidget {
 class _Modul2Page22State extends State<Modul2Page22> {
   final String role;
   Map<int, List<String>> mapQuestions = Map();
-  TextEditingController firstAnswerController = TextEditingController(text: "");
+  TextEditingController firstAnswerController = TextEditingController(text: "0");
   int module = 2;
   int page = 22;
   String? menteeID;
@@ -195,7 +195,7 @@ class _Modul2Page22State extends State<Modul2Page22> {
         var listString = List.from(userGrade.get('grades'));
         setState(() {
           firstAnswerController.text =
-              listString[0] != null ? listString[0].toString() : '';
+              listString[0] != null ? listString[0].toString() : '0';
         });
       }
     }

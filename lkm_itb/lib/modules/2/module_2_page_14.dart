@@ -32,7 +32,8 @@ class _Modul2Page14State extends State<Modul2Page14> {
   _Modul2Page14State(this.role, this.menteeID);
 
   List<String> listAnswer = ['', '', '', '', ''];
-  TextEditingController firstAnswerController = TextEditingController(text: "");
+  TextEditingController firstAnswerController =
+      TextEditingController(text: "0");
   List<String> listTitle = [
     'Physiological Needs',
     'Safety Needs',
@@ -52,9 +53,9 @@ class _Modul2Page14State extends State<Modul2Page14> {
         await ModuleRepository.addModuleGrades(module.toString(),
                 page.toString(), listGrades, menteeID!, sharedPrefs.group)
             .then((value) {
-              Navigator.pushNamed(context, Modul2Page18.routeName,
-                arguments: {'menteeID': menteeID});
-            });
+          Navigator.pushNamed(context, Modul2Page18.routeName,
+              arguments: {'menteeID': menteeID});
+        });
       } else {
         await ModuleRepository.addModuleAnswer(
                 module.toString(), page.toString(), listAnswer)
@@ -70,6 +71,7 @@ class _Modul2Page14State extends State<Modul2Page14> {
 
   @override
   void dispose() {
+    firstAnswerController.dispose();
     super.dispose();
   }
 
@@ -477,7 +479,7 @@ class _Modul2Page14State extends State<Modul2Page14> {
         var listString = List.from(userGrade.get('grades'));
         setState(() {
           firstAnswerController.text =
-              listString[0] != null ? listString[0].toString() : '';
+              listString[0] != null ? listString[0].toString() : '0';
         });
       }
     }

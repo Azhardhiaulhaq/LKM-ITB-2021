@@ -34,8 +34,8 @@ class _Modul2Page12State extends State<Modul2Page12> {
   final int page;
   String? menteeID;
   bool isLoading = false;
-  TextEditingController firstController = TextEditingController(text: "");
-  TextEditingController firstAnswerController = TextEditingController(text: "");
+  List<TextEditingController> answerController = [];
+  List<TextEditingController> gradeController = [];
 
   _Modul2Page12State(this.role, this.module, this.page, this.menteeID);
 
@@ -46,20 +46,24 @@ class _Modul2Page12State extends State<Modul2Page12> {
       });
       if (menteeID != null) {
         List<int> listGrades = [];
-        listGrades.add(int.parse(firstAnswerController.text));
+        gradeController.forEach((element) {
+          listGrades.add(int.parse(element.text));
+        });
         await ModuleRepository.initiateModuleGrades(
                 module.toString(), menteeID!)
             .then((value) async {
           await ModuleRepository.addModuleGrades(module.toString(),
                   page.toString(), listGrades, menteeID!, sharedPrefs.group)
               .then((value) {
-                Navigator.pushNamed(context, Modul2Page14.routeName,
+            Navigator.pushNamed(context, Modul2Page14.routeName,
                 arguments: {'menteeID': menteeID});
-              });
+          });
         });
       } else {
         List<String> listAnswers = [];
-        listAnswers.add(firstController.text);
+        answerController.forEach((element) {
+          listAnswers.add(element.text);
+        });
         await ModuleRepository.addModuleAnswer(
                 module.toString(), page.toString(), listAnswers)
             .then((value) => Navigator.pushNamed(context, next_route));
@@ -70,11 +74,6 @@ class _Modul2Page12State extends State<Modul2Page12> {
     } else {
       Navigator.pushNamed(context, next_route);
     }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   _forMentee() {
@@ -117,9 +116,9 @@ class _Modul2Page12State extends State<Modul2Page12> {
           new ModuleAnswerField(
               title:
                   'Apakah kamu tahu diagaram apakah ini? Jelaskan apa yang kamu dapat dari diagram ini!',
-              textController: firstController),
+              textController: answerController[0]),
           menteeID != null
-              ?new  ModuleGradeField(textController: firstAnswerController)
+              ? new ModuleGradeField(textController: gradeController[0])
               : Container(),
           SizedBox(
             height: SizeConfig.screenHeight * 0.2,
@@ -186,8 +185,9 @@ class _Modul2Page12State extends State<Modul2Page12> {
       if (userGrade.exists) {
         var listString = List.from(userGrade.get('grades'));
         setState(() {
-          firstAnswerController.text =
-              listString[0] != null ? listString[0].toString() : '0';
+          for (var i = 0; i < listString.length; i++) {
+            gradeController[i].text = listString[i].toString();
+          }
         });
       }
     }
@@ -197,7 +197,9 @@ class _Modul2Page12State extends State<Modul2Page12> {
     if (userAnswer.exists) {
       var listString = List.from(userAnswer.get('answers'));
       setState(() {
-        firstController.text = listString[0] != null ? listString[0] : '';
+        for (var i = 0; i < listString.length; i++) {
+          answerController[i].text = listString[i] != null ? listString[i] : '';
+        }
       });
     }
   }
@@ -205,7 +207,8 @@ class _Modul2Page12State extends State<Modul2Page12> {
   @override
   void initState() {
     super.initState();
-
+    gradeController.add(TextEditingController(text: '0'));
+    answerController.add(TextEditingController(text: ""));
     // Add the observer.
     _initAnswer();
   }
@@ -247,5 +250,16 @@ class _Modul2Page12State extends State<Modul2Page12> {
         new LoadingProgress(isLoading: isLoading),
       ],
     ));
+  }
+
+  @override
+  void dispose() {
+    answerController.forEach((element) {
+      element.dispose();
+    });
+    gradeController.forEach((element) {
+      element.dispose();
+    });
+    super.dispose();
   }
 }

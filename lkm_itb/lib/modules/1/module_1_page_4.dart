@@ -43,7 +43,7 @@ class _Modul1Page4State extends State<Modul1Page4> {
       });
       if (menteeID != null) {
         List<int> listGrades = [];
-        for (var controller in gradeController){
+        for (var controller in gradeController) {
           listGrades.add(int.parse(controller.text));
         }
         await ModuleRepository.initiateModuleGrades('1', menteeID!)
@@ -56,7 +56,7 @@ class _Modul1Page4State extends State<Modul1Page4> {
         });
       } else {
         List<String> listAnswers = [];
-        for (var controller in answerController){
+        for (var controller in answerController) {
           listAnswers.add(controller.text);
         }
         await ModuleRepository.addModuleAnswer("1", "4", listAnswers)
@@ -205,7 +205,7 @@ class _Modul1Page4State extends State<Modul1Page4> {
               title: 'Coba ceritakan apa yang terjadi pada gambar 2',
               textController: answerController[1]),
           menteeID != null
-              ?new  ModuleGradeField(textController: gradeController[1])
+              ? new ModuleGradeField(textController: gradeController[1])
               : Container(),
         ],
       ),
@@ -240,9 +240,9 @@ class _Modul1Page4State extends State<Modul1Page4> {
         var listString = List.from(userGrade.get('grades'));
         print(listString.toString());
         setState(() {
-          for (var i = 0; i < listString.length; i++){
-          gradeController[i].text = listString[i].toString();
-      } 
+          for (var i = 0; i < listString.length; i++) {
+            gradeController[i].text = listString[i].toString();
+          }
         });
       }
     }
@@ -252,9 +252,9 @@ class _Modul1Page4State extends State<Modul1Page4> {
     if (userAnswer.exists) {
       var listString = List.from(userAnswer.get('answers'));
       setState(() {
-        for (var i = 0; i < listString.length; i++){
+        for (var i = 0; i < listString.length; i++) {
           answerController[i].text = listString[i] != null ? listString[i] : '';
-      }
+        }
       });
     }
   }
@@ -320,7 +320,8 @@ class _Modul1Page4State extends State<Modul1Page4> {
               ]),
         ));
   }
-    @override
+
+  @override
   void dispose() {
     answerController.forEach((element) {
       element.dispose();
