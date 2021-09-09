@@ -28,11 +28,8 @@ class Modul1Page4 extends StatefulWidget {
 class _Modul1Page4State extends State<Modul1Page4> {
   String? menteeID;
   final String role;
-  TextEditingController firstController = TextEditingController(text: "");
-  TextEditingController secondController = TextEditingController(text: "");
-  TextEditingController firstAnswerController = TextEditingController(text: "");
-  TextEditingController secondAnswerController =
-      TextEditingController(text: "");
+  List<TextEditingController> answerController = [];
+  List<TextEditingController> gradeController = [];
   CollectionReference answers =
       FirebaseFirestore.instance.collection('answers');
   bool isLoading = false;
@@ -46,8 +43,9 @@ class _Modul1Page4State extends State<Modul1Page4> {
       });
       if (menteeID != null) {
         List<int> listGrades = [];
-        listGrades.add(int.parse(firstAnswerController.text));
-        listGrades.add(int.parse(secondAnswerController.text));
+        for (var controller in gradeController){
+          listGrades.add(int.parse(controller.text));
+        }
         await ModuleRepository.initiateModuleGrades('1', menteeID!)
             .then((value) async {
           await ModuleRepository.addModuleGrades(
@@ -58,8 +56,9 @@ class _Modul1Page4State extends State<Modul1Page4> {
         });
       } else {
         List<String> listAnswers = [];
-        listAnswers.add(firstController.text);
-        listAnswers.add(secondController.text);
+        for (var controller in answerController){
+          listAnswers.add(controller.text);
+        }
         await ModuleRepository.addModuleAnswer("1", "4", listAnswers)
             .then((value) => Navigator.pushNamed(context, next_route));
       }
@@ -197,16 +196,16 @@ class _Modul1Page4State extends State<Modul1Page4> {
           SizedBox(height: 30),
           new ModuleAnswerField(
               title: 'Coba ceritakan apa yang terjadi pada gambar 1?',
-              textController: firstController),
+              textController: answerController[0]),
           menteeID != null
-              ? new ModuleGradeField(textController: firstAnswerController)
+              ? new ModuleGradeField(textController: gradeController[0])
               : Container(),
           SizedBox(height: 20),
           new ModuleAnswerField(
               title: 'Coba ceritakan apa yang terjadi pada gambar 2',
-              textController: secondController),
+              textController: answerController[1]),
           menteeID != null
-              ?new  ModuleGradeField(textController: secondAnswerController)
+              ?new  ModuleGradeField(textController: gradeController[1])
               : Container(),
         ],
       ),
@@ -233,15 +232,17 @@ class _Modul1Page4State extends State<Modul1Page4> {
 
   _initAnswer() async {
     if (menteeID != null) {
+      print('--------');
+      print(menteeID);
       DocumentSnapshot userGrade =
           await UserRepository.getUserGrade('1', menteeID!, '4');
       if (userGrade.exists) {
         var listString = List.from(userGrade.get('grades'));
+        print(listString.toString());
         setState(() {
-          firstAnswerController.text =
-              listString[0] != null ? listString[0].toString() : '0';
-          secondAnswerController.text =
-              listString[1] != null ? listString[1].toString() : '0';
+          for (var i = 0; i < listString.length; i++){
+          gradeController[i].text = listString[i].toString();
+      } 
         });
       }
     }
@@ -251,8 +252,9 @@ class _Modul1Page4State extends State<Modul1Page4> {
     if (userAnswer.exists) {
       var listString = List.from(userAnswer.get('answers'));
       setState(() {
-        firstController.text = listString[0] != null ? listString[0] : '';
-        secondController.text = listString[1] != null ? listString[1] : '';
+        for (var i = 0; i < listString.length; i++){
+          answerController[i].text = listString[i] != null ? listString[i] : '';
+      }
       });
     }
   }
@@ -260,7 +262,10 @@ class _Modul1Page4State extends State<Modul1Page4> {
   @override
   void initState() {
     super.initState();
-
+    gradeController.add(TextEditingController(text: '0'));
+    gradeController.add(TextEditingController(text: '0'));
+    answerController.add(TextEditingController(text: ""));
+    answerController.add(TextEditingController(text: ""));
     // Add the observer.
     _initAnswer();
   }
@@ -314,5 +319,15 @@ class _Modul1Page4State extends State<Modul1Page4> {
                 LoadingProgress(isLoading: isLoading),
               ]),
         ));
+  }
+    @override
+  void dispose() {
+    answerController.forEach((element) {
+      element.dispose();
+    });
+    gradeController.forEach((element) {
+      element.dispose();
+    });
+    super.dispose();
   }
 }

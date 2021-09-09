@@ -27,8 +27,8 @@ class Modul1Page16 extends StatefulWidget {
 
 class _Modul1Page16State extends State<Modul1Page16> {
   final String role;
-  TextEditingController firstController = TextEditingController(text: "");
-  TextEditingController firstAnswerController = TextEditingController(text: "");
+  List<TextEditingController> answerController = [];
+  List<TextEditingController> gradeController = [];
   String? menteeID;
   bool isLoading = false;
   _Modul1Page16State(this.role, this.menteeID);
@@ -40,7 +40,9 @@ class _Modul1Page16State extends State<Modul1Page16> {
       });
       if (menteeID != null) {
         List<int> listGrades = [];
-        listGrades.add(int.parse(firstAnswerController.text));
+        gradeController.forEach((element) {
+          listGrades.add(int.parse(element.text));
+        });
         await ModuleRepository.addModuleGrades(
                 "1", "16", listGrades, menteeID!, sharedPrefs.group)
             .then((value) => Navigator.pushNamed(
@@ -48,7 +50,9 @@ class _Modul1Page16State extends State<Modul1Page16> {
                 arguments: {'menteeID': menteeID}));
       } else {
         List<String> listAnswers = [];
-        listAnswers.add(firstController.text);
+        answerController.forEach((element) {
+          listAnswers.add(element.text);
+        });
         await ModuleRepository.addModuleAnswer("1", "16", listAnswers)
             .then((value) => Navigator.pushNamed(context, next_route));
       }
@@ -104,9 +108,9 @@ class _Modul1Page16State extends State<Modul1Page16> {
           SizedBox(height: 20),
           new ModuleAnswerField(
               title: 'Coba kemukakan pendapatmu!',
-              textController: firstController),
+              textController: answerController[0]),
           menteeID != null
-              ? new ModuleGradeField(textController: firstAnswerController)
+              ? new ModuleGradeField(textController: gradeController[0])
               : Container(),
         ],
       ),
@@ -164,16 +168,19 @@ class _Modul1Page16State extends State<Modul1Page16> {
         ));
   }
 
-  _initAnswer() async {
+   _initAnswer() async {
     if (menteeID != null) {
+      print('--------');
+      print(menteeID);
       DocumentSnapshot userGrade =
           await UserRepository.getUserGrade('1', menteeID!, '16');
       if (userGrade.exists) {
         var listString = List.from(userGrade.get('grades'));
-        print(listString);
+        print(listString.toString());
         setState(() {
-          firstAnswerController.text =
-              listString[0] != null ? listString[0].toString() : '';
+          for (var i = 0; i < listString.length; i++) {
+            gradeController[i].text = listString[i].toString();
+          }
         });
       }
     }
@@ -182,9 +189,10 @@ class _Modul1Page16State extends State<Modul1Page16> {
         await UserRepository.getUserAnswers('1', id!, '16');
     if (userAnswer.exists) {
       var listString = List.from(userAnswer.get('answers'));
-      print(listString);
       setState(() {
-        firstController.text = listString[0] != null ? listString[0] : '';
+        for (var i = 0; i < listString.length; i++) {
+          answerController[i].text = listString[i] != null ? listString[i] : '';
+        }
       });
     }
   }
@@ -192,11 +200,11 @@ class _Modul1Page16State extends State<Modul1Page16> {
   @override
   void initState() {
     super.initState();
-
+    answerController.add(TextEditingController(text: ''));
+    gradeController.add(TextEditingController(text: '0'));
     // Add the observer.
     _initAnswer();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -223,7 +231,12 @@ class _Modul1Page16State extends State<Modul1Page16> {
 
   @override
   void dispose() {
-    firstController.dispose();
+    answerController.forEach((element) {
+      element.dispose();
+    });
+    gradeController.forEach((element) {
+      element.dispose();
+    });
     super.dispose();
   }
 }

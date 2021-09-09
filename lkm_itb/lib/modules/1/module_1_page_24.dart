@@ -45,7 +45,7 @@ class _Modul1Page24State extends State<Modul1Page24> {
     'Melihat dan mencoba pembaruan',
     'Mencari lebih dalam berdasar fakta'
   ];
-  TextEditingController firstAnswerController = TextEditingController(text: "");
+  TextEditingController firstAnswerController = TextEditingController(text: "0");
 
   _Modul1Page24State(this.role, this.menteeID);
   void pushFunction(String next_route) async {
@@ -468,7 +468,7 @@ class _Modul1Page24State extends State<Modul1Page24> {
         var listString = List.from(userGrade.get('grades'));
         setState(() {
           firstAnswerController.text =
-              listString[0] != null ? listString[0].toString() : '';
+              listString[0] != null ? listString[0].toString() : '0';
         });
       }
     }
@@ -516,5 +516,10 @@ class _Modul1Page24State extends State<Modul1Page24> {
             : Container()
       ]),
     ));
+  }
+  @override
+  void dispose() {
+    firstAnswerController.dispose();
+    super.dispose();
   }
 }
