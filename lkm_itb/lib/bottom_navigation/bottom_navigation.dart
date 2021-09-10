@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
+import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/detail_lkm/ui/detail_lkm.dart';
 import 'package:lkm_itb/home_screen/ui/home_screen.dart';
@@ -460,6 +461,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   @override
   Widget build(BuildContext context) {
+     SizeConfig().init(context);
     return PersistentTabView(
       context,
       controller: _controller,
@@ -470,7 +472,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       handleAndroidBackButtonPress: true,
       resizeToAvoidBottomInset: true,
       stateManagement: true,
-      navBarHeight: MediaQuery.of(context).viewInsets.bottom > 0 ? 0.0 : 64,
+      navBarHeight: MediaQuery.of(context).viewInsets.bottom > 0 ? 0.0 : SizeConfig.screenHeight*0.075,
       hideNavigationBarWhenKeyboardShows: true,
       popActionScreens: PopActionScreensType.all,
       bottomScreenMargin: 0.0,

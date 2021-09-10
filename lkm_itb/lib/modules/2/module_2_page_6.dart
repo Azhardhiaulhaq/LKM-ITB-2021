@@ -31,6 +31,8 @@ class _Modul2Page6State extends State<Modul2Page6> {
   _forMentee() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      height: SizeConfig.screenHeight,
+      alignment: Alignment.center,
       child: Text(
         'Yuk perhatikan Mentormu dengan saksama dan antusias yang luar biasa!',
         style: GoogleFonts.roboto(
@@ -48,6 +50,9 @@ class _Modul2Page6State extends State<Modul2Page6> {
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Column(
         children: [
+          SizedBox(
+            height: SizeConfig.screenHeight * 0.2,
+          ),
           Text(
             'Rangkum dan beri tanggapan apresiatif terhadap antusias mentee kemudian jelaskan bagian tersirat dari gambar tersebut dengan gaya Mentor masing-masing dengan narasi informasi berikut ini.',
             style: GoogleFonts.roboto(
@@ -93,6 +98,7 @@ class _Modul2Page6State extends State<Modul2Page6> {
             ),
             textAlign: TextAlign.justify,
           ),
+          SizedBox(height: SizeConfig.screenHeight*0.2,)
         ],
       ),
     );
@@ -112,23 +118,21 @@ class _Modul2Page6State extends State<Modul2Page6> {
                   minHeight: MediaQuery.of(context).size.height,
                 ),
                 child: IntrinsicHeight(
-                    child: Stack(alignment: Alignment.center, children: [
-                  Positioned(
-                    top: SizeConfig.screenHeight * 0.1,
-                    child: Text('Bagian 1',
-                        style: GoogleFonts.roboto(
-                          fontSize: 24,
-                          color: ConstColor.lightGreen,
-                          fontWeight: FontWeight.w700,
-                        )),
-                  ),
+                    child: Stack(alignment: Alignment.center, children: [ Positioned(
+                          top: SizeConfig.screenHeight * 0.1,
+                          child: Text('Bagian 1',
+                              style: GoogleFonts.roboto(
+                                fontSize: 24,
+                                color: ConstColor.lightGreen,
+                                fontWeight: FontWeight.w700,
+                              )),
+                        ),
                   Container(
                       margin: EdgeInsets.symmetric(horizontal: 25),
                       alignment: Alignment.center,
                       width: SizeConfig.screenWidth,
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             role == 'mentor' ? _forMentor() : _forMentee()
                           ])),

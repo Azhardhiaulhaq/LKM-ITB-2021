@@ -31,6 +31,8 @@ class _Modul2Page13State extends State<Modul2Page13> {
   _forMentee() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      height: SizeConfig.screenHeight,
+      alignment: Alignment.center,
       child: Text(
         'Yuk simak penjelasan mentormu terkait maksud atau korelasi diagram tersebut terkait suatu hal!',
         style: GoogleFonts.roboto(
@@ -48,6 +50,8 @@ class _Modul2Page13State extends State<Modul2Page13> {
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Column(
         children: [
+          SizedBox(height: SizeConfig.screenHeight*0.2,),
+
           Text(
             'Mentor memberikan penjelasan singkat mengenai maksud dari korelasi positif dua gambar tersebut. ',
             style: GoogleFonts.roboto(
@@ -116,7 +120,7 @@ class _Modul2Page13State extends State<Modul2Page13> {
                 ),
                 child: IntrinsicHeight(
                     child: Stack(alignment: Alignment.center, children: [
-                  Positioned(
+                   Positioned(
                     top: SizeConfig.screenHeight * 0.1,
                     child: Text('Bagian 3',
                         style: GoogleFonts.roboto(
@@ -131,7 +135,6 @@ class _Modul2Page13State extends State<Modul2Page13> {
                       width: SizeConfig.screenWidth,
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             role == 'mentor' ? _forMentor() : _forMentee()
                           ])),

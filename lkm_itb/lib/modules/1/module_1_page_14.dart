@@ -232,7 +232,7 @@ class _Modul1Page14State extends State<Modul1Page14> {
                       title: 'Solusi terhadap masalah:',
                       textController: answerController[1]),
                   menteeID != null
-                      ?new  ModuleGradeField(textController: gradeController[0])
+                      ?new  ModuleGradeField(textController: gradeController[1])
                       : Container(),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.1,

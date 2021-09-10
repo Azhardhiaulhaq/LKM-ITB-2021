@@ -114,7 +114,7 @@ class _NilaiKelompokPageState extends State<NilaiKelompokPage> {
               for (var list in listNilaiMentee)
                 new NilaiKelompokCard(penilaian: list),
               SizedBox(
-                height: SizeConfig.screenHeight * 0.12,
+                height: SizeConfig.screenHeight * 0.2,
               ),
             ],
           )),

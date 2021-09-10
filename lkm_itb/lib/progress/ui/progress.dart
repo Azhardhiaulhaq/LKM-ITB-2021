@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
+import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/models/module.dart';
 import 'package:lkm_itb/progress/bloc/progress_bloc.dart';
 import 'package:lkm_itb/progress/ui/progress_card.dart';
@@ -110,7 +111,8 @@ class _ProgressState extends State<Progress> {
           SingleChildScrollView(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[_listProgress()],
+            children: <Widget>[_listProgress(),
+            SizedBox(height: SizeConfig.screenHeight*0.2,)],
           )),
           isLoading
               ? Center(

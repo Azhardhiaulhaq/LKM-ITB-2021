@@ -31,6 +31,8 @@ class _Modul2Page25State extends State<Modul2Page25> {
   _forMentee() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      height: SizeConfig.screenHeight,
+      alignment: Alignment.center,
       child: Text(
         'Yuk dengarkan dan perhatikan Mentormu dengan saksama!',
         style: GoogleFonts.roboto(

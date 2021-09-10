@@ -155,6 +155,9 @@ class _Modul2Page5State extends State<Modul2Page5> {
           menteeID != null
               ? new ModuleGradeField(textController: gradeController[0])
               : Container(),
+          SizedBox(
+            height: SizeConfig.screenHeight * 0.2,
+          )
         ],
       ),
     );
@@ -192,6 +195,9 @@ class _Modul2Page5State extends State<Modul2Page5> {
             ),
             textAlign: TextAlign.justify,
           ),
+          SizedBox(
+            height: SizeConfig.screenHeight * 0.2,
+          )
         ],
       ),
     );
@@ -200,7 +206,8 @@ class _Modul2Page5State extends State<Modul2Page5> {
   _image() {
     return Image.asset(
       'assets/images/modul_2_5.png',
-      fit: BoxFit.fill,
+      height: SizeConfig.screenHeight * 0.3,
+      fit: BoxFit.contain,
     );
   }
 

@@ -172,8 +172,8 @@ class _Modul2Page12State extends State<Modul2Page12> {
   _image(String path) {
     return Image.asset(
       path,
-      height: 300,
-      fit: BoxFit.fill,
+      height: SizeConfig.screenHeight*0.3,
+      fit: BoxFit.contain,
     );
   }
 

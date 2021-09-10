@@ -127,7 +127,7 @@ class ModuleRepository {
       for (var answer in listAnswers) {
         diff += answer;
       }
-
+      print(listAnswers);
       DocumentSnapshot userGrade =
           await UserRepository.getUserGrade(moduleID, menteeID, questionID);
       if (userGrade.exists) {
@@ -143,7 +143,7 @@ class ModuleRepository {
           .doc(menteeID)
           .collection('questions')
           .doc(questionID)
-          .set({'grades': FieldValue.arrayUnion(listAnswers)});
+          .set({'grades': listAnswers});
 
       await grades
           .doc(moduleID)

@@ -108,6 +108,7 @@ class _Modul2Page8State extends State<Modul2Page8> {
             'assets/images/icon_toples_kue.png',
             width: 150,
             height: 150,
+            fit: BoxFit.contain,
           )),
           SizedBox(
             height: SizeConfig.screenHeight * 0.2,

@@ -30,6 +30,8 @@ class _Modul2Page4State extends State<Modul2Page4> {
 
   _forMentee() {
     return Container(
+      alignment: Alignment.center,
+      height: SizeConfig.screenHeight,
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Text(
         'Yuk perhatikan Mentormu dengan saksama dan antusias yang luar biasa!',
@@ -48,6 +50,7 @@ class _Modul2Page4State extends State<Modul2Page4> {
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Column(
         children: [
+          SizedBox(height: SizeConfig.screenHeight*0.2,),
           Text(
             'Mentor menjelaskan sedikit rangkuman mengenai video tersebut.',
             style: GoogleFonts.roboto(
@@ -93,6 +96,7 @@ class _Modul2Page4State extends State<Modul2Page4> {
             ),
             textAlign: TextAlign.justify,
           ),
+          SizedBox(height: SizeConfig.screenHeight*0.2,)
         ],
       ),
     );
@@ -121,14 +125,12 @@ class _Modul2Page4State extends State<Modul2Page4> {
                           color: ConstColor.lightGreen,
                           fontWeight: FontWeight.w700,
                         )),
-                  ),
+                  ) ,
                   Container(
                       margin: EdgeInsets.symmetric(horizontal: 25),
-                      alignment: Alignment.center,
                       width: SizeConfig.screenWidth,
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             role == 'mentor' ? _forMentor() : _forMentee()
                           ])),
