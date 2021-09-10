@@ -46,9 +46,7 @@ class _Modul1Page4State extends State<Modul1Page4> {
         for (var controller in gradeController) {
           listGrades.add(int.parse(controller.text));
         }
-        print('0000000000000');
-        print(menteeID);
-        print(listGrades);
+
         await ModuleRepository.initiateModuleGrades('1', menteeID!)
             .then((value) async {
           await ModuleRepository.addModuleGrades(

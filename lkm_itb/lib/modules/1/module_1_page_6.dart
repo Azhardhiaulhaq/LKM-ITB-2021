@@ -192,8 +192,7 @@ class _Modul1Page6State extends State<Modul1Page6> {
 
   _initAnswer() async {
     if (menteeID != null) {
-      print('--------');
-      print(menteeID);
+
       DocumentSnapshot userGrade =
           await UserRepository.getUserGrade('1', menteeID!, '6');
       if (userGrade.exists) {

@@ -127,7 +127,6 @@ class ModuleRepository {
       for (var answer in listAnswers) {
         diff += answer;
       }
-      print(listAnswers);
       DocumentSnapshot userGrade =
           await UserRepository.getUserGrade(moduleID, menteeID, questionID);
       if (userGrade.exists) {
@@ -178,7 +177,6 @@ class ModuleRepository {
   static Future<void> addModuleAnswer(
       String moduleID, String questionID, List<String> listAnswers) async {
     try {
-      print(listAnswers);
       String userID = sharedPrefs.userid;
       String name = sharedPrefs.name;
       String group = sharedPrefs.group;
