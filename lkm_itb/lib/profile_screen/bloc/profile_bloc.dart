@@ -13,7 +13,9 @@ part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc() : super(ProfileInitial());
-
+static FirebaseFirestore firestore = FirebaseFirestore.instance;
+static CollectionReference grades = firestore.collection('grades');
+static CollectionReference groupGrades = firestore.collection('group_grades');
   @override
   Stream<ProfileState> mapEventToState(
     ProfileEvent event,
@@ -22,6 +24,32 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       yield ProfileLoading();
 
       try {
+        // QuerySnapshot group = await grades.doc('1').collection('groups').get();
+        // for (var group in group.docs){
+        //   await grades.doc('1').collection('groups').doc(group.id).update({'score' : 0});
+        // }
+        // QuerySnapshot group = await groupGrades.get();
+        // for(var group in group.docs){
+        //    await groupGrades.doc(group.id).update({'total' : 0});
+        // }
+      //  QuerySnapshot users = await grades.doc('1').collection('users').get();
+      //  for(var user in users.docs){
+      //    var mapUser = user.data() as Map;
+      //    String group = mapUser['group'];
+      //    String userID = user.id;
+      //    QuerySnapshot questions = await grades.doc('1').collection('users').doc(user.id).collection('questions').get();
+      //    for(var question in questions.docs){
+      //      var mapQuestion = question.data() as Map;
+      //      List listGrades = List.from(mapQuestion['grades']);
+      //      for(var grade in listGrades){
+      //        int score = grade.toInt();
+      //         await grades.doc('1').collection('users').doc(userID).update({'score' : FieldValue.increment(score)});
+      //         await grades.doc('1').collection('groups').doc(group).update({'score' : FieldValue.increment(score)});
+      //         await groupGrades.doc(group).update({'total' : FieldValue.increment(score)});
+      //      }
+      //    }
+      //   //  await grades.doc('1').collection('users').doc(user.id).update({'score' : 0});
+      //  }
         DocumentSnapshot user =
             await UserRepository.getUserDetail(event.user.uid);
         if (user.exists) {
@@ -41,6 +69,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
               group: dataProfile['group']);
 
           yield ProfileSucceed(profile: profile);
+
         } else {
           yield ProfileFailed(message: 'User Kosong');
         }
