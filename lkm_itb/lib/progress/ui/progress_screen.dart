@@ -23,7 +23,6 @@ class ProgressScreen extends StatelessWidget {
       extendBodyBehindAppBar: true,
       body: BlocProvider<ProgressBloc>(
           create: (context) {
-            print(sharedPrefs.role);
             if (sharedPrefs.role == 'mentor') {
               return ProgressBloc()
                 ..add(ProgressMentorLoaded(sharedPrefs.group));

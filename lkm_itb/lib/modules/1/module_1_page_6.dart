@@ -33,6 +33,7 @@ class _Modul1Page6State extends State<Modul1Page6> {
   bool isLoading = false;
   _Modul1Page6State(this.role, this.menteeID);
 
+  // ignore: non_constant_identifier_names
   void pushFunction(String next_route) async {
     if (role == 'mentee') {
       setState(() {

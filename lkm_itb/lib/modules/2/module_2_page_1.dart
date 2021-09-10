@@ -21,6 +21,7 @@ class _Modul2Page1State extends State<Modul2Page1> {
   String text =
       'Salah satu acara orientasi kampus adalah gotong royong membersihkan lingkungan, dihari itu Loki belum sempat untuk sarapan, bantulah Loki agar bisa melaksanakan kegiatan dengan energi yang maksimal, belikan item ini untuk bisa memberikan energi, mintalah rekomendasi dari Kimy!';
 
+  // ignore: non_constant_identifier_names
   void pushFunction(String next_route) {
     Navigator.pushNamed(context, next_route);
   }
@@ -30,6 +31,7 @@ class _Modul2Page1State extends State<Modul2Page1> {
     super.dispose();
   }
 
+  // ignore: non_constant_identifier_names
   _Card() {
     return Container(
       width: MediaQuery.of(context).size.width,

@@ -81,6 +81,7 @@ class _ProfileState extends State<Profile> {
                   );
                   break;
                 case 'signOut':
+                  // ignore: await_only_futures
                   await sharedPrefs.remove;
                   await UserRepository.signOut();
                   await Phoenix.rebirth(context);

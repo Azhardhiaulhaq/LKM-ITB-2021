@@ -187,6 +187,7 @@ class UserRepository {
     // ignore: await_only_futures
     var currentUser = await firebaseAuth.currentUser;
     if (currentUser != null) {
+      // ignore: await_only_futures
       await users.doc(currentUser.uid).snapshots().listen((result) {
         sharedPrefs.setName(result['name']);
         sharedPrefs.setID(currentUser.uid);

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/components/back_button.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
+import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/models/module.dart';
 import 'package:lkm_itb/data/models/penilaian_modul.dart';
 import 'package:lkm_itb/penilaian_modul/bloc/penilaian_bloc.dart';
@@ -96,6 +97,7 @@ class _PenilaianModulePageState extends State<PenilaianModulePage> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return BlocListener<PenilaianBloc, PenilaianState>(listener:
         (context, state) {
       if (state is PenilaianLoadFailed) {
@@ -145,7 +147,8 @@ class _PenilaianModulePageState extends State<PenilaianModulePage> {
                 height: 10,
               ),
               for (var list in listPenilaianModules)
-                new PenilaianCard(penilaian: list, moduleID: module.modulID!)
+                new PenilaianCard(penilaian: list, moduleID: module.modulID!),
+              SizedBox(height: SizeConfig.screenHeight*0.2,),
             ],
           )),
           isLoading

@@ -16,14 +16,13 @@ class Modul1Page23 extends StatefulWidget {
 
 class _Modul1Page23State extends State<Modul1Page23> {
   final String role;
-  
 
   _Modul1Page23State(this.role);
 
-  void pushFunction(String next_route){
-                    Navigator.pushNamed(context, next_route);
+  // ignore: non_constant_identifier_names
+  void pushFunction(String next_route) {
+    Navigator.pushNamed(context, next_route);
   }
-
 
   _contentMentor() {
     return Container(
@@ -34,14 +33,12 @@ class _Modul1Page23State extends State<Modul1Page23> {
           Container(
               width: MediaQuery.of(context).size.width,
               margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              
               child: Card(
                 color: ConstColor.lightGreen,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
                 elevation: 3,
                 child: Container(
-                  
                   margin: EdgeInsets.all(30),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -158,9 +155,12 @@ class _Modul1Page23State extends State<Modul1Page23> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-      child: Stack(fit: StackFit.expand, alignment: Alignment.center,children: <Widget>[
-        role == 'mentor' ? _forMentor() : _forMentee(),
-        Positioned(
+      child: Stack(
+          fit: StackFit.expand,
+          alignment: Alignment.center,
+          children: <Widget>[
+            role == 'mentor' ? _forMentor() : _forMentee(),
+            Positioned(
                 bottom: 60,
                 child: Container(
                     padding: EdgeInsets.all(10),
@@ -169,7 +169,7 @@ class _Modul1Page23State extends State<Modul1Page23> {
                         : ConstColor.whiteBackground,
                     child: new CustomModuleButton(
                         pushFunction: () => pushFunction('/module/1/page/24'))))
-      ]),
+          ]),
     ));
   }
 }

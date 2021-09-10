@@ -22,11 +22,13 @@ class ProfileFailed extends ProfileState {
   ProfileFailed({required this.message});
 }
 
+
 class updateProfileFailed extends ProfileState{
   String message;
   updateProfileFailed({required this.message});
 }
 
+// ignore: camel_case_types
 class updateProfileSuccess extends ProfileState{
   
 }

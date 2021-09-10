@@ -18,6 +18,7 @@ class _PusatBantuanState extends State<PusatBantuan> {
 
   Future<void> share(String phone, String message) async {
     var phoneNumber = '+' + phone;
+    // ignore: non_constant_identifier_names
     var whatsappURl_android = "whatsapp://send?phone="+phoneNumber+"&text="+message;
     if( await canLaunch(whatsappURl_android)){
       await launch(whatsappURl_android);

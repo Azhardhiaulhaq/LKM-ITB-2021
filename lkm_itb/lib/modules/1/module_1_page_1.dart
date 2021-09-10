@@ -18,10 +18,12 @@ class Modul1Page1 extends StatefulWidget {
 class _Modul1Page1State extends State<Modul1Page1> {
   final String role;
 
+  // ignore: non_constant_identifier_names
   String youtube_link = 'https://www.youtube.com/watch?v=0jYDsL19qQw';
   late YoutubePlayerController _youtubeController;
 
   _Modul1Page1State(this.role);
+  // ignore: non_constant_identifier_names
   Widget _videoModule(String youtube_link) {
     String? videoID = YoutubePlayer.convertUrlToId(youtube_link) != null
         ? YoutubePlayer.convertUrlToId(youtube_link)
@@ -52,6 +54,7 @@ class _Modul1Page1State extends State<Modul1Page1> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   void pushFunction(String next_route) {
     _youtubeController.pause();
     Navigator.pushNamed(context, next_route);

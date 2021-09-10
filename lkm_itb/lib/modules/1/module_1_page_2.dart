@@ -21,10 +21,12 @@ class _Modul1Page2State extends State<Modul1Page2> {
 
   _Modul1Page2State(this.role);
 
+    // ignore: non_constant_identifier_names
     void pushFunction(String next_route) {
     Navigator.pushNamed(context, next_route);
   }
 
+  // ignore: non_constant_identifier_names
   _Card() {
     return Container(
       width: MediaQuery.of(context).size.width,

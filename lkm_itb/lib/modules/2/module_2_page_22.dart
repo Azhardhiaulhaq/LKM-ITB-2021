@@ -114,7 +114,6 @@ class _Modul2Page22State extends State<Modul2Page22> {
               onChanged: (String? value) {
                 setState(() {
                   answers[index] = value ?? '';
-                  print(answers);
                 });
               },
               activeColor: ConstColor.lightGreen)
@@ -242,7 +241,6 @@ class _Modul2Page22State extends State<Modul2Page22> {
     mapQuestions[0] = firstQuestions;
     mapQuestions[1] = secondQuestions;
     mapQuestions[2] = thirdQuestions;
-    print(mapQuestions);
   }
 
   

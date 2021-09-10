@@ -36,6 +36,7 @@ class _Modul1Page4State extends State<Modul1Page4> {
 
   _Modul1Page4State(this.role, this.menteeID);
 
+  // ignore: non_constant_identifier_names
   void pushFunction(String next_route) async {
     if (role == 'mentee') {
       setState(() {
@@ -238,7 +239,7 @@ class _Modul1Page4State extends State<Modul1Page4> {
           await UserRepository.getUserGrade('1', menteeID!, '4');
       if (userGrade.exists) {
         var listString = List.from(userGrade.get('grades'));
-
+        print(menteeID);
         setState(() {
           for (var i = 0; i < listString.length; i++) {
             gradeController[i].text = listString[i].toString();

@@ -19,6 +19,7 @@ class _Modul1Page8State extends State<Modul1Page8> {
 
   _Modul1Page8State(this.role);
 
+  // ignore: non_constant_identifier_names
   void pushFunction(String next_route) {
     Navigator.pushNamed(context, next_route);
   }

@@ -19,10 +19,12 @@ class _Modul1Page3State extends State<Modul1Page3> {
 
   _Modul1Page3State(this.role);
 
+  // ignore: non_constant_identifier_names
   void pushFunction(String next_route){
      Navigator.pushNamed(context, next_route);
   }
 
+  // ignore: non_constant_identifier_names
   _Text() {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
@@ -77,6 +79,7 @@ class _Modul1Page3State extends State<Modul1Page3> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   _TextMentee() {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
