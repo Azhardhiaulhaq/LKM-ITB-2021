@@ -175,7 +175,7 @@ class ModuleRepository {
   }
 
   static Future<void> addModuleAnswer(
-      String moduleID, String questionID, List<String> listAnswers) async {
+      String moduleID, String questionID, List listAnswers) async {
     try {
       String userID = sharedPrefs.userid;
       String name = sharedPrefs.name;

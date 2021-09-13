@@ -27,20 +27,21 @@ class PenilaianBloc extends Bloc<PenilaianEvent, PenilaianState> {
         List<QueryDocumentSnapshot<Object?>> listGroupedUser =
             await UserRepository.getGroupedUser(event.group);
         for (var user in listGroupedUser) {
-          mapPenilaian[user.get('name')] = PenilaianModul(
+          mapPenilaian[user.id] = PenilaianModul(
               userID: user.id,
               name: user.get('name'),
               nilai: 0,
               isComplete: false);
         }
-
+        print(mapPenilaian.toString());
         List<QueryDocumentSnapshot> listGradedUsers =
             await NilaiRepository.getGroupedUser(
                 event.module.modulID!, event.group);
         for (var user in listGradedUsers) {
           Map<String, dynamic> map = user.data() as Map<String, dynamic>;
-          mapPenilaian[map['name']]!.incrementNilai(map['score'] ?? 0);
-          mapPenilaian[map['name']]!.setStatus(map['isComplete'] ?? false);
+
+          mapPenilaian[user.id]!.incrementNilai(map['score'] ?? 0);
+          mapPenilaian[user.id]!.setStatus(map['isComplete'] ?? false);
         }
 
         mapPenilaian.forEach((key, value) => listPenilaian.add(value));

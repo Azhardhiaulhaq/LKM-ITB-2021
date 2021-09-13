@@ -62,6 +62,39 @@ import 'package:lkm_itb/modules/2/module_2_page_6.dart';
 import 'package:lkm_itb/modules/2/module_2_page_7.dart';
 import 'package:lkm_itb/modules/2/module_2_page_8.dart';
 import 'package:lkm_itb/modules/2/module_2_page_9.dart';
+import 'package:lkm_itb/modules/3/module_3_page_1.dart';
+import 'package:lkm_itb/modules/3/module_3_page_10.dart';
+import 'package:lkm_itb/modules/3/module_3_page_11.dart';
+import 'package:lkm_itb/modules/3/module_3_page_12.dart';
+import 'package:lkm_itb/modules/3/module_3_page_13.dart';
+import 'package:lkm_itb/modules/3/module_3_page_14.dart';
+import 'package:lkm_itb/modules/3/module_3_page_15.dart';
+import 'package:lkm_itb/modules/3/module_3_page_16.dart';
+import 'package:lkm_itb/modules/3/module_3_page_17.dart';
+import 'package:lkm_itb/modules/3/module_3_page_18.dart';
+import 'package:lkm_itb/modules/3/module_3_page_19.dart';
+import 'package:lkm_itb/modules/3/module_3_page_2.dart';
+import 'package:lkm_itb/modules/3/module_3_page_20.dart';
+import 'package:lkm_itb/modules/3/module_3_page_21.dart';
+import 'package:lkm_itb/modules/3/module_3_page_22.dart';
+import 'package:lkm_itb/modules/3/module_3_page_23.dart';
+import 'package:lkm_itb/modules/3/module_3_page_24.dart';
+import 'package:lkm_itb/modules/3/module_3_page_25.dart';
+import 'package:lkm_itb/modules/3/module_3_page_26.dart';
+import 'package:lkm_itb/modules/3/module_3_page_27.dart';
+import 'package:lkm_itb/modules/3/module_3_page_28.dart';
+import 'package:lkm_itb/modules/3/module_3_page_29.dart';
+import 'package:lkm_itb/modules/3/module_3_page_3.dart';
+import 'package:lkm_itb/modules/3/module_3_page_30.dart';
+import 'package:lkm_itb/modules/3/module_3_page_31.dart';
+import 'package:lkm_itb/modules/3/module_3_page_32.dart';
+import 'package:lkm_itb/modules/3/module_3_page_33.dart';
+import 'package:lkm_itb/modules/3/module_3_page_4.dart';
+import 'package:lkm_itb/modules/3/module_3_page_5.dart';
+import 'package:lkm_itb/modules/3/module_3_page_6.dart';
+import 'package:lkm_itb/modules/3/module_3_page_7.dart';
+import 'package:lkm_itb/modules/3/module_3_page_8.dart';
+import 'package:lkm_itb/modules/3/module_3_page_9.dart';
 import 'package:lkm_itb/modules/penilaian/penilaian_first.dart';
 import 'package:lkm_itb/modules/penilaian/penilaian_last.dart';
 import 'package:lkm_itb/nilai/ui/nilai_kelompok_screen.dart';
@@ -133,116 +166,182 @@ class _BottomNavigationState extends State<BottomNavigation> {
             '/home/listlkm': (context) => new ListLKM(
                   title: 'List LKM',
                 ),
-            '/module/1/page/1': (context) =>
-               new  Modul1Page1(title: 'Module 1 Page 1', role: sharedPrefs.role),
-            '/module/1/page/2': (context) =>
-               new  Modul1Page2(title: 'Module 1 Page 2', role: sharedPrefs.role),
-            '/module/1/page/3': (context) =>
-               new  Modul1Page3(title: 'Module 1 Page 3', role: sharedPrefs.role),
-            '/module/1/page/4': (context) =>
-               new  Modul1Page4(title: 'Module 1 Page 4', role: sharedPrefs.role),
-            '/module/1/page/5': (context) =>
-                new Modul1Page5(title: 'Module 1 Page 5', role: sharedPrefs.role),
-            '/module/1/page/6': (context) =>
-               new  Modul1Page6(title: 'Module 1 Page 6', role: sharedPrefs.role),
-            '/module/1/page/7': (context) =>
-               new  Modul1Page7(title: 'Module 1 Page 7', role: sharedPrefs.role),
-            '/module/1/page/8': (context) =>
-               new  Modul1Page8(title: 'Module 1 Page 8', role: sharedPrefs.role),
-            '/module/1/page/9': (context) =>
-               new  Modul1Page9(title: 'Module 1 Page 9', role: sharedPrefs.role),
-            '/module/1/page/10': (context) =>
-               new  Modul1Page10(title: 'Module 1 Page 10', role: sharedPrefs.role),
-            '/module/1/page/11': (context) =>
-               new  Modul1Page11(title: 'Module 1 Page 11', role: sharedPrefs.role),
-            '/module/1/page/12': (context) =>
-               new  Modul1Page12(title: 'Module 1 Page 12', role: sharedPrefs.role),
-            '/module/1/page/13': (context) =>
-               new  Modul1Page13(title: 'Module 1 Page 13', role: sharedPrefs.role),
-            '/module/1/page/14': (context) =>
-              new   Modul1Page14(title: 'Module 1 Page 14', role: sharedPrefs.role),
-            '/module/1/page/15': (context) =>
-                new Modul1Page15(title: 'Module 1 Page 15', role: sharedPrefs.role),
-            '/module/1/page/16': (context) =>
-               new  Modul1Page16(title: 'Module 1 Page 16', role: sharedPrefs.role),
-            '/module/1/page/17': (context) =>
-               new  Modul1Page17(title: 'Module 1 Page 17', role: sharedPrefs.role),
-            '/module/1/page/18': (context) =>
-                new Modul1Page18(title: 'Module 1 Page 18', role: sharedPrefs.role),
-            '/module/1/page/19': (context) =>
-                new Modul1Page19(title: 'Module 1 Page 19', role: sharedPrefs.role),
-            '/module/1/page/20': (context) =>
-              new  Modul1Page20(title: 'Module 1 Page 20', role: sharedPrefs.role),
-            '/module/1/page/21': (context) =>
-               new  Modul1Page21(title: 'Module 1 Page 21', role: sharedPrefs.role),
-            '/module/1/page/22': (context) =>
-               new  Modul1Page22(title: 'Module 1 Page 22', role: sharedPrefs.role),
-            '/module/1/page/23': (context) =>
-               new  Modul1Page23(title: 'Module 1 Page 23', role: sharedPrefs.role),
-            '/module/1/page/24': (context) =>
-               new  Modul1Page24(title: 'Module 1 Page 24', role: sharedPrefs.role),
-            '/module/1/page/25': (context) =>
-               new  Modul1Page25(title: 'Module 1 Page 25', role: sharedPrefs.role),
-            '/module/1/page/26': (context) =>
-                new Modul1Page26(title: 'Module 1 Page 26', role: sharedPrefs.role),
+            '/module/1/page/1': (context) => new Modul1Page1(
+                title: 'Module 1 Page 1', role: sharedPrefs.role),
+            '/module/1/page/2': (context) => new Modul1Page2(
+                title: 'Module 1 Page 2', role: sharedPrefs.role),
+            '/module/1/page/3': (context) => new Modul1Page3(
+                title: 'Module 1 Page 3', role: sharedPrefs.role),
+            '/module/1/page/4': (context) => new Modul1Page4(
+                title: 'Module 1 Page 4', role: sharedPrefs.role),
+            '/module/1/page/5': (context) => new Modul1Page5(
+                title: 'Module 1 Page 5', role: sharedPrefs.role),
+            '/module/1/page/6': (context) => new Modul1Page6(
+                title: 'Module 1 Page 6', role: sharedPrefs.role),
+            '/module/1/page/7': (context) => new Modul1Page7(
+                title: 'Module 1 Page 7', role: sharedPrefs.role),
+            '/module/1/page/8': (context) => new Modul1Page8(
+                title: 'Module 1 Page 8', role: sharedPrefs.role),
+            '/module/1/page/9': (context) => new Modul1Page9(
+                title: 'Module 1 Page 9', role: sharedPrefs.role),
+            '/module/1/page/10': (context) => new Modul1Page10(
+                title: 'Module 1 Page 10', role: sharedPrefs.role),
+            '/module/1/page/11': (context) => new Modul1Page11(
+                title: 'Module 1 Page 11', role: sharedPrefs.role),
+            '/module/1/page/12': (context) => new Modul1Page12(
+                title: 'Module 1 Page 12', role: sharedPrefs.role),
+            '/module/1/page/13': (context) => new Modul1Page13(
+                title: 'Module 1 Page 13', role: sharedPrefs.role),
+            '/module/1/page/14': (context) => new Modul1Page14(
+                title: 'Module 1 Page 14', role: sharedPrefs.role),
+            '/module/1/page/15': (context) => new Modul1Page15(
+                title: 'Module 1 Page 15', role: sharedPrefs.role),
+            '/module/1/page/16': (context) => new Modul1Page16(
+                title: 'Module 1 Page 16', role: sharedPrefs.role),
+            '/module/1/page/17': (context) => new Modul1Page17(
+                title: 'Module 1 Page 17', role: sharedPrefs.role),
+            '/module/1/page/18': (context) => new Modul1Page18(
+                title: 'Module 1 Page 18', role: sharedPrefs.role),
+            '/module/1/page/19': (context) => new Modul1Page19(
+                title: 'Module 1 Page 19', role: sharedPrefs.role),
+            '/module/1/page/20': (context) => new Modul1Page20(
+                title: 'Module 1 Page 20', role: sharedPrefs.role),
+            '/module/1/page/21': (context) => new Modul1Page21(
+                title: 'Module 1 Page 21', role: sharedPrefs.role),
+            '/module/1/page/22': (context) => new Modul1Page22(
+                title: 'Module 1 Page 22', role: sharedPrefs.role),
+            '/module/1/page/23': (context) => new Modul1Page23(
+                title: 'Module 1 Page 23', role: sharedPrefs.role),
+            '/module/1/page/24': (context) => new Modul1Page24(
+                title: 'Module 1 Page 24', role: sharedPrefs.role),
+            '/module/1/page/25': (context) => new Modul1Page25(
+                title: 'Module 1 Page 25', role: sharedPrefs.role),
+            '/module/1/page/26': (context) => new Modul1Page26(
+                title: 'Module 1 Page 26', role: sharedPrefs.role),
             Modul2Page1.routeName: (context) =>
-               new  Modul2Page1(role: sharedPrefs.role),
+                new Modul2Page1(role: sharedPrefs.role),
             Modul2Page2.routeName: (context) =>
-               new  Modul2Page2(role: sharedPrefs.role),
+                new Modul2Page2(role: sharedPrefs.role),
             Modul2Page3.routeName: (context) =>
-               new  Modul2Page3(role: sharedPrefs.role),
+                new Modul2Page3(role: sharedPrefs.role),
             Modul2Page4.routeName: (context) =>
-               new  Modul2Page4(role: sharedPrefs.role),
+                new Modul2Page4(role: sharedPrefs.role),
             Modul2Page5.routeName: (context) =>
                 new Modul2Page5(role: sharedPrefs.role),
             Modul2Page6.routeName: (context) =>
-               new  Modul2Page6(role: sharedPrefs.role),
+                new Modul2Page6(role: sharedPrefs.role),
             Modul2Page7.routeName: (context) =>
-               new  Modul2Page7(role: sharedPrefs.role),
+                new Modul2Page7(role: sharedPrefs.role),
             Modul2Page8.routeName: (context) =>
-               new  Modul2Page8(role: sharedPrefs.role),
+                new Modul2Page8(role: sharedPrefs.role),
             Modul2Page9.routeName: (context) =>
-               new  Modul2Page9(role: sharedPrefs.role),
+                new Modul2Page9(role: sharedPrefs.role),
             Modul2Page10.routeName: (context) =>
                 new Modul2Page10(role: sharedPrefs.role),
             Modul2Page11.routeName: (context) =>
-               new  Modul2Page11(role: sharedPrefs.role),
+                new Modul2Page11(role: sharedPrefs.role),
             Modul2Page12.routeName: (context) =>
-               new  Modul2Page12(role: sharedPrefs.role),
+                new Modul2Page12(role: sharedPrefs.role),
             Modul2Page13.routeName: (context) =>
-               new  Modul2Page13(role: sharedPrefs.role),
+                new Modul2Page13(role: sharedPrefs.role),
             Modul2Page14.routeName: (context) =>
-               new  Modul2Page14(role: sharedPrefs.role),
+                new Modul2Page14(role: sharedPrefs.role),
             Modul2Page15.routeName: (context) =>
-              new   Modul2Page15(role: sharedPrefs.role),
+                new Modul2Page15(role: sharedPrefs.role),
             Modul2Page16.routeName: (context) =>
-              new   Modul2Page16(role: sharedPrefs.role),
+                new Modul2Page16(role: sharedPrefs.role),
             Modul2Page17.routeName: (context) =>
-               new  Modul2Page17(role: sharedPrefs.role),
+                new Modul2Page17(role: sharedPrefs.role),
             Modul2Page18.routeName: (context) =>
-              new   Modul2Page18(role: sharedPrefs.role),
+                new Modul2Page18(role: sharedPrefs.role),
             Modul2Page19.routeName: (context) =>
-              new   Modul2Page19(role: sharedPrefs.role),
+                new Modul2Page19(role: sharedPrefs.role),
             Modul2Page20.routeName: (context) =>
-               new  Modul2Page20(role: sharedPrefs.role),
+                new Modul2Page20(role: sharedPrefs.role),
             Modul2Page21.routeName: (context) =>
-               new  Modul2Page21(role: sharedPrefs.role),
+                new Modul2Page21(role: sharedPrefs.role),
             Modul2Page22.routeName: (context) =>
-               new  Modul2Page22(role: sharedPrefs.role),
+                new Modul2Page22(role: sharedPrefs.role),
             Modul2Page23.routeName: (context) =>
-               new  Modul2Page23(role: sharedPrefs.role),
+                new Modul2Page23(role: sharedPrefs.role),
             Modul2Page24.routeName: (context) =>
-               new  Modul2Page24(role: sharedPrefs.role),
+                new Modul2Page24(role: sharedPrefs.role),
             Modul2Page25.routeName: (context) =>
-               new  Modul2Page25(role: sharedPrefs.role),
+                new Modul2Page25(role: sharedPrefs.role),
             Modul2Page26.routeName: (context) =>
-              new   Modul2Page26(role: sharedPrefs.role),
+                new Modul2Page26(role: sharedPrefs.role),
             Modul2Page27.routeName: (context) =>
-               new  Modul2Page27(role: sharedPrefs.role),
+                new Modul2Page27(role: sharedPrefs.role),
             Modul2Page28.routeName: (context) =>
-               new  Modul2Page28(role: sharedPrefs.role),
+                new Modul2Page28(role: sharedPrefs.role),
             Modul2Page29.routeName: (context) =>
                 new Modul2Page29(role: sharedPrefs.role),
+            Modul3Page1.routeName: (context) =>
+                new Modul3Page1(role: sharedPrefs.role),
+            Modul3Page2.routeName: (context) =>
+                new Modul3Page2(role: sharedPrefs.role),
+            Modul3Page3.routeName: (context) =>
+                new Modul3Page3(role: sharedPrefs.role),
+            Modul3Page4.routeName: (context) =>
+                new Modul3Page4(role: sharedPrefs.role),
+            Modul3Page5.routeName: (context) =>
+                new Modul3Page5(role: sharedPrefs.role),
+            Modul3Page6.routeName: (context) =>
+                new Modul3Page6(role: sharedPrefs.role),
+            Modul3Page7.routeName: (context) =>
+                new Modul3Page7(role: sharedPrefs.role),
+            Modul3Page8.routeName: (context) =>
+                new Modul3Page8(role: sharedPrefs.role),
+            Modul3Page9.routeName: (context) =>
+                new Modul3Page9(role: sharedPrefs.role),
+            Modul3Page10.routeName: (context) =>
+                new Modul3Page10(role: sharedPrefs.role),
+            Modul3Page11.routeName: (context) =>
+                new Modul3Page11(role: sharedPrefs.role),
+            Modul3Page12.routeName: (context) =>
+                new Modul3Page12(role: sharedPrefs.role),
+            Modul3Page13.routeName: (context) =>
+                new Modul3Page13(role: sharedPrefs.role),
+            Modul3Page14.routeName: (context) =>
+                new Modul3Page14(role: sharedPrefs.role),
+            Modul3Page15.routeName: (context) =>
+                new Modul3Page15(role: sharedPrefs.role),
+            Modul3Page16.routeName: (context) =>
+                new Modul3Page16(role: sharedPrefs.role),
+            Modul3Page17.routeName: (context) =>
+                new Modul3Page17(role: sharedPrefs.role),
+            Modul3Page18.routeName: (context) =>
+                new Modul3Page18(role: sharedPrefs.role),
+            Modul3Page19.routeName: (context) =>
+                new Modul3Page19(role: sharedPrefs.role),
+            Modul3Page20.routeName: (context) =>
+                new Modul3Page20(role: sharedPrefs.role),
+            Modul3Page21.routeName: (context) =>
+                new Modul3Page21(role: sharedPrefs.role),
+            Modul3Page22.routeName: (context) =>
+                new Modul3Page22(role: sharedPrefs.role),
+            Modul3Page23.routeName: (context) =>
+                new Modul3Page23(role: sharedPrefs.role),
+            Modul3Page24.routeName: (context) =>
+                new Modul3Page24(role: sharedPrefs.role),
+            Modul3Page25.routeName: (context) =>
+                new Modul3Page25(role: sharedPrefs.role),
+            Modul3Page26.routeName: (context) =>
+                new Modul3Page26(role: sharedPrefs.role),
+            Modul3Page27.routeName: (context) =>
+                new Modul3Page27(role: sharedPrefs.role),
+            Modul3Page28.routeName: (context) =>
+                new Modul3Page28(role: sharedPrefs.role),
+            Modul3Page29.routeName: (context) =>
+                new Modul3Page29(role: sharedPrefs.role),
+            Modul3Page30.routeName: (context) =>
+                new Modul3Page30(role: sharedPrefs.role),
+            Modul3Page31.routeName: (context) =>
+                new Modul3Page31(role: sharedPrefs.role),
+            Modul3Page32.routeName: (context) =>
+                new Modul3Page32(role: sharedPrefs.role),
+            Modul3Page33.routeName: (context) =>
+                new Modul3Page33(role: sharedPrefs.role),
           },
         ),
       ),
@@ -274,7 +373,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 } else if (settings.name == Modul1Page4.routeName) {
                   var arg = settings.arguments as Map;
                   return MaterialPageRoute(
-                      builder: (context) =>new  Modul1Page4(
+                      builder: (context) => new Modul1Page4(
                           menteeID: arg['menteeID'],
                           title: 'Penilaian Modul 1 Page 4',
                           role: 'mentee'));
@@ -288,14 +387,14 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 } else if (settings.name == Modul1Page6.routeName) {
                   var arg = settings.arguments as Map;
                   return MaterialPageRoute(
-                      builder: (context) =>new  Modul1Page6(
+                      builder: (context) => new Modul1Page6(
                           menteeID: arg['menteeID'],
                           title: 'Penilaian Modul 1 Page 4',
                           role: 'mentee'));
                 } else if (settings.name == Modul1Page7.routeName) {
                   var arg = settings.arguments as Map;
                   return MaterialPageRoute(
-                      builder: (context) =>new  Modul1Page7(
+                      builder: (context) => new Modul1Page7(
                           menteeID: arg['menteeID'],
                           title: 'Penilaian Modul 1 Page 7',
                           role: 'mentee'));
@@ -366,7 +465,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 } else if (settings.name == Modul2Page9.routeName) {
                   var arg = settings.arguments as Map;
                   return MaterialPageRoute(
-                      builder: (context) =>new  Modul2Page9(
+                      builder: (context) => new Modul2Page9(
                           menteeID: arg['menteeID'], role: 'mentee'));
                 } else if (settings.name == Modul2Page12.routeName) {
                   var arg = settings.arguments as Map;
@@ -400,7 +499,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                           menteeID: arg['menteeID'], role: 'mentee'));
                 } else if (settings.name == '/progress') {
                   return MaterialPageRoute(
-                    builder: (context) =>new  ProgressTab(user: user),
+                    builder: (context) => new ProgressTab(user: user),
                   );
                 }
               })),
@@ -422,7 +521,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                           new NilaiKelompokScreen(group: arg['group']));
                 } else if (settings.name == NilaiScreen.routeName) {
                   return MaterialPageRoute(
-                      builder: (context) =>new  NilaiScreen(
+                      builder: (context) => new NilaiScreen(
                             group: sharedPrefs.group,
                             name: sharedPrefs.name,
                             role: sharedPrefs.role,
@@ -447,10 +546,12 @@ class _BottomNavigationState extends State<BottomNavigation> {
           routes: {
             '/profile/edit': (context) => new ProfileFormBuilder(user: user),
             '/profile': (context) => new Profile(title: 'Profile', user: user),
-            '/profile/info': (context) =>new  DetailLKM(title: 'Detail LKM'),
-            '/profile/password': (context) => new DetailLKM(title: 'Detail LKM'),
-            '/profile/about': (context) => new TentangKami(title: 'Tentang Kami'),
-            '/profile/help': (context) =>new  PusatBantuan(
+            '/profile/info': (context) => new DetailLKM(title: 'Detail LKM'),
+            '/profile/password': (context) =>
+                new DetailLKM(title: 'Detail LKM'),
+            '/profile/about': (context) =>
+                new TentangKami(title: 'Tentang Kami'),
+            '/profile/help': (context) => new PusatBantuan(
                   title: 'Pusat Bantuan',
                 ),
           },
@@ -461,7 +562,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
 
   @override
   Widget build(BuildContext context) {
-     SizeConfig().init(context);
+    SizeConfig().init(context);
     return PersistentTabView(
       context,
       controller: _controller,
@@ -472,7 +573,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
       handleAndroidBackButtonPress: true,
       resizeToAvoidBottomInset: true,
       stateManagement: true,
-      navBarHeight: MediaQuery.of(context).viewInsets.bottom > 0 ? 0.0 : SizeConfig.screenHeight*0.075,
+      navBarHeight: MediaQuery.of(context).viewInsets.bottom > 0
+          ? 0.0
+          : SizeConfig.screenHeight * 0.075,
       hideNavigationBarWhenKeyboardShows: true,
       popActionScreens: PopActionScreensType.all,
       bottomScreenMargin: 0.0,
