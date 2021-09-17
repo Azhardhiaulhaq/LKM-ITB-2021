@@ -11,8 +11,8 @@ import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/data/repositories/user_repositories.dart';
 import 'package:lkm_itb/modules/2/module_2_page_12.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+// ignore: must_be_immutable
 class Modul2Page9 extends StatefulWidget {
   Modul2Page9({Key? key, required this.role, this.menteeID}) : super(key: key);
 
@@ -38,6 +38,7 @@ class _Modul2Page9State extends State<Modul2Page9> {
 
   _Modul2Page9State(this.role, this.module, this.page, this.menteeID);
 
+  // ignore: non_constant_identifier_names
   void pushFunction(String next_route) async {
     if (role == 'mentee') {
       setState(() {

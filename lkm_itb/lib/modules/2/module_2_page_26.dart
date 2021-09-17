@@ -13,6 +13,7 @@ import 'package:lkm_itb/data/repositories/user_repositories.dart';
 import 'package:lkm_itb/modules/penilaian/penilaian_last.dart';
 
 
+// ignore: must_be_immutable
 class Modul2Page26 extends StatefulWidget {
   Modul2Page26({Key? key, required this.role, this.menteeID}) : super(key: key);
 
@@ -38,6 +39,7 @@ class _Modul2Page26State extends State<Modul2Page26> {
 
   _Modul2Page26State(this.role, this.module, this.page, this.menteeID);
 
+  // ignore: non_constant_identifier_names
   void pushFunction(String next_route) async {
     if (role == 'mentee') {
       setState(() {

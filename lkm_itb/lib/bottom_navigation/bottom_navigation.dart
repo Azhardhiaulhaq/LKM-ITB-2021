@@ -457,6 +457,11 @@ class _BottomNavigationState extends State<BottomNavigation> {
                   return MaterialPageRoute(
                       builder: (context) => new Modul2Page5(
                           menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == '/module/3/penilaian/first') {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul3Page2(
+                          menteeID: arg['menteeID'], role: 'mentee'));
                 } else if (settings.name == Modul2Page7.routeName) {
                   var arg = settings.arguments as Map;
                   return MaterialPageRoute(
@@ -496,6 +501,71 @@ class _BottomNavigationState extends State<BottomNavigation> {
                   var arg = settings.arguments as Map;
                   return MaterialPageRoute(
                       builder: (context) => new Modul2Page26(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul3Page2.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul3Page2(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul3Page4.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul3Page4(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul3Page7.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul3Page7(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul3Page8.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul3Page8(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul3Page9.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul3Page9(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul3Page13.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul3Page13(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul3Page16.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul3Page16(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul3Page17.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul3Page17(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul3Page18.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul3Page18(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul3Page20.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul3Page20(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul3Page23.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul3Page23(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul3Page25.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul3Page25(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul3Page30.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul3Page30(
                           menteeID: arg['menteeID'], role: 'mentee'));
                 } else if (settings.name == '/progress') {
                   return MaterialPageRoute(
@@ -573,9 +643,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       handleAndroidBackButtonPress: true,
       resizeToAvoidBottomInset: true,
       stateManagement: true,
-      navBarHeight: MediaQuery.of(context).viewInsets.bottom > 0
-          ? 0.0
-          : SizeConfig.screenHeight * 0.075,
+      navBarHeight: MediaQuery.of(context).viewInsets.bottom > 0 ? 0.0 : 64,
       hideNavigationBarWhenKeyboardShows: true,
       popActionScreens: PopActionScreensType.all,
       bottomScreenMargin: 0.0,

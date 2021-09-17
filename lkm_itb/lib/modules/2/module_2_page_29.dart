@@ -21,6 +21,7 @@ class _Modul2Page29State extends State<Modul2Page29> {
 
   _Modul2Page29State(this.role);
 
+  // ignore: non_constant_identifier_names
   void pushFunction(String next_route) async {
     if (role == 'mentee') {
       print(sharedPrefs.userid);
@@ -73,61 +74,6 @@ class _Modul2Page29State extends State<Modul2Page29> {
     );
   }
 
-  _forMentor() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      child: Column(
-        children: [
-          SizedBox(
-            height: SizeConfig.screenHeight * 0.2,
-          ),
-          Container(
-              width: MediaQuery.of(context).size.width,
-              child: Card(
-                color: ConstColor.lightGreen,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                elevation: 3,
-                child: Container(
-                  margin: EdgeInsets.all(20),
-                  child: Text(
-                    'Yeyy, kamu berhasil menemukan obat luka untuk memberikan perlakuan dini terhadap luka Loki. Meskipun hanya luka goresan tetapi Kimy merasakan betapa perihnya ketika ditetesi dengan obat luka.',
-                    style: GoogleFonts.roboto(
-                        color: ConstColor.whiteBackground,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              )),
-          SizedBox(
-            height: 20,
-          ),
-          Text(
-            'Hari yang melelahkan, tak lupa dengan kebaikan yang Kimy berikan, Loki berencana memberikan hadiah kepada loki karena telah membantu kerja bakti waktu itu. Bantulah Loki menemukan hadiah yang unik untuk Kimy.',
-            style: GoogleFonts.roboto(
-                color: ConstColor.lightGreen,
-                fontSize: 20,
-                fontWeight: FontWeight.bold),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(
-            height: 40,
-          ),
-          Container(
-              child: Image.asset(
-            'assets/images/icon_puzzle.png',
-            width: 100,
-            height: 100,
-          )),
-          SizedBox(
-            height: SizeConfig.screenHeight * 0.2,
-          )
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -156,7 +102,7 @@ class _Modul2Page29State extends State<Modul2Page29> {
             bottom: 60,
             child: Container(
                 padding: EdgeInsets.all(10),
-                color:  ConstColor.whiteBackground,
+                color: ConstColor.whiteBackground,
                 child: new CustomModuleButton(
                   pushFunction: () => pushFunction('/home'),
                   isEnd: true,

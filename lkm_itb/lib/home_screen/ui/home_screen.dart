@@ -11,6 +11,7 @@ import 'package:lkm_itb/data/models/seminar.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/home_screen/ui/module_card.dart';
 import 'package:lkm_itb/home_screen/ui/seminar_card.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class HomeScreen extends StatefulWidget {
   final User user;
@@ -48,17 +49,41 @@ class _HomeScreenState extends State<HomeScreen> {
       indicatorColor: ConstColor.darkGreen,
       indicatorBackgroundColor: Colors.grey,
       children: [
-        Image.network(
-          'https://firebasestorage.googleapis.com/v0/b/lkmitb2021-eacb6.appspot.com/o/banner%2FBANNER%20BU%20REKTOR.png?alt=media&token=ed132b55-4eea-4d3e-b374-aaa32ad85fb8',
+        CachedNetworkImage(
+          imageUrl:
+              'https://firebasestorage.googleapis.com/v0/b/lkmitb2021-eacb6.appspot.com/o/banner%2FBANNER%20BU%20REKTOR.png?alt=media&token=ed132b55-4eea-4d3e-b374-aaa32ad85fb8',
           fit: BoxFit.fitWidth,
+          placeholder: (context, url) => Center(
+            child: LinearProgressIndicator(
+              backgroundColor: ConstColor.boldGreyText,
+              color: ConstColor.darkGreen,
+            ),
+          ),
+          errorWidget: (context, url, error) => Icon(Icons.error),
         ),
-        Image.network(
-          'https://firebasestorage.googleapis.com/v0/b/lkmitb2021-eacb6.appspot.com/o/banner%2FBANNER%20LKM.png?alt=media&token=2d67ab9a-a982-4667-9b95-4a723dce91a2',
+        CachedNetworkImage(
+          imageUrl:
+              'https://firebasestorage.googleapis.com/v0/b/lkmitb2021-eacb6.appspot.com/o/banner%2FBANNER%20LKM.png?alt=media&token=2d67ab9a-a982-4667-9b95-4a723dce91a2',
           fit: BoxFit.fitWidth,
+          placeholder: (context, url) => Center(
+            child: LinearProgressIndicator(
+              backgroundColor: ConstColor.boldGreyText,
+              color: ConstColor.darkGreen,
+            ),
+          ),
+          errorWidget: (context, url, error) => Icon(Icons.error),
         ),
-        Image.network(
-          'https://firebasestorage.googleapis.com/v0/b/lkmitb2021-eacb6.appspot.com/o/banner%2FBANNER%20DITMAWA.png?alt=media&token=89e3ad78-447b-4a1a-8ecf-d7ced67d400e',
+        CachedNetworkImage(
+          imageUrl:
+              'https://firebasestorage.googleapis.com/v0/b/lkmitb2021-eacb6.appspot.com/o/banner%2FBANNER%20DITMAWA.png?alt=media&token=89e3ad78-447b-4a1a-8ecf-d7ced67d400e',
           fit: BoxFit.fitWidth,
+          placeholder: (context, url) => Center(
+            child: LinearProgressIndicator(
+              backgroundColor: ConstColor.boldGreyText,
+              color: ConstColor.darkGreen,
+            ),
+          ),
+          errorWidget: (context, url, error) => Icon(Icons.error),
         ),
       ],
     );
@@ -320,7 +345,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           for (var i = 0; i < snapshot.data!.docs.length; ++i)
-                            _modulePoint('Kelompok ' + snapshot.data!.docs[i].id, i + 1)
+                            _modulePoint(
+                                'Kelompok ' + snapshot.data!.docs[i].id, i + 1)
                         ],
                       ),
                       SizedBox(

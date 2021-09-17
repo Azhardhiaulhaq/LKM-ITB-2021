@@ -53,7 +53,7 @@ class PresenceBloc extends Bloc<PresenceEvent, PresenceState> {
 
         for (Presence data in listPresence) {
           var contain = listUserID.where((element) => element.userID == data.userID);
-          if (!contain.isEmpty) {
+          if (contain.isNotEmpty) {
             if(contain.first.isPresence == true){
               data.isPresence = true;
             }

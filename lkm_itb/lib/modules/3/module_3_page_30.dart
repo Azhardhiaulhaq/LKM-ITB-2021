@@ -1,6 +1,8 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'package:lkm_itb/constants/components/loading_progress.dart';
 import 'package:lkm_itb/constants/components/module_answer_field.dart';
 import 'package:lkm_itb/constants/components/module_button.dart';
@@ -10,8 +12,9 @@ import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/data/repositories/user_repositories.dart';
-import 'package:lkm_itb/modules/2/module_2_page_9.dart';
+import 'package:lkm_itb/modules/penilaian/penilaian_last.dart';
 
+// ignore: must_be_immutable
 class Modul3Page30 extends StatefulWidget {
   Modul3Page30({Key? key, required this.role, this.menteeID}) : super(key: key);
 
@@ -37,7 +40,8 @@ class _Modul3Page30State extends State<Modul3Page30> {
 
   _Modul3Page30State(this.role, this.module, this.page, this.menteeID);
 
-  void pushFunction(String next_route) async {
+  // ignore: non_constant_identifier_names
+  void pushFunction(String next_route, BuildContext context) async {
     if (role == 'mentee') {
       setState(() {
         isLoading = true;
@@ -53,8 +57,26 @@ class _Modul3Page30State extends State<Modul3Page30> {
           await ModuleRepository.addModuleGrades(module.toString(),
                   page.toString(), listGrades, menteeID!, sharedPrefs.group)
               .then((value) {
-            Navigator.pushNamed(context, Modul2Page9.routeName,
-                arguments: {'menteeID': menteeID});
+            Navigator.pushNamed(context, PenilaianLast.routeName, arguments: {
+              'menteeID': menteeID,
+              'userID': sharedPrefs.userid,
+              'moduleID': module.toString()
+            });
+          }).onError((error, stackTrace) {
+            isLoading = false;
+            new Flushbar(
+              title: 'Penambahan Nilai Gagal',
+              titleColor: Colors.white,
+              message: error.toString(),
+              messageColor: Colors.white,
+              duration: Duration(seconds: 3),
+              backgroundColor: ConstColor.invalidEntry,
+              flushbarPosition: FlushbarPosition.TOP,
+              flushbarStyle: FlushbarStyle.FLOATING,
+              reverseAnimationCurve: Curves.decelerate,
+              forwardAnimationCurve: Curves.elasticOut,
+              leftBarIndicatorColor: Colors.blue[300],
+            )..show(context);
           });
         });
       } else {
@@ -64,7 +86,23 @@ class _Modul3Page30State extends State<Modul3Page30> {
         });
         await ModuleRepository.addModuleAnswer(
                 module.toString(), page.toString(), listAnswers)
-            .then((value) => Navigator.pushNamed(context, next_route));
+            .then((value) => Navigator.pushNamed(context, next_route))
+            .onError((error, stackTrace) {
+          isLoading = false;
+          new Flushbar(
+            title: 'Penambahan Jawaban Gagal',
+            titleColor: Colors.white,
+            message: error.toString(),
+            messageColor: Colors.white,
+            duration: Duration(seconds: 3),
+            backgroundColor: ConstColor.invalidEntry,
+            flushbarPosition: FlushbarPosition.TOP,
+            flushbarStyle: FlushbarStyle.FLOATING,
+            reverseAnimationCurve: Curves.decelerate,
+            forwardAnimationCurve: Curves.elasticOut,
+            leftBarIndicatorColor: Colors.blue[300],
+          )..show(context);
+        });
       }
       setState(() {
         isLoading = false;
@@ -89,7 +127,6 @@ class _Modul3Page30State extends State<Modul3Page30> {
                 GoogleFonts.roboto(fontSize: 14, color: ConstColor.blackText),
             textAlign: TextAlign.justify,
           ),
-
           for (var i = 0; i < 3; i++) _answerField(i),
           menteeID != null
               ? new ModuleGradeField(textController: gradeController[0])
@@ -204,15 +241,14 @@ class _Modul3Page30State extends State<Modul3Page30> {
                       margin: EdgeInsets.symmetric(horizontal: 25),
                       alignment: Alignment.center,
                       width: SizeConfig.screenWidth,
-                      child:
-                          role == 'mentor' ? _forMentor() :
-                          _forMentee()),
+                      child: role == 'mentor' ? _forMentor() : _forMentee()),
                 ])))),
         new LoadingProgress(isLoading: isLoading),
         Positioned(
             bottom: 70,
             child: new CustomModuleButton(
-                pushFunction: () => pushFunction('/module/3/page/31'))),
+                pushFunction: () =>
+                    pushFunction('/module/3/page/31', context))),
       ],
     ));
   }

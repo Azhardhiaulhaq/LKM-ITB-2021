@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,8 +11,9 @@ import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/data/repositories/user_repositories.dart';
-import 'package:lkm_itb/modules/2/module_2_page_26.dart';
+import 'package:lkm_itb/modules/3/module_3_page_17.dart';
 
+// ignore: must_be_immutable
 class Modul3Page16 extends StatefulWidget {
   Modul3Page16({Key? key, required this.role, this.menteeID}) : super(key: key);
 
@@ -29,17 +31,12 @@ class Modul3Page16 extends StatefulWidget {
 class _Modul3Page16State extends State<Modul3Page16> {
   final String role;
   Map<int, List<String>> mapQuestions = Map();
-  TextEditingController firstAnswerController = TextEditingController(text: "0");
+  TextEditingController firstAnswerController =
+      TextEditingController(text: "0");
   int module = 3;
   int page = 16;
   String? menteeID;
-  List<String> answers = [
-    'Pernah',
-    'Pernah',
-    'Pernah',
-    'Pernah',
-    'Pernah'
-  ];
+  List<String> answers = ['Pernah', 'Pernah', 'Pernah', 'Pernah', 'Pernah'];
   List<String> questions = [
     'Pernahkah kamu membaca pancasila secara lengkap dan cermat?',
     'Pernahkah kamu membaca UUD 1945 secara lengkap dan cermat?',
@@ -50,7 +47,8 @@ class _Modul3Page16State extends State<Modul3Page16> {
   bool isLoading = false;
   _Modul3Page16State(this.role, this.module, this.page, this.menteeID);
 
-  void pushFunction(String next_route) async {
+  // ignore: non_constant_identifier_names
+  void pushFunction(String next_route, BuildContext context) async {
     if (role == 'mentee') {
       setState(() {
         isLoading = true;
@@ -65,14 +63,45 @@ class _Modul3Page16State extends State<Modul3Page16> {
           await ModuleRepository.addModuleGrades(module.toString(),
                   page.toString(), listGrades, menteeID!, sharedPrefs.group)
               .then((value) {
-                Navigator.pushNamed(context, Modul2Page26.routeName,
+            Navigator.pushNamed(context, Modul3Page17.routeName,
                 arguments: {'menteeID': menteeID});
-              });
+          }).onError((error, stackTrace) {
+            isLoading = false;
+            new Flushbar(
+              title: 'Penambahan Nilai Gagal',
+              titleColor: Colors.white,
+              message: error.toString(),
+              messageColor: Colors.white,
+              duration: Duration(seconds: 3),
+              backgroundColor: ConstColor.invalidEntry,
+              flushbarPosition: FlushbarPosition.TOP,
+              flushbarStyle: FlushbarStyle.FLOATING,
+              reverseAnimationCurve: Curves.decelerate,
+              forwardAnimationCurve: Curves.elasticOut,
+              leftBarIndicatorColor: Colors.blue[300],
+            )..show(context);
+          });
         });
       } else {
         await ModuleRepository.addModuleAnswer(
                 module.toString(), page.toString(), answers)
-            .then((value) => Navigator.pushNamed(context, next_route));
+            .then((value) => Navigator.pushNamed(context, next_route))
+            .onError((error, stackTrace) {
+          isLoading = false;
+          new Flushbar(
+            title: 'Penambahan Jawaban Gagal',
+            titleColor: Colors.white,
+            message: error.toString(),
+            messageColor: Colors.white,
+            duration: Duration(seconds: 3),
+            backgroundColor: ConstColor.invalidEntry,
+            flushbarPosition: FlushbarPosition.TOP,
+            flushbarStyle: FlushbarStyle.FLOATING,
+            reverseAnimationCurve: Curves.decelerate,
+            forwardAnimationCurve: Curves.elasticOut,
+            leftBarIndicatorColor: Colors.blue[300],
+          )..show(context);
+        });
       }
       setState(() {
         isLoading = false;
@@ -167,7 +196,8 @@ class _Modul3Page16State extends State<Modul3Page16> {
       ),
     );
   }
-    _initAnswer() async {
+
+  _initAnswer() async {
     if (menteeID != null) {
       DocumentSnapshot userGrade = await UserRepository.getUserGrade(
           module.toString(), menteeID!, page.toString());
@@ -203,12 +233,10 @@ class _Modul3Page16State extends State<Modul3Page16> {
       'Tidak lengkap dan cermat',
       'Tidak pernah',
     ];
-    for (var i = 0; i<5; i++){
+    for (var i = 0; i < 5; i++) {
       mapQuestions[i] = firstQuestions;
     }
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -240,13 +268,14 @@ class _Modul3Page16State extends State<Modul3Page16> {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            role == 'mentor' ? _forMentor() :
-                           _forMentee()])),
+                            role == 'mentor' ? _forMentor() : _forMentee()
+                          ])),
                 ])))),
         Positioned(
             bottom: 70,
             child: new CustomModuleButton(
-                pushFunction: () => pushFunction('/module/3/page/17'))),
+                pushFunction: () =>
+                    pushFunction('/module/3/page/17', context))),
         new LoadingProgress(isLoading: isLoading),
       ],
     ));

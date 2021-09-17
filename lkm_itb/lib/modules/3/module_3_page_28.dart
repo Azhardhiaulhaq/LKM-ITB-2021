@@ -1,18 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/components/loading_progress.dart';
-import 'package:lkm_itb/constants/components/module_answer_field.dart';
+
 import 'package:lkm_itb/constants/components/module_button.dart';
-import 'package:lkm_itb/constants/components/module_grade_field.dart';
+
 import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/constants/size_config.dart';
-import 'package:lkm_itb/data/repositories/module_repositories.dart';
-import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
-import 'package:lkm_itb/data/repositories/user_repositories.dart';
-import 'package:lkm_itb/modules/2/module_2_page_7.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+// ignore: must_be_immutable
 class Modul3Page28 extends StatefulWidget {
   Modul3Page28({Key? key, required this.role, this.menteeID}) : super(key: key);
 
@@ -32,6 +27,7 @@ class _Modul3Page28State extends State<Modul3Page28> {
 
   _Modul3Page28State(this.role, this.menteeID);
 
+  // ignore: non_constant_identifier_names
   void pushFunction(String next_route) async {
     Navigator.pushNamed(context, next_route);
   }

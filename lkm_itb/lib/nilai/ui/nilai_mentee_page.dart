@@ -32,33 +32,7 @@ class _NilaiMenteePageState extends State<NilaiMenteePage> {
     super.initState();
   }
 
-  Widget _backButton() {
-    return Material(
-        child: InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(Icons.arrow_back, color: ConstColor.lightGreen),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Text('Cek Nilai Mentee',
-                style: GoogleFonts.roboto(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                    color: ConstColor.blackText))
-          ],
-        ),
-      ),
-    ));
-  }
+
 
   _menteeName(String name) {
     return Text('Berikut adalah total nilai Mentee\n' + name.toUpperCase(),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
+import 'package:package_info/package_info.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -11,9 +12,18 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  String versionNumber = '';
+  _initPackage() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    setState(() {
+      versionNumber = packageInfo.version;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    _initPackage();
     Timer(Duration(seconds: 3), () => Navigator.pushNamed(context, '/'));
   }
 
@@ -32,6 +42,14 @@ class _SplashScreenState extends State<SplashScreen> {
             alignment: Alignment.center,
             children: [
               Positioned(
+                bottom: 15,
+                child: Text(
+                  'version ' + versionNumber,
+                  style: GoogleFonts.roboto(
+                      fontSize: 12, color: ConstColor.blackText, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Positioned(
                 left: 54,
                 right: 54,
                 child: Column(
@@ -39,8 +57,8 @@ class _SplashScreenState extends State<SplashScreen> {
                   children: [
                     Image.asset(
                       "assets/images/logo_lkm_itb.png",
-                      height: 69.0*1.2,
-                      width: 161.0*1.2,
+                      height: 69.0 * 1.2,
+                      width: 161.0 * 1.2,
                     ),
                     SizedBox(
                       height: 11,
@@ -57,7 +75,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
               Positioned(
-                  bottom: 30,
+                  bottom: 40,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,

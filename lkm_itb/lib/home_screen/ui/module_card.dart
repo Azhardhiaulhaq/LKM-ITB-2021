@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
+import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/models/module.dart';
 import 'package:lkm_itb/presence/presence_builder.dart';
 
@@ -43,16 +45,23 @@ class ModuleCard extends StatelessWidget {
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Container(
-                          color:ConstColor.lightGreen,
+                          color: ConstColor.lightGreen,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Image.network(
-                                  module.banner! != ''
-                                      ? module.banner!
-                                      : 'https://www.searchpng.com/wp-content/uploads/2019/02/Deafult-Profile-Pitcher.png',
-                                  fit: BoxFit.fill,
-                                  width: MediaQuery.of(context).size.width),
+                              CachedNetworkImage(
+                                imageUrl: module.banner!,
+                                fit: BoxFit.fill,
+                                width: SizeConfig.screenWidth,
+                                placeholder: (context, url) => Center(
+                                  child: LinearProgressIndicator(
+                                    backgroundColor: ConstColor.boldGreyText,
+                                    color: ConstColor.darkGreen,
+                                  ),
+                                ),
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error),
+                              ),
                               Container(
                                 margin: EdgeInsets.symmetric(
                                     vertical: 10, horizontal: 13),

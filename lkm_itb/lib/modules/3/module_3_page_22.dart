@@ -19,6 +19,7 @@ class _Modul3Page22State extends State<Modul3Page22> {
 
   _Modul3Page22State(this.role);
 
+  // ignore: non_constant_identifier_names
   void pushFunction(String next_route) {
     Navigator.pushNamed(context, next_route);
   }
@@ -37,13 +38,13 @@ class _Modul3Page22State extends State<Modul3Page22> {
           SizedBox(
             height: SizeConfig.screenHeight * 0.1,
           ),
-                    Container(
+          Container(
               child: Image.asset(
-            'assets/images/icon_naskah.png',
+            'assets/images/icon_sepatu_futsal.png',
             width: 300,
             height: 300,
           )),
-                    SizedBox(
+          SizedBox(
             height: 40,
           ),
           Text(
@@ -54,9 +55,6 @@ class _Modul3Page22State extends State<Modul3Page22> {
                 color: ConstColor.whiteBackground,
                 fontWeight: FontWeight.w600),
           ),
-
-
-          
           SizedBox(
             height: SizeConfig.screenHeight * 0.2,
           )

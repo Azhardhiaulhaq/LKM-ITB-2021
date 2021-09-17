@@ -1,7 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/components/back_button.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/constants/size_config.dart';
@@ -9,16 +8,15 @@ import 'package:lkm_itb/data/models/nilai_mentee.dart';
 import 'package:lkm_itb/nilai/bloc/nilai_bloc.dart';
 import 'package:lkm_itb/nilai/ui/nilai_kelompok_card.dart';
 
-
 class NilaiKelompokPage extends StatefulWidget {
-  NilaiKelompokPage({Key? key, required this.group, })
-      : super(key: key);
+  NilaiKelompokPage({
+    Key? key,
+    required this.group,
+  }) : super(key: key);
   final String group;
 
-
   @override
-  _NilaiKelompokPageState createState() =>
-      _NilaiKelompokPageState(group);
+  _NilaiKelompokPageState createState() => _NilaiKelompokPageState(group);
 }
 
 class _NilaiKelompokPageState extends State<NilaiKelompokPage> {
@@ -33,39 +31,10 @@ class _NilaiKelompokPageState extends State<NilaiKelompokPage> {
     super.initState();
   }
 
-  Widget _backButton() {
-    return Material(
-        child: InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(Icons.arrow_back, color: ConstColor.lightGreen),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Text('Cek Nilai Kelompok',
-                style: GoogleFonts.roboto(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                    color: ConstColor.blackText))
-          ],
-        ),
-      ),
-    ));
-  }
-
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return BlocListener<NilaiBloc, NilaiState>(listener:
-        (context, state) {
+    return BlocListener<NilaiBloc, NilaiState>(listener: (context, state) {
       if (state is NilaiLoadFailed) {
         setState(() {
           isLoading = false;
@@ -95,8 +64,7 @@ class _NilaiKelompokPageState extends State<NilaiKelompokPage> {
           listNilaiMentee = state.listNilaiMentee;
         });
       }
-    }, child:
-        BlocBuilder<NilaiBloc, NilaiState>(builder: (context, state) {
+    }, child: BlocBuilder<NilaiBloc, NilaiState>(builder: (context, state) {
       return Scaffold(
           body: SafeArea(
         child: Stack(fit: StackFit.expand, children: <Widget>[
@@ -107,7 +75,7 @@ class _NilaiKelompokPageState extends State<NilaiKelompokPage> {
               SizedBox(
                 height: SizeConfig.screenHeight * 0.025,
               ),
-              new CustomBackButton(title : 'Cek Nilai Kelompok'),
+              new CustomBackButton(title: 'Cek Nilai Kelompok'),
               SizedBox(
                 height: SizeConfig.screenHeight * 0.01,
               ),

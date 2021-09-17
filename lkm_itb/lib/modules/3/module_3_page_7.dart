@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,8 +11,9 @@ import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/data/repositories/user_repositories.dart';
-import 'package:lkm_itb/modules/2/module_2_page_9.dart';
+import 'package:lkm_itb/modules/3/module_3_page_8.dart';
 
+// ignore: must_be_immutable
 class Modul3Page7 extends StatefulWidget {
   Modul3Page7({Key? key, required this.role, this.menteeID}) : super(key: key);
 
@@ -32,13 +34,20 @@ class _Modul3Page7State extends State<Modul3Page7> {
   final int page;
   String? menteeID;
   bool isLoading = false;
-  List<String> listQuestion = ['Aku bisa merangkak pertama kali pada umur ... tahun', 'Pada umur ... tahun, aku sudah bisa berjalan tanpa pegangan.','Ketika ulang tahunku yang ke ... aku sudah dapat makan sendiri tanpa perlu disuapi.','Kata pertama kali yang diucapkan saat aku bisa berbicara adalah ....', 'Aku bisa menaiki sepeda pertama kali saat aku kelas ....'];  
+  List<String> listQuestion = [
+    'Aku bisa merangkak pertama kali pada umur ... tahun',
+    'Pada umur ... tahun, aku sudah bisa berjalan tanpa pegangan.',
+    'Ketika ulang tahunku yang ke ... aku sudah dapat makan sendiri tanpa perlu disuapi.',
+    'Kata pertama kali yang diucapkan saat aku bisa berbicara adalah ....',
+    'Aku bisa menaiki sepeda pertama kali saat aku kelas ....'
+  ];
   List<TextEditingController> answerController = [];
   List<TextEditingController> gradeController = [];
 
   _Modul3Page7State(this.role, this.module, this.page, this.menteeID);
 
-  void pushFunction(String next_route) async {
+  // ignore: non_constant_identifier_names
+  void pushFunction(String next_route, BuildContext context) async {
     if (role == 'mentee') {
       setState(() {
         isLoading = true;
@@ -54,8 +63,23 @@ class _Modul3Page7State extends State<Modul3Page7> {
           await ModuleRepository.addModuleGrades(module.toString(),
                   page.toString(), listGrades, menteeID!, sharedPrefs.group)
               .then((value) {
-            Navigator.pushNamed(context, Modul2Page9.routeName,
+            Navigator.pushNamed(context, Modul3Page8.routeName,
                 arguments: {'menteeID': menteeID});
+          }).onError((error, stackTrace) {
+            isLoading = false;
+            new Flushbar(
+              title: 'Penambahan Nilai Gagal',
+              titleColor: Colors.white,
+              message: error.toString(),
+              messageColor: Colors.white,
+              duration: Duration(seconds: 3),
+              backgroundColor: ConstColor.invalidEntry,
+              flushbarPosition: FlushbarPosition.TOP,
+              flushbarStyle: FlushbarStyle.FLOATING,
+              reverseAnimationCurve: Curves.decelerate,
+              forwardAnimationCurve: Curves.elasticOut,
+              leftBarIndicatorColor: Colors.blue[300],
+            )..show(context);
           });
         });
       } else {
@@ -65,7 +89,23 @@ class _Modul3Page7State extends State<Modul3Page7> {
         });
         await ModuleRepository.addModuleAnswer(
                 module.toString(), page.toString(), listAnswers)
-            .then((value) => Navigator.pushNamed(context, next_route));
+            .then((value) => Navigator.pushNamed(context, next_route))
+            .onError((error, stackTrace) {
+          isLoading = false;
+          new Flushbar(
+            title: 'Penambahan Jawaban Gagal',
+            titleColor: Colors.white,
+            message: error.toString(),
+            messageColor: Colors.white,
+            duration: Duration(seconds: 3),
+            backgroundColor: ConstColor.invalidEntry,
+            flushbarPosition: FlushbarPosition.TOP,
+            flushbarStyle: FlushbarStyle.FLOATING,
+            reverseAnimationCurve: Curves.decelerate,
+            forwardAnimationCurve: Curves.elasticOut,
+            leftBarIndicatorColor: Colors.blue[300],
+          )..show(context);
+        });
       }
       setState(() {
         isLoading = false;
@@ -93,7 +133,7 @@ class _Modul3Page7State extends State<Modul3Page7> {
           SizedBox(
             height: 10,
           ),
-          for (var i = 0; i<5; i++) _answerField(i, listQuestion[i]),
+          for (var i = 0; i < 5; i++) _answerField(i, listQuestion[i]),
           menteeID != null
               ? new ModuleGradeField(textController: gradeController[0])
               : Container(),
@@ -113,9 +153,9 @@ class _Modul3Page7State extends State<Modul3Page7> {
           height: 10,
         ),
         Text(question,
-        textAlign: TextAlign.justify,
-            style:
-                GoogleFonts.roboto(fontSize: 14, fontWeight: FontWeight.normal)),
+            textAlign: TextAlign.justify,
+            style: GoogleFonts.roboto(
+                fontSize: 14, fontWeight: FontWeight.normal)),
         new ModuleAnswerField(
             title: '', textController: answerController[index]),
         SizedBox(
@@ -214,15 +254,13 @@ class _Modul3Page7State extends State<Modul3Page7> {
                       margin: EdgeInsets.symmetric(horizontal: 25),
                       alignment: Alignment.center,
                       width: SizeConfig.screenWidth,
-                      child:
-                          role == 'mentor' ? _forMentor() :
-                          _forMentee()),
+                      child: role == 'mentor' ? _forMentor() : _forMentee()),
                 ])))),
         new LoadingProgress(isLoading: isLoading),
         Positioned(
             bottom: 70,
             child: new CustomModuleButton(
-                pushFunction: () => pushFunction('/module/3/page/8'))),
+                pushFunction: () => pushFunction('/module/3/page/8', context))),
       ],
     ));
   }

@@ -17,11 +17,13 @@ class Modul3Page11 extends StatefulWidget {
 
 class _Modul3Page11State extends State<Modul3Page11> {
   final String role;
+  // ignore: non_constant_identifier_names
   String youtube_link = 'https://www.youtube.com/watch?v=NDfew0YcDTo';
   late YoutubePlayerController _youtubeController;
 
   _Modul3Page11State(this.role);
 
+  // ignore: non_constant_identifier_names
   Widget _videoModule(String youtube_link) {
     String? videoID = YoutubePlayer.convertUrlToId(youtube_link) != null
         ? YoutubePlayer.convertUrlToId(youtube_link)
@@ -52,6 +54,7 @@ class _Modul3Page11State extends State<Modul3Page11> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   void pushFunction(String next_route) {
     _youtubeController.pause();
     Navigator.pushNamed(context, next_route);
@@ -138,9 +141,9 @@ class _Modul3Page11State extends State<Modul3Page11> {
                                 style: GoogleFonts.roboto(
                                   fontSize: 20,
                                   color: ConstColor.blackText,
-                                  fontWeight: FontWeight.w700,
+                                  fontWeight: FontWeight.w400,
                                 ),
-                                textAlign: TextAlign.justify,
+                                textAlign: TextAlign.center,
                               )) : Container(),
                               SizedBox(height: SizeConfig.screenHeight*0.2,)
                           ])),

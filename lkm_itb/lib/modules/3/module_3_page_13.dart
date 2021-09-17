@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,9 +11,10 @@ import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/data/repositories/user_repositories.dart';
-import 'package:lkm_itb/modules/2/module_2_page_9.dart';
+import 'package:lkm_itb/modules/3/module_3_page_16.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+// ignore: must_be_immutable
 class Modul3Page13 extends StatefulWidget {
   Modul3Page13({Key? key, required this.role, this.menteeID}) : super(key: key);
 
@@ -35,11 +37,13 @@ class _Modul3Page13State extends State<Modul3Page13> {
   bool isLoading = false;
   List<TextEditingController> answerController = [];
   List<TextEditingController> gradeController = [];
+  // ignore: non_constant_identifier_names
   String youtube_link = 'https://www.youtube.com/watch?v=nCFQF2Iyrss';
   late YoutubePlayerController _youtubeController;
 
   _Modul3Page13State(this.role, this.module, this.page, this.menteeID);
 
+  // ignore: non_constant_identifier_names
   Widget _videoModule(String youtube_link) {
     String? videoID = YoutubePlayer.convertUrlToId(youtube_link) != null
         ? YoutubePlayer.convertUrlToId(youtube_link)
@@ -70,7 +74,8 @@ class _Modul3Page13State extends State<Modul3Page13> {
     );
   }
 
-  void pushFunction(String next_route) async {
+  // ignore: non_constant_identifier_names
+  void pushFunction(String next_route, BuildContext context) async {
     _youtubeController.pause();
     if (role == 'mentee') {
       setState(() {
@@ -87,8 +92,23 @@ class _Modul3Page13State extends State<Modul3Page13> {
           await ModuleRepository.addModuleGrades(module.toString(),
                   page.toString(), listGrades, menteeID!, sharedPrefs.group)
               .then((value) {
-            Navigator.pushNamed(context, Modul2Page9.routeName,
+            Navigator.pushNamed(context, Modul3Page16.routeName,
                 arguments: {'menteeID': menteeID});
+          }).onError((error, stackTrace) {
+            isLoading = false;
+            new Flushbar(
+              title: 'Penambahan Nilai Gagal',
+              titleColor: Colors.white,
+              message: error.toString(),
+              messageColor: Colors.white,
+              duration: Duration(seconds: 3),
+              backgroundColor: ConstColor.invalidEntry,
+              flushbarPosition: FlushbarPosition.TOP,
+              flushbarStyle: FlushbarStyle.FLOATING,
+              reverseAnimationCurve: Curves.decelerate,
+              forwardAnimationCurve: Curves.elasticOut,
+              leftBarIndicatorColor: Colors.blue[300],
+            )..show(context);
           });
         });
       } else {
@@ -98,7 +118,23 @@ class _Modul3Page13State extends State<Modul3Page13> {
         });
         await ModuleRepository.addModuleAnswer(
                 module.toString(), page.toString(), listAnswers)
-            .then((value) => Navigator.pushNamed(context, next_route));
+            .then((value) => Navigator.pushNamed(context, next_route))
+            .onError((error, stackTrace) {
+          isLoading = false;
+          new Flushbar(
+            title: 'Penambahan Jawaban Gagal',
+            titleColor: Colors.white,
+            message: error.toString(),
+            messageColor: Colors.white,
+            duration: Duration(seconds: 3),
+            backgroundColor: ConstColor.invalidEntry,
+            flushbarPosition: FlushbarPosition.TOP,
+            flushbarStyle: FlushbarStyle.FLOATING,
+            reverseAnimationCurve: Curves.decelerate,
+            forwardAnimationCurve: Curves.elasticOut,
+            leftBarIndicatorColor: Colors.blue[300],
+          )..show(context);
+        });
       }
       setState(() {
         isLoading = false;
@@ -284,7 +320,8 @@ class _Modul3Page13State extends State<Modul3Page13> {
         Positioned(
             bottom: 70,
             child: new CustomModuleButton(
-                pushFunction: () => pushFunction('/module/3/page/14'))),
+                pushFunction: () =>
+                    pushFunction('/module/3/page/14', context))),
       ],
     ));
   }

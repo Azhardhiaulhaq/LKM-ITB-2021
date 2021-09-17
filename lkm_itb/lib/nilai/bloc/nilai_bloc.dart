@@ -30,11 +30,9 @@ class NilaiBloc extends Bloc<NilaiEvent, NilaiState> {
         }
         List<QueryDocumentSnapshot> listGradeModules =
             await NilaiRepository.getGradeModules();
-        int nilaiGroup = 0;
         for (var module in listGradeModules) {
           int nilai =
               await ModuleRepository.getModuleGrade(module.id, event.group);
-          nilaiGroup += nilai;
           mapNilaiModule[module.id]!.incrementNilai(nilai);
         }
 

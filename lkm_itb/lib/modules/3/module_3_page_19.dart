@@ -19,6 +19,7 @@ class _Modul3Page19State extends State<Modul3Page19> {
 
   _Modul3Page19State(this.role);
 
+  // ignore: non_constant_identifier_names
   void pushFunction(String next_route) {
     Navigator.pushNamed(context, next_route);
   }
@@ -37,15 +38,6 @@ class _Modul3Page19State extends State<Modul3Page19> {
           SizedBox(
             height: SizeConfig.screenHeight * 0.1,
           ),
-          Container(
-              child: Image.asset(
-            'assets/images/icon_naskah.png',
-            width: 300,
-            height: 300,
-          )),
-          SizedBox(
-            height: 40,
-          ),
           Text(
             'Selamat kamu telah menemukan item Naskah Drama. Dengan begitu, Loki dan Kimy bisa memahami alur drama dan seluruh hal yang berkaitan dengan perannya.',
             textAlign: TextAlign.center,
@@ -54,6 +46,15 @@ class _Modul3Page19State extends State<Modul3Page19> {
                 color: ConstColor.whiteBackground,
                 fontWeight: FontWeight.w600),
           ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+              child: Image.asset(
+            'assets/images/icon_naskah.png',
+            width: 300,
+            height: 300,
+          )),
           SizedBox(
             height: SizeConfig.screenHeight * 0.2,
           )

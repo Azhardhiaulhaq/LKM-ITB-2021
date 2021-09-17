@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/components/module_button.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/constants/size_config.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
 
 class Modul2Page3 extends StatefulWidget {
   Modul2Page3({Key? key, required this.role}) : super(key: key);
@@ -20,6 +20,7 @@ class _Modul2Page3State extends State<Modul2Page3> {
 
   _Modul2Page3State(this.role);
 
+  // ignore: non_constant_identifier_names
   void pushFunction(String next_route) {
     Navigator.pushNamed(context, next_route);
   }

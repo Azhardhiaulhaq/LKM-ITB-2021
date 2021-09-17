@@ -12,6 +12,7 @@ import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/data/repositories/user_repositories.dart';
 import 'package:lkm_itb/modules/2/module_2_page_26.dart';
 
+// ignore: must_be_immutable
 class Modul2Page22 extends StatefulWidget {
   Modul2Page22({Key? key, required this.role, this.menteeID}) : super(key: key);
 
@@ -46,6 +47,7 @@ class _Modul2Page22State extends State<Modul2Page22> {
   bool isLoading = false;
   _Modul2Page22State(this.role, this.module, this.page, this.menteeID);
 
+  // ignore: non_constant_identifier_names
   void pushFunction(String next_route) async {
     if (role == 'mentee') {
       setState(() {
