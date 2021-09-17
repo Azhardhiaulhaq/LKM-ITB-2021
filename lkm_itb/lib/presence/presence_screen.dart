@@ -85,6 +85,7 @@ class _PresenceScreenState extends State<PresenceScreen> {
           child: InkWell(
             splashColor: ConstColor.darkGreen,
             onTap: () async {
+              // ignore: await_only_futures
               await PresenceBloc()
                 ..add(SavePresence(
                     eventID: eventID,
