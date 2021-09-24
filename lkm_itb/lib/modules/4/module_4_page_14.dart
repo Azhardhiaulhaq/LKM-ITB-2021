@@ -146,7 +146,7 @@ class _Modul4Page14State extends State<Modul4Page14> {
                                       ? 'Setelah menonton video, ajak Mentee untuk mendiskusikan terkait arti resiliensi. Tanyakan juga, pernah ga sih mereka melakukan hal terkait resilien ini?'
                                       : 'Bagaimana pendapatmu tentang hal tersebut? Yuk diskusi dengan Mentor dan kelompokmu!',
                                   style: GoogleFonts.roboto(
-                                    fontSize: 20,
+                                    fontSize: 14,
                                     color: ConstColor.blackText,
                                     fontWeight: FontWeight.w400,
                                   ),

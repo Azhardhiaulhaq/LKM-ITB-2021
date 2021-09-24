@@ -21,7 +21,7 @@ class Modul4Page18 extends StatefulWidget {
   final String role;
   static const routeName = '/module/4/page/18';
   int module = 4;
-  int page = 3;
+  int page = 18;
   String? menteeID;
 
   @override
@@ -186,10 +186,11 @@ class _Modul4Page18State extends State<Modul4Page18> {
           new ModuleAnswerField(
               title: 'Tuliskan hal yang bisa kalian ambil dari video di atas!',
               textController: answerController[0]),
+          SizedBox(height: 20,),
           new ModuleAnswerField(
               title:
                   'Tuliskan cita-cita yang akan kalian lakukan setiap saat tanpa kurang dengan penuh integritas untuk membangun organisasi kalian.',
-              textController: answerController[0]),
+              textController: answerController[1]),
           menteeID != null
               ? new ModuleGradeField(textController: gradeController[0])
               : Container(),

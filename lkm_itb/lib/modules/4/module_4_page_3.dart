@@ -212,7 +212,7 @@ class _Modul4Page3State extends State<Modul4Page3> {
               color: ConstColor.blackText,
               fontWeight: FontWeight.w400,
             ),
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.justify,
           ),
           SizedBox(
             height: 20,

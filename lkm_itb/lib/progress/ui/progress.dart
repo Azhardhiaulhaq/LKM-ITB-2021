@@ -2,6 +2,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lkm_itb/constants/components/loading_progress.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/models/module.dart';
@@ -30,25 +31,27 @@ class _ProgressState extends State<Progress> {
   }
 
   Widget _emptyProgress() {
-    return Container(height: MediaQuery.of(context).size.height*0.5,child:Center(
-        child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image.asset('assets/images/icon_message.png'),
-        SizedBox(
-          height: 20,
-        ),
-        Container(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: Text(
-              'Tugas kamu belum ada nih, tapi tenang kami nanti kabarin kamu kalo udah kok',
-              style:
-                  GoogleFonts.roboto(fontSize: 16, color: ConstColor.blackText),
-              textAlign: TextAlign.center,
-            ))
-      ],
-    )));
+    return Container(
+        height: MediaQuery.of(context).size.height * 0.5,
+        child: Center(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/images/icon_message.png'),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                child: Text(
+                  'Tugas kamu belum ada nih, tapi tenang kami nanti kabarin kamu kalo udah kok',
+                  style: GoogleFonts.roboto(
+                      fontSize: 16, color: ConstColor.blackText),
+                  textAlign: TextAlign.center,
+                ))
+          ],
+        )));
   }
 
   Widget _listProgress() {
@@ -111,19 +114,14 @@ class _ProgressState extends State<Progress> {
           SingleChildScrollView(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[_listProgress(),
-            SizedBox(height: SizeConfig.screenHeight*0.2,)],
+            children: <Widget>[
+              _listProgress(),
+              SizedBox(
+                height: SizeConfig.screenHeight * 0.2,
+              )
+            ],
           )),
-          isLoading
-              ? Center(
-                  child: Container(
-                      height: 100,
-                      width: 100,
-                      child: CircularProgressIndicator(
-                        color: ConstColor.darkGreen,
-                      )),
-                )
-              : Container(),
+          new LoadingProgress(isLoading: isLoading),
         ]),
       ));
     }));

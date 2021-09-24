@@ -2,6 +2,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lkm_itb/constants/components/loading_progress.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/models/nilai.dart';
@@ -261,16 +262,7 @@ class _NilaiPageState extends State<NilaiPage> {
               ),
             ],
           )),
-          isLoading
-              ? Center(
-                  child: Container(
-                      height: 100,
-                      width: 100,
-                      child: CircularProgressIndicator(
-                        color: ConstColor.darkGreen,
-                      )),
-                )
-              : Container(),
+          new LoadingProgress(isLoading: isLoading),
         ]),
       ));
     }));

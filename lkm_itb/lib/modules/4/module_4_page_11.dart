@@ -174,7 +174,7 @@ class _Modul4Page11State extends State<Modul4Page11> {
             textAlign: TextAlign.center,
           ),
           SizedBox(
-            height: 15,
+            height: 30,
           ),
           Text(
             'Untuk lebih mengerti bagaimana cara mulai menerapkan adaptif pada diri sendiri, sesi ini ada beberapa checkboxes yang berisi tentang beberapa hal yang akan memudahkan kita dalam meningkatkan adaptif kita.',

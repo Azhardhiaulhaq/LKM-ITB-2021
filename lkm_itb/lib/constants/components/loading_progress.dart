@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 
 class LoadingProgress extends StatelessWidget {
@@ -11,10 +12,23 @@ class LoadingProgress extends StatelessWidget {
     return isLoading
         ? Center(
             child: Container(
-                height: 100,
-                width: 100,
-                child: CircularProgressIndicator(
-                  color: ConstColor.darkGreen,
+                height: 150,
+                width: 150,
+                color: ConstColor.whiteBackground,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(
+                      backgroundColor: ConstColor.lightGrey,
+                      color: ConstColor.darkGreen,
+                      
+                    ),
+                    SizedBox(height: 30,),
+                    Text('Mohon Menunggu...',
+                        style: GoogleFonts.roboto(
+                            fontSize: 14, color: ConstColor.darkGreen), textAlign: TextAlign.center,)
+                  ],
                 )),
           )
         : Container();

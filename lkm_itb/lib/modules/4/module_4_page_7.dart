@@ -56,7 +56,7 @@ class _Modul4Page7State extends State<Modul4Page7> {
             textAlign: TextAlign.center,
           ),
           SizedBox(
-            height: 20,
+            height: 40,
           ),
           _image(),
           SizedBox(
@@ -145,7 +145,7 @@ class _Modul4Page7State extends State<Modul4Page7> {
 
   _image() {
     return Image.asset(
-      'assets/images/modul_4_7.png',
+      'assets/images/modul_4_7.jpg',
       width: SizeConfig.screenWidth,
       fit: BoxFit.contain,
     );

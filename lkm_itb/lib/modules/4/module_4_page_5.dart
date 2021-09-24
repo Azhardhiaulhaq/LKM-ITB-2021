@@ -135,22 +135,43 @@ class _Modul4Page5State extends State<Modul4Page5> {
   }
 
   _questionTile(List<String> list, int index) {
-    return Column(
-      children: <Widget>[
-        for (String data in list)
-          new LabeledRadio(
-              label: data,
-              padding: EdgeInsets.symmetric(horizontal: 5),
-              groupValue: answers[index],
-              value: data,
-              onChanged: (String? value) {
-                setState(() {
-                  answers[index] = value ?? '';
-                });
-              },
-              activeColor: ConstColor.lightGreen)
-      ],
-    );
+    return Column(children: [
+      for (String data in list)
+        Container(
+          margin: EdgeInsets.symmetric(vertical: 10),
+          child: new Row(
+          children: [
+            LabeledRadio(
+                label: '',
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                groupValue: answers[index],
+                value: data,
+                onChanged: (String? value) {
+                  setState(() {
+                    answers[index] = value ?? '';
+                  });
+                },
+                activeColor: ConstColor.lightGreen),
+            SizedBox(
+              width: 5,
+            ),
+            Container(
+                width: SizeConfig.screenWidth * 0.65,
+                child: Text(
+                  data,
+                  maxLines: 4,
+                  overflow: TextOverflow.fade,
+                  textAlign: TextAlign.justify,
+                )),
+          ],
+        ),)
+
+    ]);
+    // Column(
+    //   children: <Widget>[
+
+    //   ],
+    // );
   }
 
   _forMentor() {
@@ -223,11 +244,8 @@ class _Modul4Page5State extends State<Modul4Page5> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
-            height: SizeConfig.screenHeight * 0.2,
-          ),
           SizedBox(
             height: SizeConfig.screenHeight * 0.2,
           ),
@@ -235,31 +253,27 @@ class _Modul4Page5State extends State<Modul4Page5> {
           SizedBox(
             height: 5,
           ),
-          Container(
-              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              child: Text(
-                'Gambar 1',
-                style: GoogleFonts.roboto(
-                  fontSize: 14,
-                  color: ConstColor.blackText,
-                  fontWeight: FontWeight.w400,
-                ),
-                textAlign: TextAlign.center,
-              )),
+          Text(
+            'Gambar 1',
+            style: GoogleFonts.roboto(
+              fontSize: 14,
+              color: ConstColor.blackText,
+              fontWeight: FontWeight.w400,
+            ),
+            textAlign: TextAlign.center,
+          ),
           SizedBox(
             height: 15,
           ),
-          Container(
-              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              child: Text(
-                'Apakah kamu mengenal merk dagang di atas? Ya itu adalah Starbucks Coffee.',
-                style: GoogleFonts.roboto(
-                  fontSize: 14,
-                  color: ConstColor.blackText,
-                  fontWeight: FontWeight.w400,
-                ),
-                textAlign: TextAlign.justify,
-              )),
+          Text(
+            'Apakah kamu mengenal merk dagang di atas? Ya itu adalah Starbucks Coffee.',
+            style: GoogleFonts.roboto(
+              fontSize: 14,
+              color: ConstColor.blackText,
+              fontWeight: FontWeight.w400,
+            ),
+            textAlign: TextAlign.justify,
+          ),
           SizedBox(
             height: 15,
           ),

@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
+import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/models/module.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/penilaian_modul/ui/penilaian_modul_screen.dart';
@@ -41,14 +43,20 @@ class ProgressCard extends StatelessWidget {
                           child: Wrap(
                             direction: Axis.vertical,
                             children: [
-                              Image.network(
-                                  module.banner! != ''
-                                      ? module.banner!
-                                      : 'https://www.searchpng.com/wp-content/uploads/2019/02/Deafult-Profile-Pitcher.png',
-                                  fit: BoxFit.fill,
-                                  height: 100,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.4),
+                              CachedNetworkImage(
+                                imageUrl: module.banner!,
+                                fit: BoxFit.fill,
+                                height: 100,
+                                width: SizeConfig.screenWidth * 0.4,
+                                placeholder: (context, url) => Center(
+                                  child: LinearProgressIndicator(
+                                    backgroundColor: ConstColor.boldGreyText,
+                                    color: ConstColor.darkGreen,
+                                  ),
+                                ),
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error),
+                              ),
                               SizedBox(
                                 width: 5,
                               ),

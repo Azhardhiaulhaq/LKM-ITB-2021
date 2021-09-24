@@ -48,6 +48,7 @@ class _Modul4Page13State extends State<Modul4Page13> {
 
   _forMentor() {
     return Container(
+      alignment: Alignment.center,
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -64,7 +65,7 @@ class _Modul4Page13State extends State<Modul4Page13> {
             textAlign: TextAlign.justify,
           ),
           SizedBox(
-            height: 25,
+            height: 40,
           ),
           Text(
             'Coba pancing mentee untuk menjawab tanpa menyebutkan resiliensi. Pancing mentee sampai muncul jawaban yang benar yaitu “Resiliensi”.',

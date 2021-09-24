@@ -171,7 +171,7 @@ class _Modul4Page15State extends State<Modul4Page15> {
             ),
             textAlign: TextAlign.justify,
           ),
-          SizedBox(height: 15,),
+          SizedBox(height: 30,),
           Text(
             'Nah setelah selesai melihat video dan diskusi, yuk isikan beberapa faktor penyebab dan cara menjadi pribadi dan kelompok yang resilien dengan mengisikan pada kolom yg tertera!',
             style: GoogleFonts.roboto(

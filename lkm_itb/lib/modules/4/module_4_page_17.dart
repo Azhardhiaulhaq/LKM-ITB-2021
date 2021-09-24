@@ -86,6 +86,7 @@ class _Modul4Page17State extends State<Modul4Page17> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          SizedBox(height: SizeConfig.screenHeight*0.2,),
           Text(
             'Warna kuning dan Integritas emang nyambung?',
             style: GoogleFonts.roboto(

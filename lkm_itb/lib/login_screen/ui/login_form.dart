@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/bottom_navigation/bottom_navigation.dart';
+import 'package:lkm_itb/constants/components/loading_progress.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:lkm_itb/login_screen/bloc/login_bloc.dart';
@@ -310,16 +311,7 @@ class _LoginFormState extends State<LoginForm> {
                       ),
                     ),
                   ),
-                  isLoading
-                      ? Center(
-                          child: Container(
-                              height: 100,
-                              width: 100,
-                              child: CircularProgressIndicator(
-                                color: ConstColor.darkGreen,
-                              )),
-                        )
-                      : Container(),
+                  new LoadingProgress(isLoading: isLoading),
                 ],
               ),
             ),

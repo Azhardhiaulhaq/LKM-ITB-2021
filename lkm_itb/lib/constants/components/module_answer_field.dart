@@ -15,11 +15,11 @@ class ModuleAnswerField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
+        Container(alignment: Alignment.centerLeft, child : Text(
           title,
-          textAlign: TextAlign.justify,
+          textAlign: TextAlign.start,
           style: GoogleFonts.roboto(fontSize: 14, color: ConstColor.blackText),
-        ),
+        )),
         SizedBox(height: 10),
         TextField(
             controller: textController,

@@ -172,6 +172,7 @@ class _Modul4Page10State extends State<Modul4Page10> {
           ),
           new ModuleAnswerField(
               title: 'Sebelum pandemi:', textController: answerController[0]),
+          SizedBox(height: 20,),
           new ModuleAnswerField(
               title: 'Masa pandemi:', textController: answerController[1]),
           menteeID != null
@@ -244,7 +245,7 @@ class _Modul4Page10State extends State<Modul4Page10> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Image.asset(
-          'assets/images/modul_4_10_1.png',
+          'assets/images/modul_4_10_1.jpg',
           fit: BoxFit.fitWidth,
         ),
         SizedBox(
@@ -259,7 +260,7 @@ class _Modul4Page10State extends State<Modul4Page10> {
           height: 10,
         ),
         Image.asset(
-          'assets/images/modul_4_10_2.png',
+          'assets/images/modul_4_10_2.jpg',
           fit: BoxFit.fitWidth,
         ),
         SizedBox(

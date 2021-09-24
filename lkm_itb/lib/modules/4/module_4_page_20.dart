@@ -46,7 +46,7 @@ class _Modul4Page20State extends State<Modul4Page20> {
           SizedBox(
             height: SizeConfig.screenHeight * 0.2,
           ),
-          Text(
+          Container(alignment: Alignment.centerLeft, child : Text(
             'Pertanyaan untuk menjadi seorang pelopor',
             style: GoogleFonts.roboto(
               fontSize: 14,
@@ -54,11 +54,13 @@ class _Modul4Page20State extends State<Modul4Page20> {
               fontWeight: FontWeight.w400,
             ),
             textAlign: TextAlign.start,
-          ),
+          ),),
           SizedBox(
             height: 20,
           ),
-          Text(
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Text(
             'Bagaimana jika… ?',
             style: GoogleFonts.roboto(
               fontSize: 20,
@@ -66,7 +68,7 @@ class _Modul4Page20State extends State<Modul4Page20> {
               fontWeight: FontWeight.w700,
             ),
             textAlign: TextAlign.start,
-          ),
+          ),),
           SizedBox(
             height: 20,
           ),
@@ -110,6 +112,7 @@ class _Modul4Page20State extends State<Modul4Page20> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          SizedBox(height: SizeConfig.screenHeight*0.2,),
           Text(
             'Misalkan dalam suatu diskusi kamu dan kelompokmu menemui suatu masalah yang masih belum menemukan solusi dan ada satu pertanyaan yang bisa memantik suatu solusi yaitu:',
             style: GoogleFonts.roboto(
@@ -122,7 +125,9 @@ class _Modul4Page20State extends State<Modul4Page20> {
           SizedBox(
             height: 20,
           ),
-          Text(
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Text(
             'Bagaimana jika… ?',
             style: GoogleFonts.roboto(
               fontSize: 20,
@@ -130,7 +135,7 @@ class _Modul4Page20State extends State<Modul4Page20> {
               fontWeight: FontWeight.w700,
             ),
             textAlign: TextAlign.start,
-          ),
+          ),),
           SizedBox(
             height: 20,
           ),
@@ -181,7 +186,7 @@ class _Modul4Page20State extends State<Modul4Page20> {
 
   _image() {
     return Image.asset(
-      'assets/images/modul_4_20.png',
+      'assets/images/modul_4_20.jpg',
       width: SizeConfig.screenWidth,
       fit: BoxFit.contain,
     );
