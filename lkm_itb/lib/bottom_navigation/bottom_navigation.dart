@@ -395,19 +395,19 @@ class _BottomNavigationState extends State<BottomNavigation> {
             Modul4Page15.routeName: (context) =>
                 new Modul4Page15(role: sharedPrefs.role),
             Modul4Page16.routeName: (context) =>
-                new Modul4Page16(role: sharedPrefs.role),   
+                new Modul4Page16(role: sharedPrefs.role),
             Modul4Page17.routeName: (context) =>
-                new Modul4Page17(role: sharedPrefs.role),    
+                new Modul4Page17(role: sharedPrefs.role),
             Modul4Page18.routeName: (context) =>
-                new Modul4Page18(role: sharedPrefs.role),    
+                new Modul4Page18(role: sharedPrefs.role),
             Modul4Page19.routeName: (context) =>
-                new Modul4Page19(role: sharedPrefs.role),    
+                new Modul4Page19(role: sharedPrefs.role),
             Modul4Page20.routeName: (context) =>
-                new Modul4Page20(role: sharedPrefs.role), 
+                new Modul4Page20(role: sharedPrefs.role),
             Modul4Page21.routeName: (context) =>
-                new Modul4Page21(role: sharedPrefs.role),   
+                new Modul4Page21(role: sharedPrefs.role),
             Modul4Page22.routeName: (context) =>
-                new Modul4Page22(role: sharedPrefs.role),        
+                new Modul4Page22(role: sharedPrefs.role),
           },
         ),
       ),
@@ -632,6 +632,41 @@ class _BottomNavigationState extends State<BottomNavigation> {
                   var arg = settings.arguments as Map;
                   return MaterialPageRoute(
                       builder: (context) => new Modul3Page30(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == '/module/4/penilaian/first') {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul4Page3(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul4Page5.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul4Page5(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul4Page8.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul4Page8(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul4Page10.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul4Page10(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul4Page11.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul4Page11(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul4Page15.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul4Page15(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul4Page18.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul4Page18(
                           menteeID: arg['menteeID'], role: 'mentee'));
                 } else if (settings.name == '/progress') {
                   return MaterialPageRoute(

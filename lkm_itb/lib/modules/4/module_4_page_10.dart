@@ -12,6 +12,7 @@ import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/data/repositories/user_repositories.dart';
 import 'package:lkm_itb/modules/3/module_3_page_13.dart';
+import 'package:lkm_itb/modules/4/module_4_page_11.dart';
 
 // ignore: must_be_immutable
 class Modul4Page10 extends StatefulWidget {
@@ -56,7 +57,7 @@ class _Modul4Page10State extends State<Modul4Page10> {
           await ModuleRepository.addModuleGrades(module.toString(),
                   page.toString(), listGrades, menteeID!, sharedPrefs.group)
               .then((value) {
-            Navigator.pushNamed(context, Modul3Page13.routeName,
+            Navigator.pushNamed(context, Modul4Page11.routeName,
                 arguments: {'menteeID': menteeID});
           }).onError((error, stackTrace) {
             isLoading = false;

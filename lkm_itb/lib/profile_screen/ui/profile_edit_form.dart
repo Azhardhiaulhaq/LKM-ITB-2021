@@ -443,7 +443,7 @@ class _ProfileEditFormState extends State<ProfileEditForm> {
                   child: new CustomBackButton(
                     title: 'Edit Profil',
                   )),
-              LoadingProgress(isLoading: isLoading)
+              new LoadingProgress(isLoading: isLoading)
             ],
           ),
         ));

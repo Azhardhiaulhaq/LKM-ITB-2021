@@ -12,6 +12,7 @@ import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/data/repositories/user_repositories.dart';
 import 'package:lkm_itb/modules/3/module_3_page_16.dart';
+import 'package:lkm_itb/modules/penilaian/penilaian_last.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 // ignore: must_be_immutable
@@ -92,8 +93,11 @@ class _Modul4Page18State extends State<Modul4Page18> {
           await ModuleRepository.addModuleGrades(module.toString(),
                   page.toString(), listGrades, menteeID!, sharedPrefs.group)
               .then((value) {
-            Navigator.pushNamed(context, Modul3Page16.routeName,
-                arguments: {'menteeID': menteeID});
+            Navigator.pushNamed(context, PenilaianLast.routeName, arguments: {
+              'menteeID': menteeID,
+              'userID': sharedPrefs.userid,
+              'moduleID': module.toString()
+            });
           }).onError((error, stackTrace) {
             isLoading = false;
             new Flushbar(
@@ -186,7 +190,9 @@ class _Modul4Page18State extends State<Modul4Page18> {
           new ModuleAnswerField(
               title: 'Tuliskan hal yang bisa kalian ambil dari video di atas!',
               textController: answerController[0]),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           new ModuleAnswerField(
               title:
                   'Tuliskan cita-cita yang akan kalian lakukan setiap saat tanpa kurang dengan penuh integritas untuk membangun organisasi kalian.',
