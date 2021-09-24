@@ -95,6 +95,28 @@ import 'package:lkm_itb/modules/3/module_3_page_6.dart';
 import 'package:lkm_itb/modules/3/module_3_page_7.dart';
 import 'package:lkm_itb/modules/3/module_3_page_8.dart';
 import 'package:lkm_itb/modules/3/module_3_page_9.dart';
+import 'package:lkm_itb/modules/4/module_4_page_1.dart';
+import 'package:lkm_itb/modules/4/module_4_page_10.dart';
+import 'package:lkm_itb/modules/4/module_4_page_11.dart';
+import 'package:lkm_itb/modules/4/module_4_page_12.dart';
+import 'package:lkm_itb/modules/4/module_4_page_13.dart';
+import 'package:lkm_itb/modules/4/module_4_page_14.dart';
+import 'package:lkm_itb/modules/4/module_4_page_15.dart';
+import 'package:lkm_itb/modules/4/module_4_page_16.dart';
+import 'package:lkm_itb/modules/4/module_4_page_17.dart';
+import 'package:lkm_itb/modules/4/module_4_page_18.dart';
+import 'package:lkm_itb/modules/4/module_4_page_19.dart';
+import 'package:lkm_itb/modules/4/module_4_page_2.dart';
+import 'package:lkm_itb/modules/4/module_4_page_20.dart';
+import 'package:lkm_itb/modules/4/module_4_page_21.dart';
+import 'package:lkm_itb/modules/4/module_4_page_22.dart';
+import 'package:lkm_itb/modules/4/module_4_page_3.dart';
+import 'package:lkm_itb/modules/4/module_4_page_4.dart';
+import 'package:lkm_itb/modules/4/module_4_page_5.dart';
+import 'package:lkm_itb/modules/4/module_4_page_6.dart';
+import 'package:lkm_itb/modules/4/module_4_page_7.dart';
+import 'package:lkm_itb/modules/4/module_4_page_8.dart';
+import 'package:lkm_itb/modules/4/module_4_page_9.dart';
 import 'package:lkm_itb/modules/penilaian/penilaian_first.dart';
 import 'package:lkm_itb/modules/penilaian/penilaian_last.dart';
 import 'package:lkm_itb/nilai/ui/nilai_kelompok_screen.dart';
@@ -342,6 +364,50 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 new Modul3Page32(role: sharedPrefs.role),
             Modul3Page33.routeName: (context) =>
                 new Modul3Page33(role: sharedPrefs.role),
+            Modul4Page1.routeName: (context) =>
+                new Modul4Page1(role: sharedPrefs.role),
+            Modul4Page2.routeName: (context) =>
+                new Modul4Page2(role: sharedPrefs.role),
+            Modul4Page3.routeName: (context) =>
+                new Modul4Page3(role: sharedPrefs.role),
+            Modul4Page4.routeName: (context) =>
+                new Modul4Page4(role: sharedPrefs.role),
+            Modul4Page5.routeName: (context) =>
+                new Modul4Page5(role: sharedPrefs.role),
+            Modul4Page6.routeName: (context) =>
+                new Modul4Page6(role: sharedPrefs.role),
+            Modul4Page7.routeName: (context) =>
+                new Modul4Page7(role: sharedPrefs.role),
+            Modul4Page8.routeName: (context) =>
+                new Modul4Page8(role: sharedPrefs.role),
+            Modul4Page9.routeName: (context) =>
+                new Modul4Page9(role: sharedPrefs.role),
+            Modul4Page10.routeName: (context) =>
+                new Modul4Page10(role: sharedPrefs.role),
+            Modul4Page11.routeName: (context) =>
+                new Modul4Page11(role: sharedPrefs.role),
+            Modul4Page12.routeName: (context) =>
+                new Modul4Page12(role: sharedPrefs.role),
+            Modul4Page13.routeName: (context) =>
+                new Modul4Page13(role: sharedPrefs.role),
+            Modul4Page14.routeName: (context) =>
+                new Modul4Page14(role: sharedPrefs.role),
+            Modul4Page15.routeName: (context) =>
+                new Modul4Page15(role: sharedPrefs.role),
+            Modul4Page16.routeName: (context) =>
+                new Modul4Page16(role: sharedPrefs.role),   
+            Modul4Page17.routeName: (context) =>
+                new Modul4Page17(role: sharedPrefs.role),    
+            Modul4Page18.routeName: (context) =>
+                new Modul4Page18(role: sharedPrefs.role),    
+            Modul4Page19.routeName: (context) =>
+                new Modul4Page19(role: sharedPrefs.role),    
+            Modul4Page20.routeName: (context) =>
+                new Modul4Page20(role: sharedPrefs.role), 
+            Modul4Page21.routeName: (context) =>
+                new Modul4Page21(role: sharedPrefs.role),   
+            Modul4Page22.routeName: (context) =>
+                new Modul4Page22(role: sharedPrefs.role),        
           },
         ),
       ),

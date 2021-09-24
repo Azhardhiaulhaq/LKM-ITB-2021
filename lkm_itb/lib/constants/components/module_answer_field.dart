@@ -17,7 +17,7 @@ class ModuleAnswerField extends StatelessWidget {
       children: [
         Text(
           title,
-          textAlign: TextAlign.start,
+          textAlign: TextAlign.justify,
           style: GoogleFonts.roboto(fontSize: 14, color: ConstColor.blackText),
         ),
         SizedBox(height: 10),
