@@ -18,5 +18,6 @@ class ConstColor {
   static const Color goldColor = Color(0xffFFD700);
   static const Color silverColor = Color(0xffC0C0C0);
   static const Color bronzeColor = Color(0xffCD7F32);
+  static const Color blueLink = Color(0xff0645AD);
 
 }

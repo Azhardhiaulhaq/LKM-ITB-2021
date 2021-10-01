@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/data/repositories/user_repositories.dart';
 
@@ -207,6 +210,45 @@ class ModuleRepository {
       }
     } catch (e) {
       print(e.toString());
+    }
+  }
+
+  static Future<void> uploadFile(
+      String groupID, String type, File file, String fileName) async {
+    try {
+      QuerySnapshot query = await grades
+          .doc('6')
+          .collection('groups')
+          .doc(groupID)
+          .collection(type)
+          .get();
+      Reference ref = FirebaseStorage.instance
+          .ref()
+          .child('/laporan/$groupID/$type/$fileName');
+      UploadTask uploadTask = ref.putFile(file);
+      var url = (await uploadTask.storage
+              .ref()
+              .child('/laporan/$groupID/$type/$fileName')
+              .getDownloadURL())
+          .toString();
+      if (query.size != 0) {
+        grades
+            .doc('6')
+            .collection('groups')
+            .doc(groupID)
+            .collection(type)
+            .doc(query.docs.first.id)
+            .update({'name': fileName, 'url': url});
+      } else {
+        grades
+            .doc('6')
+            .collection('groups')
+            .doc(groupID)
+            .collection(type)
+            .add({'name': fileName, 'url': url});
+      }
+    } catch (err) {
+      throw err;
     }
   }
 

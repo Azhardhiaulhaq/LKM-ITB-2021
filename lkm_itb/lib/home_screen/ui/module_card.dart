@@ -24,7 +24,7 @@ class ModuleCard extends StatelessWidget {
             child: InkWell(
               splashColor: Colors.transparent,
               onTap: () {
-                if (role == 'mentor') {
+                if (role == 'mentor' && int.parse(module.modulID!) < 6) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(

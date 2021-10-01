@@ -128,6 +128,11 @@ import 'package:lkm_itb/modules/5/module_5_page_6.dart';
 import 'package:lkm_itb/modules/5/module_5_page_7.dart';
 import 'package:lkm_itb/modules/5/module_5_page_8.dart';
 import 'package:lkm_itb/modules/5/module_5_page_9.dart';
+import 'package:lkm_itb/modules/6/module_6_mentee_individu.dart';
+import 'package:lkm_itb/modules/6/module_6_mentee_kelompok.dart';
+import 'package:lkm_itb/modules/6/module_6_mentor.dart';
+import 'package:lkm_itb/modules/6/module_6_mentor_kelompok.dart';
+import 'package:lkm_itb/modules/6/module_6_page_1.dart';
 import 'package:lkm_itb/modules/penilaian/penilaian_first.dart';
 import 'package:lkm_itb/modules/penilaian/penilaian_last.dart';
 import 'package:lkm_itb/nilai/ui/nilai_kelompok_screen.dart';
@@ -441,6 +446,16 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 new Modul5Page10(role: sharedPrefs.role),
             Modul5Page11.routeName: (context) =>
                 new Modul5Page11(role: sharedPrefs.role),
+            Modul6Page1.routeName: (context) =>
+                new Modul6Page1(role: sharedPrefs.role),
+            '/module/6/mentor/individu': (context) =>
+                new Modul6MentorIndividu(role: sharedPrefs.role),
+            '/module/6/mentor/kelompok': (context) =>
+                new Modul6MentorKelompok(role: sharedPrefs.role),
+            '/module/6/mentee/individu': (context) =>
+                new Modul6MenteeIndividu(role: sharedPrefs.role, menteeID: sharedPrefs.userid,),
+            '/module/6/mentee/kelompok': (context) =>
+                new Modul6Menteekelompok(role: sharedPrefs.role,)
           },
         ),
       ),
@@ -735,7 +750,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
                   return MaterialPageRoute(
                       builder: (context) => new Modul5Page8(
                           menteeID: arg['menteeID'], role: 'mentee'));
-                } 
+                }
               })),
       PersistentBottomNavBarItem(
           icon: Image.asset('assets/images/logo_nilai_filled.png'),
