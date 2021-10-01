@@ -117,6 +117,17 @@ import 'package:lkm_itb/modules/4/module_4_page_6.dart';
 import 'package:lkm_itb/modules/4/module_4_page_7.dart';
 import 'package:lkm_itb/modules/4/module_4_page_8.dart';
 import 'package:lkm_itb/modules/4/module_4_page_9.dart';
+import 'package:lkm_itb/modules/5/module_5_page_1.dart';
+import 'package:lkm_itb/modules/5/module_5_page_10.dart';
+import 'package:lkm_itb/modules/5/module_5_page_11.dart';
+import 'package:lkm_itb/modules/5/module_5_page_2.dart';
+import 'package:lkm_itb/modules/5/module_5_page_3.dart';
+import 'package:lkm_itb/modules/5/module_5_page_4.dart';
+import 'package:lkm_itb/modules/5/module_5_page_5.dart';
+import 'package:lkm_itb/modules/5/module_5_page_6.dart';
+import 'package:lkm_itb/modules/5/module_5_page_7.dart';
+import 'package:lkm_itb/modules/5/module_5_page_8.dart';
+import 'package:lkm_itb/modules/5/module_5_page_9.dart';
 import 'package:lkm_itb/modules/penilaian/penilaian_first.dart';
 import 'package:lkm_itb/modules/penilaian/penilaian_last.dart';
 import 'package:lkm_itb/nilai/ui/nilai_kelompok_screen.dart';
@@ -408,6 +419,28 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 new Modul4Page21(role: sharedPrefs.role),
             Modul4Page22.routeName: (context) =>
                 new Modul4Page22(role: sharedPrefs.role),
+            Modul5Page1.routeName: (context) =>
+                new Modul5Page1(role: sharedPrefs.role),
+            Modul5Page2.routeName: (context) =>
+                new Modul5Page2(role: sharedPrefs.role),
+            Modul5Page3.routeName: (context) =>
+                new Modul5Page3(role: sharedPrefs.role),
+            Modul5Page4.routeName: (context) =>
+                new Modul5Page4(role: sharedPrefs.role),
+            Modul5Page5.routeName: (context) =>
+                new Modul5Page5(role: sharedPrefs.role),
+            Modul5Page6.routeName: (context) =>
+                new Modul5Page6(role: sharedPrefs.role),
+            Modul5Page7.routeName: (context) =>
+                new Modul5Page7(role: sharedPrefs.role),
+            Modul5Page8.routeName: (context) =>
+                new Modul5Page8(role: sharedPrefs.role),
+            Modul5Page9.routeName: (context) =>
+                new Modul5Page9(role: sharedPrefs.role),
+            Modul5Page10.routeName: (context) =>
+                new Modul5Page10(role: sharedPrefs.role),
+            Modul5Page11.routeName: (context) =>
+                new Modul5Page11(role: sharedPrefs.role),
           },
         ),
       ),
@@ -672,7 +705,37 @@ class _BottomNavigationState extends State<BottomNavigation> {
                   return MaterialPageRoute(
                     builder: (context) => new ProgressTab(user: user),
                   );
-                }
+                } else if (settings.name == '/module/5/penilaian/first') {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul5Page3(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul5Page4.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul5Page5(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul5Page5.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul5Page5(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul5Page6.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul5Page6(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul5Page7.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul5Page7(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == Modul5Page8.routeName) {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul5Page8(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } 
               })),
       PersistentBottomNavBarItem(
           icon: Image.asset('assets/images/logo_nilai_filled.png'),

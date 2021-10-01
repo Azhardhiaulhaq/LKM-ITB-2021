@@ -5,46 +5,63 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/components/loading_progress.dart';
 import 'package:lkm_itb/constants/components/module_button.dart';
 import 'package:lkm_itb/constants/components/module_grade_field.dart';
-import 'package:lkm_itb/constants/components/radio_tile.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/data/repositories/user_repositories.dart';
-import 'package:lkm_itb/modules/3/module_3_page_17.dart';
-import 'package:lkm_itb/modules/4/module_4_page_8.dart';
+import 'package:lkm_itb/modules/3/module_3_page_30.dart';
+import 'package:lkm_itb/modules/4/module_4_page_15.dart';
+import 'package:lkm_itb/modules/penilaian/penilaian_last.dart';
 
 // ignore: must_be_immutable
-class Modul4Page5 extends StatefulWidget {
-  Modul4Page5({Key? key, required this.role, this.menteeID}) : super(key: key);
+class Modul5Page8 extends StatefulWidget {
+  Modul5Page8({Key? key, required this.role, this.menteeID}) : super(key: key);
 
   final String role;
-  static const routeName = '/module/4/page/5';
-  int module = 4;
-  int page = 5;
+  static const routeName = '/module/5/page/8';
+  int module = 5;
+  int page = 8;
   String? menteeID;
 
   @override
-  _Modul4Page5State createState() =>
-      _Modul4Page5State(role, module, page, menteeID);
+  _Modul5Page8State createState() =>
+      _Modul5Page8State(role, module, page, menteeID);
 }
 
-class _Modul4Page5State extends State<Modul4Page5> {
+class _Modul5Page8State extends State<Modul5Page8> {
   final String role;
-  Map<int, List<String>> mapQuestions = Map();
   TextEditingController firstAnswerController =
       TextEditingController(text: "0");
-  int module = 4;
-  int page = 5;
+  int module = 5;
+  int page = 8;
   String? menteeID;
-  List<String> answers = [
-    'Karena tempatnya estetik dan bisa digunakan untuk memanjakan mata dan juga menunjukkan status sosial'
+  List<bool> answers = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
   ];
   List<String> questions = [
-    'Mengapa Starbuck memiliki pelanggan yang loyal walaupun harganya mahal ?',
+    'Menjaga dan melindungi negara',
+    'Selalu mengkritik pemerintah tapi tidak rasional',
+    'Sikap rela berkorban/patriotisme',
+    'Indonesia bersatu',
+    'Menentang negara lain yang tidak sependapat ',
+    'Melestarikan budaya Indonesia',
+    'Cinta Tanah Air',
+    'Doktrinasi pendapat mayoritas',
+    'Bangga berbangsa Indonesia',
+    'Menjunjung tinggi nilai kemanusiaan'
   ];
   bool isLoading = false;
-  _Modul4Page5State(this.role, this.module, this.page, this.menteeID);
+  _Modul5Page8State(this.role, this.module, this.page, this.menteeID);
 
   // ignore: non_constant_identifier_names
   void pushFunction(String next_route, BuildContext context) async {
@@ -62,8 +79,11 @@ class _Modul4Page5State extends State<Modul4Page5> {
           await ModuleRepository.addModuleGrades(module.toString(),
                   page.toString(), listGrades, menteeID!, sharedPrefs.group)
               .then((value) {
-            Navigator.pushNamed(context, Modul4Page8.routeName,
-                arguments: {'menteeID': menteeID});
+            Navigator.pushNamed(context, PenilaianLast.routeName, arguments: {
+              'menteeID': menteeID,
+              'userID': sharedPrefs.userid,
+              'moduleID': module.toString()
+            });
           }).onError((error, stackTrace) {
             isLoading = false;
             new Flushbar(
@@ -115,167 +135,100 @@ class _Modul4Page5State extends State<Modul4Page5> {
     super.dispose();
   }
 
-  _question(String question, List<String> list, int index) {
+  _question(int index) {
     return Column(
       children: [
-        Text(
-          question,
-          style: GoogleFonts.roboto(
-            fontSize: 14,
-            color: ConstColor.blackText,
-            fontWeight: FontWeight.w400,
+        CheckboxListTile(
+          title: Text(
+            questions[index],
+            style:
+                GoogleFonts.roboto(fontSize: 14, color: ConstColor.blackText),
+            textAlign: TextAlign.justify,
           ),
-          textAlign: TextAlign.justify,
+          contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+          controlAffinity: ListTileControlAffinity.leading,
+          onChanged: (bool? value) {
+            setState(() {
+              answers[index] = value ?? false;
+            });
+          },
+          value: answers[index],
+          activeColor: ConstColor.lightGreen,
+          checkColor: ConstColor.whiteBackground,
         ),
-        _questionTile(list, index),
         SizedBox(
-          height: 30,
+          height: 5,
         ),
       ],
     );
-  }
-
-  _questionTile(List<String> list, int index) {
-    return Column(children: [
-      for (String data in list)
-        Container(
-          margin: EdgeInsets.symmetric(vertical: 10),
-          child: new Row(
-          children: [
-            LabeledRadio(
-                label: '',
-                padding: EdgeInsets.symmetric(horizontal: 5),
-                groupValue: answers[index],
-                value: data,
-                onChanged: (String? value) {
-                  setState(() {
-                    answers[index] = value ?? '';
-                  });
-                  print(answers);
-                },
-                activeColor: ConstColor.lightGreen),
-            SizedBox(
-              width: 5,
-            ),
-            Container(
-                width: SizeConfig.screenWidth * 0.65,
-                child: Text(
-                  data,
-                  maxLines: 4,
-                  overflow: TextOverflow.fade,
-                  textAlign: TextAlign.justify,
-                )),
-          ],
-        ),)
-
-    ]);
   }
 
   _forMentor() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(
+            height: SizeConfig.screenHeight * 0.1,
+          ),
+          Text(
+            'Minta mentee untuk memilih mana yang merupakan sifat atau nilai yang harus diterapkan dalam membangun jiwa nasionalisme!',
+            style: GoogleFonts.roboto(
+                fontSize: 14,
+                color: ConstColor.blackText,
+                fontWeight: FontWeight.w500),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          for (var question in questions) 
+                    new Container(
+            margin: EdgeInsets.symmetric(vertical: 7),
+            child: RichText(
+              textAlign: TextAlign.justify,
+              text: TextSpan(
+                text: '• ',
+                style: TextStyle(color: ConstColor.blackText, fontSize: 14),
+                children: <TextSpan>[
+                  TextSpan(
+                      text: question,
+                      style: GoogleFonts.roboto(
+                          textStyle: TextStyle(fontSize: 14))),
+                ],
+              ),
+            ),
+          ),
           SizedBox(
             height: SizeConfig.screenHeight * 0.2,
           ),
-          _image(),
-          SizedBox(
-            height: 5,
-          ),
-          Container(
-              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              child: Text(
-                'Gambar 1',
-                style: GoogleFonts.roboto(
-                  fontSize: 14,
-                  color: ConstColor.blackText,
-                  fontWeight: FontWeight.w400,
-                ),
-                textAlign: TextAlign.center,
-              )),
-          SizedBox(
-            height: 15,
-          ),
-          Container(
-              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              child: Text(
-                'Ajak Mentee berdiskusi tentang mengapa Starbucks memiliki pelanggan yang loyal walaupun harganya mahal. Kaitkan dengan kehidupan berorganisasinya!',
-                style: GoogleFonts.roboto(
-                  fontSize: 14,
-                  color: ConstColor.blackText,
-                  fontWeight: FontWeight.w400,
-                ),
-                textAlign: TextAlign.justify,
-              )),
-          SizedBox(
-            height: 15,
-          ),
-          Container(
-              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              child: Text(
-                'Starbucks memiliki pelanggan yang loyal karena dia menjaga kualitasnya dan pelanggannya puas dengan kualitas itu. Jadi loyalitas yang terjadi dari diri pelanggan untuk senantiasa mengonsumsi produk starbucks bukan karena paksaan Starbucks namun karena kualitasnya ya!',
-                style: GoogleFonts.roboto(
-                  fontSize: 14,
-                  color: ConstColor.blackText,
-                  fontWeight: FontWeight.w400,
-                ),
-                textAlign: TextAlign.justify,
-              )),
         ],
       ),
     );
-  }
-
-  _image() {
-    return Container(
-        child: Image.asset(
-      'assets/images/modul_4_5.jpg',
-      width: SizeConfig.screenWidth,
-      fit: BoxFit.contain,
-    ));
   }
 
   _forMentee() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: SizeConfig.screenHeight * 0.2,
-          ),
-          _image(),
-          SizedBox(
-            height: 5,
+            height: SizeConfig.screenHeight * 0.1,
           ),
           Text(
-            'Gambar 1',
+            'Pilihlah kalimat berikut yang menurutmu termasuk dalam nilai yang harus diterapkan dalam membangun jiwa nasionalisme!',
             style: GoogleFonts.roboto(
-              fontSize: 14,
-              color: ConstColor.blackText,
-              fontWeight: FontWeight.w400,
-            ),
+                fontSize: 20,
+                color: ConstColor.blackText,
+                fontWeight: FontWeight.w500),
             textAlign: TextAlign.center,
           ),
           SizedBox(
-            height: 15,
+            height: 25,
           ),
-          Text(
-            'Apakah kamu mengenal merk dagang di atas? Ya itu adalah Starbucks Coffee.',
-            style: GoogleFonts.roboto(
-              fontSize: 14,
-              color: ConstColor.blackText,
-              fontWeight: FontWeight.w400,
-            ),
-            textAlign: TextAlign.justify,
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          for (var i = 0; i < questions.length; i++)
-            _question(questions[i], mapQuestions.values.elementAt(i), i),
+          for (var i = 0; i < questions.length; i++) _question(i),
           SizedBox(
             height: 10,
           ),
@@ -307,10 +260,10 @@ class _Modul4Page5State extends State<Modul4Page5> {
     await UserRepository.getUserAnswers(module.toString(), id!, page.toString())
         .then((e) {
       if (e.exists) {
-        List<String?> listString = List.from(e.get('answers'));
+        List<bool?> listString = List.from(e.get('answers'));
         setState(() {
           for (var i = 0; i < listString.length; i++) {
-            answers[i] = listString[i] ?? '';
+            answers[i] = listString[i] ?? false;
           }
         });
       }
@@ -321,13 +274,7 @@ class _Modul4Page5State extends State<Modul4Page5> {
   void initState() {
     super.initState();
     _initAnswer();
-    List<String> firstQuestions = [
-      'Karena tempatnya estetik dan bisa digunakan untuk memanjakan mata dan juga menunjukkan status sosial',
-      'Kualitas produknya yang dijaga dengan standar yang tinggi sehingga muncul ketertarikan dari konsumen secara alami',
-      'Tidak ada pilihan lain selain Starbucks yang digunakan untuk tempat minum kopi',
-      'Tempat menghabiskan uang yang kebanyakan'
-    ];
-    mapQuestions[0] = firstQuestions;
+
   }
 
   @override
@@ -345,15 +292,6 @@ class _Modul4Page5State extends State<Modul4Page5> {
                 ),
                 child: IntrinsicHeight(
                     child: Stack(alignment: Alignment.center, children: [
-                  Positioned(
-                    top: SizeConfig.screenHeight * 0.1,
-                    child: Text('Bagian 2',
-                        style: GoogleFonts.roboto(
-                          fontSize: 24,
-                          color: ConstColor.lightGreen,
-                          fontWeight: FontWeight.w700,
-                        )),
-                  ),
                   Container(
                       margin: EdgeInsets.symmetric(horizontal: 25),
                       width: SizeConfig.screenWidth,
@@ -366,7 +304,8 @@ class _Modul4Page5State extends State<Modul4Page5> {
         Positioned(
             bottom: 70,
             child: new CustomModuleButton(
-                pushFunction: () => pushFunction('/module/4/page/6', context))),
+                pushFunction: () =>
+                    pushFunction('/module/5/page/9', context))),
         new LoadingProgress(isLoading: isLoading),
       ],
     ));
