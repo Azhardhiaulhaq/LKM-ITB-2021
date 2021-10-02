@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:another_flushbar/flushbar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/gestures.dart';
@@ -12,6 +13,7 @@ import 'package:lkm_itb/constants/size_config.dart';
 import 'package:flowder/flowder.dart';
 import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
+import 'package:lkm_itb/modules/6/module_6_doc_card.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -27,6 +29,8 @@ class Modul6Menteekelompok extends StatefulWidget {
 
 class _Modul6MenteekelompokState extends State<Modul6Menteekelompok> {
   final String role;
+  CollectionReference answers =
+      FirebaseFirestore.instance.collection('answers');
   final List<String> listDoc = [
     'Proposal',
     'Laporan Akhir',
@@ -80,7 +84,7 @@ class _Modul6MenteekelompokState extends State<Modul6Menteekelompok> {
           percent = progress;
         });
       },
-      file: File('$path/$name.docx'),
+      file: File('$path/$name'),
       progress: ProgressImplementation(),
       onDone: () {
         Future.delayed(const Duration(milliseconds: 500), () {
@@ -110,13 +114,13 @@ class _Modul6MenteekelompokState extends State<Modul6Menteekelompok> {
   }
 
   Widget _docCard(int index, String docString) {
+    String type = '';
+    docString == 'Proposal' ? type = 'proposal' : type = 'laporan';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         InkWell(
           onTap: () async {
-            String type = '';
-            docString == 'Proposal' ? type = 'proposal' : type = 'laporan';
             FilePickerResult? result = await FilePicker.platform.pickFiles(
               type: FileType.custom,
               allowedExtensions: ['pdf', 'docx', 'doc'],
@@ -193,15 +197,99 @@ class _Modul6MenteekelompokState extends State<Modul6Menteekelompok> {
                 recognizer: TapGestureRecognizer()
                   ..onTap = () async {
                     downloadFile(
-                        templateLink[index], 'Template $docString LKM');
+                        templateLink[index], 'Template $docString LKM.docx');
                   }),
           ]),
         ),
         SizedBox(
           height: 8,
-        )
+        ),
+        _kumpulanLaporan(type)
       ],
     );
+  }
+
+  Stream<QuerySnapshot> docStream(String type) {
+    return answers
+        .doc('6')
+        .collection('groups')
+        .doc(sharedPrefs.group)
+        .collection(type)
+        .snapshots();
+  }
+
+  Widget _kumpulanLaporan(String type) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: docStream(type),
+      builder: (_, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+              child: CircularProgressIndicator(
+            color: ConstColor.darkGreen,
+          ));
+        }
+        if (!snapshot.hasData) {
+          return Center(
+            child: Text('No Data'),
+          );
+        }
+        if (snapshot.data!.size == 0) {
+          return Center(
+              child: Text(
+            'Belum Ada Data $type',
+            style:
+                GoogleFonts.roboto(fontSize: 14, color: ConstColor.blackText),
+          ));
+        }
+        QueryDocumentSnapshot Doc = snapshot.data!.docs.first;
+        return fileCard(Doc.get('url'), Doc.get('name'));
+      },
+    );
+  }
+
+  Widget fileCard(String url, String fileName) {
+    String type = fileName.split('.').last;
+    return Material(
+        color: Colors.transparent,
+        child: InkWell(
+          splashColor: Colors.transparent,
+          onTap: () {
+            downloadFile(url, fileName);
+          },
+          child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: 80,
+              margin: EdgeInsets.symmetric(vertical: 10),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      color: ConstColor.lightGrey,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Image.asset(
+                            type == 'pdf'
+                                ? 'assets/images/icon_pdf.png'
+                                : 'assets/images/icon_docx.png',
+                            fit: BoxFit.fitHeight,
+                          ),
+                          SizedBox(width: 5,),
+                          Flexible(
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: Text(
+                                fileName,
+                                style: GoogleFonts.roboto(
+                                    fontSize: 12, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          )
+                        ],
+                      )))),
+        ));
   }
 
   _forMentor() {
@@ -266,6 +354,7 @@ class _Modul6MenteekelompokState extends State<Modul6Menteekelompok> {
                 ])))),
         isLoading
             ? Container(
+              color: ConstColor.whiteBackground,
                 padding: EdgeInsets.all(10),
                 child: CircularPercentIndicator(
                   radius: 120.0,

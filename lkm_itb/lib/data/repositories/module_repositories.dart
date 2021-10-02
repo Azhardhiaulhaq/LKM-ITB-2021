@@ -216,7 +216,7 @@ class ModuleRepository {
   static Future<void> uploadFile(
       String groupID, String type, File file, String fileName) async {
     try {
-      QuerySnapshot query = await grades
+      QuerySnapshot query = await answers
           .doc('6')
           .collection('groups')
           .doc(groupID)
@@ -232,7 +232,7 @@ class ModuleRepository {
               .getDownloadURL())
           .toString();
       if (query.size != 0) {
-        grades
+        answers
             .doc('6')
             .collection('groups')
             .doc(groupID)
@@ -240,7 +240,7 @@ class ModuleRepository {
             .doc(query.docs.first.id)
             .update({'name': fileName, 'url': url});
       } else {
-        grades
+        answers
             .doc('6')
             .collection('groups')
             .doc(groupID)
