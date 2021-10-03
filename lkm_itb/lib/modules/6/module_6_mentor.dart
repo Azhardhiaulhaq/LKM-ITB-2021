@@ -37,9 +37,7 @@ class _Modul6MentorIndividuState extends State<Modul6MentorIndividu> {
             height: SizeConfig.screenHeight * 0.15,
           ),
           Text(
-            'Minta menteemu untuk melaporkan setiap minggunya tentang observasi yang dilakukan dimasing-masing lembaga'
-            // : 'Minta setiap menteemu untuk mengupload proposal dan laporan akhir untuk proyek kelompok yang dikerjakan',
-            ,
+            'Minta menteemu untuk melaporkan setiap minggunya tentang observasi yang dilakukan dimasing-masing lembaga',
             style: GoogleFonts.roboto(
               fontSize: 16,
               color: ConstColor.greyText,
@@ -51,9 +49,7 @@ class _Modul6MentorIndividuState extends State<Modul6MentorIndividu> {
             height: 20,
           ),
           Text(
-            'Isi observasi sebagai berikut:'
-            // 'Data yang harus di-upload'
-            ,
+            'Isi observasi sebagai berikut:',
             style: GoogleFonts.roboto(
               fontSize: 14,
               color: ConstColor.blackText,
@@ -65,9 +61,7 @@ class _Modul6MentorIndividuState extends State<Modul6MentorIndividu> {
             height: 15,
           ),
           Text(
-            'Nilai yang diobservasi\nHasil observasi\nSaran kepada lembaga'
-            // 'Proposal Proyek\nLaporan Akhir Proyek'
-            ,
+            'Nilai yang diobservasi\nHasil observasi\nSaran kepada lembaga',
             style: GoogleFonts.roboto(
               fontSize: 14,
               color: ConstColor.blackText,

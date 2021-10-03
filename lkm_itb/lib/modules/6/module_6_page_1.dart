@@ -5,19 +5,20 @@ import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/constants/size_config.dart';
 
 class Modul6Page1 extends StatefulWidget {
-  Modul6Page1({Key? key, required this.role}) : super(key: key);
+  Modul6Page1({Key? key, required this.role, this.menteeID}) : super(key: key);
 
   final String role;
+  String? menteeID;
   static const routeName = '/module/6/page/1';
 
   @override
-  _Modul6Page1State createState() => _Modul6Page1State(role);
+  _Modul6Page1State createState() => _Modul6Page1State(role, menteeID);
 }
 
 class _Modul6Page1State extends State<Modul6Page1> {
   final String role;
-
-  _Modul6Page1State(this.role);
+  String? menteeID;
+  _Modul6Page1State(this.role, this.menteeID);
 
   // ignore: non_constant_identifier_names
   void pushFunction(String next_route) {
@@ -43,13 +44,11 @@ class _Modul6Page1State extends State<Modul6Page1> {
               child: InkWell(
                 splashColor: ConstColor.darkGreen,
                 onTap: () async {
-                  // ignore: await_only_futures
-
-                  // if (type == 'module') {
-                  //   Navigator.pushNamed(context, '/module/' + eventID + '/page/1');
-                  // }
-                  Navigator.pushNamed(context, '/module/6/'+role+'/'+type,
-                arguments: {'type': type});
+                  print('%%%%%%%%%%%%%%%%%%%%%%%');
+                  print('/module/6/' + role + '/' + type);
+                  Navigator.pushNamed(
+                      context, '/module/6/' + role + '/' + type,
+                      arguments: {'type': type, 'menteeID' : menteeID});
                 },
                 child: Container(
                     margin: EdgeInsets.symmetric(horizontal: 20),

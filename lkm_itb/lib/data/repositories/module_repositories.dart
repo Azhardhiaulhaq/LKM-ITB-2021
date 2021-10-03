@@ -35,6 +35,21 @@ class ModuleRepository {
     }
   }
 
+  static Future<int> getMenteeGradesLength(
+      String moduleID, String menteeID) async {
+    try {
+      QuerySnapshot<Object?> listGraded = await grades
+          .doc(moduleID)
+          .collection('users')
+          .doc(menteeID)
+          .collection('questions')
+          .get();
+      return listGraded.size;
+    } catch (e) {
+      throw e;
+    }
+  }
+
   static Future<int> getGradedUserLength(String moduleID, String group) async {
     try {
       QuerySnapshot<Object?> listGraded = await grades
@@ -223,7 +238,11 @@ class ModuleRepository {
           .collection(type)
           .get();
       Reference storageRef = FirebaseStorage.instance.ref();
-      Reference ref = storageRef.child('laporan').child(groupID).child(type).child(fileName);
+      Reference ref = storageRef
+          .child('laporan')
+          .child(groupID)
+          .child(type)
+          .child(fileName);
       UploadTask uploadTask = ref.putFile(file);
       var url = (await uploadTask.storage
               .ref()

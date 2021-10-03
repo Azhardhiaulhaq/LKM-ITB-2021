@@ -452,10 +452,13 @@ class _BottomNavigationState extends State<BottomNavigation> {
                 new Modul6MentorIndividu(role: sharedPrefs.role),
             '/module/6/mentor/kelompok': (context) =>
                 new Modul6MentorKelompok(role: sharedPrefs.role),
-            '/module/6/mentee/individu': (context) =>
-                new Modul6MenteeIndividu(role: sharedPrefs.role, menteeID: sharedPrefs.userid,),
-            '/module/6/mentee/kelompok': (context) =>
-                new Modul6Menteekelompok(role: sharedPrefs.role,)
+            '/module/6/mentee/individu': (context) => new Modul6MenteeIndividu(
+                  role: sharedPrefs.role,
+                  menteeID: sharedPrefs.userid,
+                ),
+            '/module/6/mentee/kelompok': (context) => new Modul6Menteekelompok(
+                  role: sharedPrefs.role,
+                )
           },
         ),
       ),
@@ -750,6 +753,18 @@ class _BottomNavigationState extends State<BottomNavigation> {
                   return MaterialPageRoute(
                       builder: (context) => new Modul5Page8(
                           menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == '/module/6/penilaian/first') {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => new Modul6Page1(
+                          menteeID: arg['menteeID'], role: 'mentee'));
+                } else if (settings.name == '/module/6/mentee/individu') {
+                  var arg = settings.arguments as Map;
+                  return MaterialPageRoute(
+                      builder: (context) => Modul6MenteeIndividu(
+                          role: 'mentor', menteeID: arg['menteeID']));
+                } else if (settings.name == '/module/6/mentee/kelompok'){
+                  return MaterialPageRoute(builder: (context) => Modul6Menteekelompok(role: 'mentor'));
                 }
               })),
       PersistentBottomNavBarItem(

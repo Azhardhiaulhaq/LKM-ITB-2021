@@ -61,9 +61,17 @@ class _Modul6MenteeQuestionState extends State<Modul6MenteeQuestion> {
           .then((value) async {
         await ModuleRepository.addModuleGrades(module.toString(),
                 week.toString(), listGrades, menteeID!, sharedPrefs.group)
-            .then((value) {
-          Navigator.pushNamed(context, Modul3Page4.routeName,
-              arguments: {'menteeID': menteeID});
+            .then((value) async {
+          int gradeLength = await ModuleRepository.getMenteeGradesLength(
+              module.toString(), menteeID!);
+          if (gradeLength == 6) {
+            await ModuleRepository.setGradeStatus(module.toString(), menteeID!)
+                .then((value) {
+              Navigator.pop(context);
+            });
+          } else {
+            Navigator.pop(context);
+          }
         }).onError((error, stackTrace) {
           isLoading = false;
           new Flushbar(
@@ -168,10 +176,10 @@ class _Modul6MenteeQuestionState extends State<Modul6MenteeQuestion> {
           SizedBox(
             height: 10,
           ),
-          _submitButton(context),
           role == 'mentor'
               ? new ModuleGradeField(textController: gradeController[0])
               : Container(),
+          _submitButton(context),
           SizedBox(
             height: SizeConfig.screenHeight * 0.2,
           ),

@@ -1,4 +1,5 @@
 import 'package:another_flushbar/flushbar.dart';
+import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,10 +7,12 @@ import 'package:lkm_itb/constants/components/loading_progress.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
 import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/models/nilai.dart';
+import 'package:lkm_itb/data/repositories/nilai_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/nilai/bloc/nilai_bloc.dart';
 import 'package:lkm_itb/nilai/ui/nilai_kelompok_screen.dart';
 import 'package:lkm_itb/nilai/ui/nilai_mentee_screen.dart';
+import 'package:open_file/open_file.dart';
 
 class NilaiPage extends StatefulWidget {
   NilaiPage(
@@ -76,7 +79,7 @@ class _NilaiPageState extends State<NilaiPage> {
 
   Widget _groupPointCard(int nilaiGroup) {
     return Container(
-        margin: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+        margin: EdgeInsets.fromLTRB(30, 30, 30, 5),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10.0),
           child: Container(
@@ -189,6 +192,53 @@ class _NilaiPageState extends State<NilaiPage> {
     );
   }
 
+  void _createExcel() async {
+    setState(() {
+      isLoading = true;
+    });
+    await NilaiRepository.downloadGrades(sharedPrefs.group).then((value) {
+      new Flushbar(
+        title: 'Download Selesai',
+        titleColor: Colors.white,
+        message: 'Proses Download Selesai. File terdapat pada folder Download',
+        messageColor: Colors.white,
+        duration: Duration(seconds: 3),
+        backgroundColor: ConstColor.lightGreen,
+        flushbarPosition: FlushbarPosition.TOP,
+        flushbarStyle: FlushbarStyle.FLOATING,
+        reverseAnimationCurve: Curves.decelerate,
+        forwardAnimationCurve: Curves.elasticOut,
+        leftBarIndicatorColor: Colors.blue[300],
+      )..show(context);
+      OpenFile.open(value);
+    });
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  Widget _downloadButton(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        _createExcel();
+      },
+      child: Container(
+          margin: EdgeInsets.symmetric(vertical: 10),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              color: ConstColor.lightGreen,
+              child: Text('Unduh Nilai Kelompok',
+                  style: GoogleFonts.roboto(
+                      color: ConstColor.whiteBackground,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 16)),
+            ),
+          )),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -243,7 +293,7 @@ class _NilaiPageState extends State<NilaiPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               SizedBox(
-                height: SizeConfig.screenHeight*0.03,
+                height: SizeConfig.screenHeight * 0.03,
               ),
               Text('Hai, ' + name.toUpperCase(),
                   style: GoogleFonts.roboto(
@@ -251,14 +301,15 @@ class _NilaiPageState extends State<NilaiPage> {
                       color: ConstColor.blackText,
                       fontWeight: FontWeight.w500)),
               _groupPointCard(nilaiGroup),
+              role == 'mentor' ? _downloadButton(context) : Container(),
               _klasementTitle(),
               SizedBox(
-                height: SizeConfig.screenHeight*0.03,
+                height: SizeConfig.screenHeight * 0.03,
               ),
               for (var i = 0; i < listNilaiKelompok.length; ++i)
                 _klasemen(listNilaiKelompok[i], i + 1),
               SizedBox(
-                height: SizeConfig.screenHeight*0.12,
+                height: SizeConfig.screenHeight * 0.12,
               ),
             ],
           )),
