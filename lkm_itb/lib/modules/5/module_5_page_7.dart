@@ -9,7 +9,6 @@ import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/data/repositories/user_repositories.dart';
-import 'package:lkm_itb/modules/2/module_2_page_18.dart';
 import 'package:lkm_itb/modules/5/module_5_page_8.dart';
 
 // ignore: must_be_immutable

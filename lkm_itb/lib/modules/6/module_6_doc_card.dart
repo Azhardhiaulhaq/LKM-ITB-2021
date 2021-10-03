@@ -1,14 +1,10 @@
 import 'dart:io';
 
 import 'package:another_flushbar/flushbar.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flowder/flowder.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lkm_itb/constants/const_colors.dart';
-import 'package:lkm_itb/constants/size_config.dart';
-import 'package:lkm_itb/data/models/module.dart';
-import 'package:lkm_itb/presence/presence_builder.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class DocCard extends StatefulWidget {

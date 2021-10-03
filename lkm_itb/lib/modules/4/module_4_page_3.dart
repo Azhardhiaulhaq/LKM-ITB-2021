@@ -11,7 +11,6 @@ import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:lkm_itb/data/repositories/user_repositories.dart';
-import 'package:lkm_itb/modules/3/module_3_page_16.dart';
 import 'package:lkm_itb/modules/4/module_4_page_5.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 

@@ -13,7 +13,6 @@ import 'package:lkm_itb/constants/size_config.dart';
 import 'package:flowder/flowder.dart';
 import 'package:lkm_itb/data/repositories/module_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
-import 'package:lkm_itb/modules/6/module_6_doc_card.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -133,10 +132,29 @@ class _Modul6MenteekelompokState extends State<Modul6Menteekelompok> {
               setState(() {
                 isUploading = true;
               });
+              print('*****************');
+              print(file.path.split('/').last);
               await ModuleRepository.uploadFile(
-                  sharedPrefs.group, type, file, file.path.split('/').last);
-              setState(() {
-                isUploading = false;
+                      sharedPrefs.group, type, file, file.path.split('/').last)
+                  .then((value) {
+                setState(() {
+                  isUploading = false;
+                });
+              }).catchError((onError) {
+                new Flushbar(
+                  title: 'Upload Error',
+                  titleColor: Colors.white,
+                  message:
+                      onError.toString(),
+                  messageColor: Colors.white,
+                  duration: Duration(seconds: 3),
+                  backgroundColor: ConstColor.redButton,
+                  flushbarPosition: FlushbarPosition.TOP,
+                  flushbarStyle: FlushbarStyle.FLOATING,
+                  reverseAnimationCurve: Curves.decelerate,
+                  forwardAnimationCurve: Curves.elasticOut,
+                  leftBarIndicatorColor: Colors.blue[300],
+                )..show(context);
               });
             } else {
               // User canceled the picker
@@ -276,7 +294,9 @@ class _Modul6MenteekelompokState extends State<Modul6Menteekelompok> {
                                 : 'assets/images/icon_docx.png',
                             fit: BoxFit.fitHeight,
                           ),
-                          SizedBox(width: 5,),
+                          SizedBox(
+                            width: 5,
+                          ),
                           Flexible(
                             child: Container(
                               alignment: Alignment.center,
@@ -354,7 +374,7 @@ class _Modul6MenteekelompokState extends State<Modul6Menteekelompok> {
                 ])))),
         isLoading
             ? Container(
-              color: ConstColor.whiteBackground,
+                color: ConstColor.whiteBackground,
                 padding: EdgeInsets.all(10),
                 child: CircularPercentIndicator(
                   radius: 120.0,
