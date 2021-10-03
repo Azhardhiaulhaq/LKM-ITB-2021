@@ -23,7 +23,6 @@ class _Modul1Page26State extends State<Modul1Page26> {
   // ignore: non_constant_identifier_names
   void pushFunction(String next_route) async {
     if (role == 'mentee') {
-      print(sharedPrefs.userid);
       await ModuleRepository.setAnswerStatus('1', sharedPrefs.userid)
           .then((value) {
         Navigator.pushNamedAndRemoveUntil(context, '/home', (_) => false);

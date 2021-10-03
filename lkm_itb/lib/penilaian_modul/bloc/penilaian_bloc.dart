@@ -33,7 +33,6 @@ class PenilaianBloc extends Bloc<PenilaianEvent, PenilaianState> {
               nilai: 0,
               isComplete: false);
         }
-        print(mapPenilaian.toString());
         List<QueryDocumentSnapshot> listGradedUsers =
             await NilaiRepository.getGroupedUser(
                 event.module.modulID!, event.group);

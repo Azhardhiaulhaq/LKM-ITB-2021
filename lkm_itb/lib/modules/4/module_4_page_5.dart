@@ -52,7 +52,6 @@ class _Modul4Page5State extends State<Modul4Page5> {
         isLoading = true;
       });
       if (menteeID != null) {
-        print('menteeID');
         List<int> listGrades = [];
         listGrades.add(int.parse(firstAnswerController.text));
         await ModuleRepository.initiateModuleGrades(
@@ -150,7 +149,6 @@ class _Modul4Page5State extends State<Modul4Page5> {
                   setState(() {
                     answers[index] = value ?? '';
                   });
-                  print(answers);
                 },
                 activeColor: ConstColor.lightGreen),
             SizedBox(

@@ -40,7 +40,6 @@ class _ProfileState extends State<Profile> {
             onTap: () async {
               switch (code) {
                 case 'infoPribadi':
-                  print('info Pribadi');
                   pushNewScreen(
                     context,
                     screen: ProfileDetail(title: 'Profile Detail', user: user),
@@ -53,12 +52,6 @@ class _ProfileState extends State<Profile> {
                   break;
                 case 'editProfile':
                   print('EditProfile');
-                  // pushNewScreen(
-                  //   context,
-                  //   screen: ProfileFormBuilder(user: user),
-                  //   withNavBar: false, // OPTIONAL VALUE. True by default.
-                  //   pageTransitionAnimation: PageTransitionAnimation.cupertino,
-                  // );
                   pushNewScreenWithRouteSettings(context,
                       screen: ProfileFormBuilder(user: user),
                       settings: RouteSettings(name: '/profile/edit'),

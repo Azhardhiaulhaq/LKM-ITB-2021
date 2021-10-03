@@ -216,9 +216,6 @@ class ModuleRepository {
   static Future<void> uploadFile(
       String groupID, String type, File file, String fileName) async {
     try {
-      print(groupID);
-      print(type);
-      print(fileName);
       QuerySnapshot query = await answers
           .doc('6')
           .collection('groups')
@@ -227,8 +224,6 @@ class ModuleRepository {
           .get();
       Reference storageRef = FirebaseStorage.instance.ref();
       Reference ref = storageRef.child('laporan').child(groupID).child(type).child(fileName);
-      print('%%%%%%%%%%%%%%%%%%');
-      print(ref);
       UploadTask uploadTask = ref.putFile(file);
       var url = (await uploadTask.storage
               .ref()

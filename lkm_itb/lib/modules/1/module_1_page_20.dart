@@ -178,7 +178,6 @@ class _Modul1Page20State extends State<Modul1Page20> {
           await UserRepository.getUserGrade('1', menteeID!, '20');
       if (userGrade.exists) {
         var listString = List.from(userGrade.get('grades'));
-        print(listString.toString());
         setState(() {
           for (var i = 0; i < listString.length; i++) {
             gradeController[i].text = listString[i].toString();

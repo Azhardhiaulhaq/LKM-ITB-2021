@@ -29,7 +29,7 @@ class CustomBackButton extends StatelessWidget {
                 style: GoogleFonts.roboto(
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
-                    color: ConstColor.blackText))
+                    color: ConstColor.blackText)),
           ],
         ),
       ),

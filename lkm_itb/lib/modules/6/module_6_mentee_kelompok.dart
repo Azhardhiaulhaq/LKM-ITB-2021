@@ -16,6 +16,7 @@ import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:open_file/open_file.dart';
 
 // ignore: must_be_immutable
 class Modul6Menteekelompok extends StatefulWidget {
@@ -91,7 +92,7 @@ class _Modul6MenteekelompokState extends State<Modul6Menteekelompok> {
             isLoading = false;
           });
         });
-
+        OpenFile.open('$path/$name');
         new Flushbar(
           title: 'Download Selesai',
           titleColor: Colors.white,
@@ -126,14 +127,10 @@ class _Modul6MenteekelompokState extends State<Modul6Menteekelompok> {
             );
 
             if (result != null) {
-              print(result.files.single.path!);
               File file = File(result.files.single.path!);
-              print(file.path.split('/').last);
               setState(() {
                 isUploading = true;
               });
-              print('*****************');
-              print(file.path.split('/').last);
               await ModuleRepository.uploadFile(
                       sharedPrefs.group, type, file, file.path.split('/').last)
                   .then((value) {
@@ -144,8 +141,7 @@ class _Modul6MenteekelompokState extends State<Modul6Menteekelompok> {
                 new Flushbar(
                   title: 'Upload Error',
                   titleColor: Colors.white,
-                  message:
-                      onError.toString(),
+                  message: onError.toString(),
                   messageColor: Colors.white,
                   duration: Duration(seconds: 3),
                   backgroundColor: ConstColor.redButton,
@@ -267,48 +263,70 @@ class _Modul6MenteekelompokState extends State<Modul6Menteekelompok> {
 
   Widget fileCard(String url, String fileName) {
     String type = fileName.split('.').last;
-    return Material(
-        color: Colors.transparent,
-        child: InkWell(
-          splashColor: Colors.transparent,
-          onTap: () {
-            downloadFile(url, fileName);
-          },
+    return Container(
+        width: MediaQuery.of(context).size.width,
+        height: 80,
+        margin: EdgeInsets.symmetric(vertical: 10),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
           child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: 80,
-              margin: EdgeInsets.symmetric(vertical: 10),
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                      color: ConstColor.lightGrey,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Image.asset(
-                            type == 'pdf'
-                                ? 'assets/images/icon_pdf.png'
-                                : 'assets/images/icon_docx.png',
-                            fit: BoxFit.fitHeight,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Flexible(
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: Text(
-                                fileName,
-                                style: GoogleFonts.roboto(
-                                    fontSize: 12, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          )
-                        ],
-                      )))),
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              color: ConstColor.lightGrey,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Image.asset(
+                    type == 'pdf'
+                        ? 'assets/images/icon_pdf.png'
+                        : 'assets/images/icon_docx.png',
+                    fit: BoxFit.fitHeight,
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Flexible(
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        fileName,
+                        style: GoogleFonts.roboto(
+                            fontSize: 12, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  File('$path/$fileName').existsSync()
+                      ? InkWell(
+                          splashColor: Colors.transparent,
+                          onTap: () {
+                            OpenFile.open('$path/$fileName');
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 5),
+                            child: Icon(Icons.remove_red_eye_outlined,
+                                color: ConstColor.darkGreen),
+                          ))
+                      : Container(),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  InkWell(
+                      splashColor: Colors.transparent,
+                      onTap: () {
+                        downloadFile(url, fileName);
+                      },
+                      child: Container(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+                        child:
+                            Icon(Icons.download, color: ConstColor.darkGreen),
+                      ))
+                ],
+              )),
         ));
   }
 
@@ -359,7 +377,7 @@ class _Modul6MenteekelompokState extends State<Modul6Menteekelompok> {
                     child: Stack(alignment: Alignment.center, children: [
                   Positioned(
                     top: SizeConfig.screenHeight * 0.1,
-                    child: Text('Individu',
+                    child: Text('Kelompok',
                         style: GoogleFonts.roboto(
                           fontSize: 24,
                           color: ConstColor.lightGreen,

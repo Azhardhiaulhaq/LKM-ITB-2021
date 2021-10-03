@@ -69,7 +69,6 @@ class _Modul3Page25State extends State<Modul3Page25> {
         isLoading = true;
       });
       if (menteeID != null) {
-        print('menteeID');
         List<int> listGrades = [];
         listGrades.add(int.parse(firstAnswerController.text));
         await ModuleRepository.initiateModuleGrades(

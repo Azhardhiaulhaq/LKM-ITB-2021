@@ -41,7 +41,6 @@ class NilaiBloc extends Bloc<NilaiEvent, NilaiState> {
         for (var grade in listGroupGrade) {
           
           var tempGrade = grade.data() as Map;
-          print(tempGrade['group']);
           int total = tempGrade['total'];
           listNilaiKelompok
               .add(Nilai(ID: tempGrade['group'], totalNilai: total));

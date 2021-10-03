@@ -66,7 +66,6 @@ class _Modul4Page11State extends State<Modul4Page11> {
         isLoading = true;
       });
       if (menteeID != null) {
-        print('menteeID');
         List<int> listGrades = [];
         listGrades.add(int.parse(firstAnswerController.text));
         await ModuleRepository.initiateModuleGrades(
