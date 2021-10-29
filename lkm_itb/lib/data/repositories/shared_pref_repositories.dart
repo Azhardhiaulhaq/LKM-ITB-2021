@@ -17,6 +17,11 @@ class SharedPrefs {
 
   String get name => _sharedPrefs!.getString('name')?? "";
 
+  bool get isMaster => _sharedPrefs!.getBool('isMaster') ?? false;
+
+  void setIsMaster(bool isMaster){
+    _sharedPrefs!.setBool('isMaster', isMaster);
+  }
   void setName(String name){
     _sharedPrefs!.setString('name',name);
   }

@@ -24,8 +24,8 @@ class _Modul6MenteeIndividuState extends State<Modul6MenteeIndividu> {
     '11-17 Oktober 2021',
     '18-24 Oktober 2021',
     '25-31 Oktober 2021',
-    '1-7 Oktober 2021',
-    '8-14 Oktober 2021'
+    '1-7 November 2021',
+    '8-14 November 2021'
   ];
   _Modul6MenteeIndividuState(this.role, this.menteeID);
 

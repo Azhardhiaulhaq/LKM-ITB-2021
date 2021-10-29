@@ -377,9 +377,11 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         }
         if (snapshot.hasData) {
-          sharedPrefs.setRole(snapshot.data!.get('role'));
-          sharedPrefs.setGroup(snapshot.data!.get('group'));
-          sharedPrefs.setName(snapshot.data!.get('name'));
+          var map = snapshot.data!.data() as Map<String, dynamic>;
+          sharedPrefs.setRole(map['role']);
+          sharedPrefs.setGroup(map['group']);
+          sharedPrefs.setName(map['name']);
+          sharedPrefs.setIsMaster(map['isMaster']??false);
         }
         return Scaffold(
             body: SafeArea(

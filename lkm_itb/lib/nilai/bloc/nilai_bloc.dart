@@ -26,20 +26,24 @@ class NilaiBloc extends Bloc<NilaiEvent, NilaiState> {
         List<Nilai> listNilaiModule = [];
         List<Nilai> listNilaiKelompok = [];
         for (int i = 1; i <= 6; ++i) {
-          mapNilaiModule[i.toString()] = Nilai(ID: i.toString(), totalNilai: 0);
-        }
-        List<QueryDocumentSnapshot> listGradeModules =
-            await NilaiRepository.getGradeModules();
-        for (var module in listGradeModules) {
           int nilai =
-              await ModuleRepository.getModuleGrade(module.id, event.group);
-          mapNilaiModule[module.id]!.incrementNilai(nilai);
+              await ModuleRepository.getModuleGrade(i.toString(), event.group);
+          mapNilaiModule[i.toString()] =
+              Nilai(ID: i.toString(), totalNilai: nilai);
         }
+        // List<QueryDocumentSnapshot> listGradeModules =
+        //     await NilaiRepository.getGradeModules();
+        // print('-------------------------');
+        // print(listGradeModules.length);
+        // for (var module in listGradeModules) {
+        //   int nilai =
+        //       await ModuleRepository.getModuleGrade(module.id, event.group);
+        //   mapNilaiModule[module.id]!.incrementNilai(nilai);
+        // }
 
         List<QueryDocumentSnapshot> listGroupGrade =
             await NilaiRepository.getGroupGrade();
         for (var grade in listGroupGrade) {
-          
           var tempGrade = grade.data() as Map;
           int total = tempGrade['total'];
           listNilaiKelompok
@@ -66,11 +70,10 @@ class NilaiBloc extends Bloc<NilaiEvent, NilaiState> {
               NilaiMentee(ID: user.id, name: user.get('name'), totalNilai: 0);
         }
 
-        List<QueryDocumentSnapshot> listGradeModules =
-            await NilaiRepository.getGradeModules();
-        for (var module in listGradeModules) {
+
+        for (var i = 1; i<=6; i++) {
           List<QueryDocumentSnapshot> listUsers =
-              await NilaiRepository.getGroupedUser(module.id, event.group);
+              await NilaiRepository.getGroupedUser(i.toString(), event.group);
           for (var user in listUsers) {
             Map<String, dynamic> map = user.data() as Map<String, dynamic>;
             mapNilaiMentee[map['name']]!.incrementNilai(map['score'] ?? 0);

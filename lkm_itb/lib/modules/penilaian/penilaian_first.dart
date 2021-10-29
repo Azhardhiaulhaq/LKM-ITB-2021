@@ -55,6 +55,7 @@ class _PenilaianFirstState extends State<PenilaianFirst> {
 
     // Add the observer.
     _initProfile();
+    print(menteeID);
   }
 
   @override
@@ -69,7 +70,7 @@ class _PenilaianFirstState extends State<PenilaianFirst> {
                 'Hai, ' +
                     mentorName +
                     '!\nYuk nilai jawaban Mentee\n' +
-                    menteeName,
+                    menteeName, 
                 textAlign: TextAlign.center,
                 style: GoogleFonts.roboto(
                     fontSize: 21,

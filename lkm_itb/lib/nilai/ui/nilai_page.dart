@@ -1,4 +1,5 @@
 import 'package:another_flushbar/flushbar.dart';
+import 'package:assorted_layout_widgets/assorted_layout_widgets.dart';
 import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:lkm_itb/constants/size_config.dart';
 import 'package:lkm_itb/data/models/nilai.dart';
 import 'package:lkm_itb/data/repositories/nilai_repositories.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
+import 'package:lkm_itb/data/repositories/user_repositories.dart';
 import 'package:lkm_itb/nilai/bloc/nilai_bloc.dart';
 import 'package:lkm_itb/nilai/ui/nilai_kelompok_screen.dart';
 import 'package:lkm_itb/nilai/ui/nilai_mentee_screen.dart';
@@ -192,35 +194,50 @@ class _NilaiPageState extends State<NilaiPage> {
     );
   }
 
-  void _createExcel() async {
+  void showNotification(String value) {
+    new Flushbar(
+      title: 'Download Selesai',
+      titleColor: Colors.white,
+      message: 'Proses Download Selesai. File terdapat pada folder Download',
+      messageColor: Colors.white,
+      duration: Duration(seconds: 3),
+      backgroundColor: ConstColor.lightGreen,
+      flushbarPosition: FlushbarPosition.TOP,
+      flushbarStyle: FlushbarStyle.FLOATING,
+      reverseAnimationCurve: Curves.decelerate,
+      forwardAnimationCurve: Curves.elasticOut,
+      leftBarIndicatorColor: Colors.blue[300],
+    )..show(context);
+    OpenFile.open(value);
+  }
+
+  void _createExcel(String type) async {
     setState(() {
       isLoading = true;
     });
-    await NilaiRepository.downloadGrades(sharedPrefs.group).then((value) {
-      new Flushbar(
-        title: 'Download Selesai',
-        titleColor: Colors.white,
-        message: 'Proses Download Selesai. File terdapat pada folder Download',
-        messageColor: Colors.white,
-        duration: Duration(seconds: 3),
-        backgroundColor: ConstColor.lightGreen,
-        flushbarPosition: FlushbarPosition.TOP,
-        flushbarStyle: FlushbarStyle.FLOATING,
-        reverseAnimationCurve: Curves.decelerate,
-        forwardAnimationCurve: Curves.elasticOut,
-        leftBarIndicatorColor: Colors.blue[300],
-      )..show(context);
-      OpenFile.open(value);
-    });
+    switch (type) {
+      case 'Nilai':
+        await NilaiRepository.downloadGrades(sharedPrefs.group).then((value) {
+          showNotification(value);
+        });
+        break;
+      case 'Presensi':
+        await UserRepository.downloadSeminarPresence(sharedPrefs.group)
+            .then((value) {
+          showNotification(value);
+        });
+        break;
+    }
+
     setState(() {
       isLoading = false;
     });
   }
 
-  Widget _downloadButton(BuildContext context) {
+  Widget _downloadButton(BuildContext context, String type) {
     return InkWell(
       onTap: () {
-        _createExcel();
+        _createExcel(type);
       },
       child: Container(
           margin: EdgeInsets.symmetric(vertical: 10),
@@ -229,7 +246,9 @@ class _NilaiPageState extends State<NilaiPage> {
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               color: ConstColor.lightGreen,
-              child: Text('Unduh Nilai Kelompok',
+              child: Text('Unduh ' + type,
+                  maxLines: 3,
+                  textAlign: TextAlign.center,
                   style: GoogleFonts.roboto(
                       color: ConstColor.whiteBackground,
                       fontWeight: FontWeight.normal,
@@ -237,6 +256,23 @@ class _NilaiPageState extends State<NilaiPage> {
             ),
           )),
     );
+  }
+
+  Widget _rowDownloadButton() {
+    return Container(
+        margin: EdgeInsets.symmetric(horizontal: 30),
+        child: ButtonBarSuper(
+          wrapType: WrapType.balanced,
+          wrapFit: WrapFit.divided,
+          spacing: 2.0, // Horizontal spacing between buttons.
+          lineSpacing: 10.0, // Vertical spacing between button lines.
+          buttonHeight: 48,
+          buttonMinWidth: 40,
+          children: [
+            _downloadButton(context, 'Nilai'),
+            _downloadButton(context, 'Presensi')
+          ],
+        ));
   }
 
   @override
@@ -301,7 +337,7 @@ class _NilaiPageState extends State<NilaiPage> {
                       color: ConstColor.blackText,
                       fontWeight: FontWeight.w500)),
               _groupPointCard(nilaiGroup),
-              role == 'mentor' ? _downloadButton(context) : Container(),
+              sharedPrefs.isMaster ? _rowDownloadButton() : Container(),
               _klasementTitle(),
               SizedBox(
                 height: SizeConfig.screenHeight * 0.03,

@@ -1,8 +1,11 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:downloads_path_provider_28/downloads_path_provider_28.dart';
+import 'package:excel/excel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:intl/intl.dart';
 import 'package:lkm_itb/data/models/presence.dart';
 import 'package:lkm_itb/data/models/profile_data.dart';
 import 'package:lkm_itb/data/repositories/shared_pref_repositories.dart';
@@ -17,7 +20,7 @@ class UserRepository {
   static CollectionReference grades = firestore.collection('grades');
   static CollectionReference groupGrades = firestore.collection('group_grades');
   static CollectionReference answers = firestore.collection('answers');
-
+  static CollectionReference seminars = firestore.collection('seminars');
   // Sign In with email and password
 
   static Future<String?> uploadImage(File imageFile) async {
@@ -193,7 +196,7 @@ class UserRepository {
         sharedPrefs.setID(currentUser.uid);
         sharedPrefs.setRole(result['role']);
         sharedPrefs.setEmail(currentUser.email!);
-        sharedPrefs.setGroup(result['grou[']);
+        sharedPrefs.setGroup(result['group']);
       });
     }
     return currentUser != null;
@@ -310,6 +313,136 @@ class UserRepository {
         'is_precense': userPresence.isPresence,
         'updatedAt': Timestamp.fromDate(DateTime.now())
       });
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  static Future<String> downloadSeminarPresence(String group) async {
+    try {
+      final stopwatch = Stopwatch()..start();
+      String path = '';
+      path = (await DownloadsPathProvider.downloadsDirectory)!.path;
+      String outputFile = '$path/presensi_mentee.xlsx';
+      var excel = Excel.createExcel();
+      Sheet sheetObject = excel['Presensi Seminar'];
+      List<String> columnID = ['A', 'B', 'C', 'D', 'E', 'F'];
+      List<String> columnHeader = [
+        'No',
+        'SeminarID',
+        'SeminarTitle',
+        'Name',
+        'Group',
+        'Time'
+      ];
+      for (var i = 0; i < columnID.length; i++) {
+        var cell = sheetObject.cell(CellIndex.indexByString(columnID[i] + "1"));
+        cell.value = columnHeader[i];
+      }
+      int index = 2;
+      var seminarRef = await seminars.get();
+      var listSeminars = seminarRef.docs;
+      var userRef = await users.get();
+      var listUser = userRef.docs;
+      for (var i = 901; i <= 907; i++) {
+        var seminarInfo = listSeminars
+            .firstWhere((element) => element.id == i.toString())
+            .data() as Map<String, dynamic>;
+        for (var grup = 1; grup <= 20; grup++) {
+          QuerySnapshot presenceUser = await precenses
+              .doc(i.toString())
+              .collection('group')
+              .doc(grup.toString())
+              .collection('users')
+              .where('is_precense', isEqualTo: true)
+              .get();
+          for (var presence in presenceUser.docs) {
+            var userInfo = listUser
+                .firstWhere((element) => element.id == presence.id)
+                .data() as Map<String, dynamic>;
+            var presenceMap = presence.data() as Map<String, dynamic>;
+            sheetObject
+                .cell(CellIndex.indexByString('A' + index.toString()))
+                .value = index - 1;
+            sheetObject
+                .cell(CellIndex.indexByString('B' + index.toString()))
+                .value = i;
+            sheetObject
+                .cell(CellIndex.indexByString('C' + index.toString()))
+                .value = seminarInfo['name'];
+            sheetObject
+                .cell(CellIndex.indexByString('D' + index.toString()))
+                .value = userInfo['name'];
+            sheetObject
+                .cell(CellIndex.indexByString('E' + index.toString()))
+                .value = grup;
+            sheetObject
+                    .cell(CellIndex.indexByString('F' + index.toString()))
+                    .value =
+                DateFormat('MM/dd/yyyy, hh:mm a')
+                    .format((presenceMap['updatedAt'] as Timestamp).toDate());
+            index = index + 1;
+          }
+        }
+      }
+      print('PResensi Mentoring');
+      Sheet sheetObject2 = excel['Presensi Mentoring'];
+      List<String> columnID2 = ['A', 'B', 'C', 'D', 'E'];
+      List<String> columnHeader2 = [
+        'No',
+        'ModuleID',
+        'Name',
+        'Group',
+        'Time'
+      ];
+      for (var i = 0; i < columnID2.length; i++) {
+        var cell = sheetObject2.cell(CellIndex.indexByString(columnID[i] + "1"));
+        cell.value = columnHeader2[i];
+      }
+      int index2 = 2;
+      for (var i = 1; i <= 6; i++) {
+        for (var grup = 1; grup <= 20; grup++) {
+          QuerySnapshot presenceUser = await precenses
+              .doc(i.toString())
+              .collection('group')
+              .doc(grup.toString())
+              .collection('users')
+              .where('is_precense', isEqualTo: true)
+              .get();
+          for (var presence in presenceUser.docs) {
+            var userInfo = listUser
+                .firstWhere((element) => element.id == presence.id)
+                .data() as Map<String, dynamic>;
+            var presenceMap = presence.data() as Map<String, dynamic>;
+            sheetObject2
+                .cell(CellIndex.indexByString('A' + index2.toString()))
+                .value = index2 - 1;
+            sheetObject2
+                .cell(CellIndex.indexByString('B' + index2.toString()))
+                .value = i;
+            sheetObject2
+                .cell(CellIndex.indexByString('C' + index2.toString()))
+                .value = userInfo['name'];
+            sheetObject2
+                .cell(CellIndex.indexByString('D' + index2.toString()))
+                .value = grup;
+            sheetObject2
+                    .cell(CellIndex.indexByString('E' + index2.toString()))
+                    .value =
+                DateFormat('MM/dd/yyyy, hh:mm a')
+                    .format((presenceMap['updatedAt'] as Timestamp).toDate());
+            index2 = index2 + 1;
+          }
+        }
+      }
+      List<int>? fileBytes = excel.save();
+      if (fileBytes != null) {
+        File(outputFile)
+          ..createSync(recursive: true)
+          ..writeAsBytesSync(fileBytes);
+      }
+      print('doSomething() executed in ${stopwatch.elapsed}');
+      return outputFile;
     } catch (e) {
       throw e;
     }
